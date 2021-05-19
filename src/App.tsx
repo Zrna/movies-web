@@ -1,5 +1,11 @@
+import Title from '~/components/Title';
+
 function App() {
-  return <h1>Movies App</h1>;
+  return (
+    <div>
+      <Title />
+    </div>
+  );
 }
 
 export default App;
