@@ -25,6 +25,8 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "import/no-anonymous-default-export": "off",
+    "import/no-unresolved": "off",
     "max-len": [
       "error",
       {
