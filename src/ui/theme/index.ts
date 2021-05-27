@@ -7,9 +7,9 @@ import space from './space';
 import typography from './typography';
 
 const themeUiColors = {
-  background: palette.white,
-  text: palette.black,
-  primary: palette.black,
+  background: palette.dark,
+  text: palette.white,
+  primary: palette.white,
 };
 
 export const colors = {
