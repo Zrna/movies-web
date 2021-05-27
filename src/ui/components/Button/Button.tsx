@@ -17,8 +17,10 @@ const sizesMap = {
 
 const variantsMap = {
   primary: {
-    bg: 'gray-500',
+    bg: 'black',
     color: 'white' as theme.Color,
+    border: `1px solid ${theme.colors['gray-700']}`,
+    borderRadius: 's',
     activeStyles: {
       bg: 'gray-700',
     },
@@ -29,11 +31,25 @@ const variantsMap = {
   secondary: {
     bg: 'white',
     color: 'black' as theme.Color,
+    border: `1px solid ${theme.colors['gray-500']}`,
+    borderRadius: 's',
     activeStyles: {
-      bg: 'gray-300',
+      bg: 'gray-500',
     },
     hoverStyles: {
-      bg: 'gray-200',
+      bg: 'gray-400',
+    },
+  },
+  danger: {
+    bg: 'red',
+    color: 'white' as theme.Color,
+    border: `1px solid ${theme.colors['red-700']}`,
+    borderRadius: 's',
+    activeStyles: {
+      bg: 'red-700',
+    },
+    hoverStyles: {
+      bg: 'red-500',
     },
   },
 };
@@ -62,7 +78,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   const { height, px, space, textVariant } = sizesMap[size];
-  const { bg, color, activeStyles, hoverStyles } = variantsMap[variant];
+  const { bg, color, border, borderRadius, activeStyles, hoverStyles } = variantsMap[variant];
 
   return (
     <Box
@@ -70,6 +86,8 @@ export const Button: React.FC<ButtonProps> = ({
       isDisabled={isDisabled || isLoading}
       sx={{
         bg,
+        border,
+        borderRadius,
         color,
         display: as === 'a' ? 'flex' : 'initial',
         height,
