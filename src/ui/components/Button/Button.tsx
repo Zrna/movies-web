@@ -1,4 +1,4 @@
-import { Box, BoxProps, FlexLayout, Icon, styles, Text, theme } from '~/ui';
+import { Box, BoxProps, FlexLayout, Icon, LoadingSpinner, styles, Text, theme } from '~/ui';
 
 const sizesMap = {
   m: {
@@ -121,7 +121,7 @@ export const Button: React.FC<ButtonProps> = ({
           justifyContent="center"
           sx={{ bottom: 0, left: 0, position: 'absolute', right: 0, top: 0 }}
         >
-          Loading...
+          <LoadingSpinner color={color} size={size} />
         </FlexLayout>
       )}
     </Box>
