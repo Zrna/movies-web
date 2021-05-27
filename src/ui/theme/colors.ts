@@ -9,12 +9,15 @@ export const alphas = {
 
 export const palette = {
   black: '#000000',
-  dark: '#1f1f1f',
-  red: '#FF0000',
+  dark: '#1a1a1a',
+  primary: '#e84545',
+  red: '#9d0b28',
   transparent: 'transparent',
   white: '#FFFFFF',
   'gray-400': '#F5F5F5',
   'gray-500': '#C7C7C7',
-  'gray-600': '#8E8E8E',
+  'gray-600': '#4d4d4d',
   'gray-700': '#3D3D3D',
+  'red-500': '#d70f37',
+  'red-700': '#77081e',
 };
