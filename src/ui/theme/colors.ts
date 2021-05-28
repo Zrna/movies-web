@@ -15,7 +15,7 @@ export const palette = {
   transparent: 'transparent',
   white: '#FFFFFF',
   'gray-400': '#F5F5F5',
-  'gray-500': '#C7C7C7',
+  'gray-500': '#737373',
   'gray-600': '#4d4d4d',
   'gray-700': '#3D3D3D',
   'red-500': '#d70f37',
