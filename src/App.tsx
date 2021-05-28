@@ -1,11 +1,7 @@
-import Title from '~/components/Title';
+import { Routes } from './routes';
 
 function App() {
-  return (
-    <div>
-      <Title />
-    </div>
-  );
+  return <Routes />;
 }
 
 export default App;

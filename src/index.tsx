@@ -1,7 +1,9 @@
 import './index.css';
 
+import { createBrowserHistory } from 'history';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router } from 'react-router-dom';
 import { ThemeProvider } from 'theme-ui';
 
 import { theme } from '~/ui';
@@ -9,11 +11,15 @@ import { theme } from '~/ui';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+export const history = createBrowserHistory();
+
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <Router history={history}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root'),
 );
