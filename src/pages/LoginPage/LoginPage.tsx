@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { login } from '~/api';
-import { Button, FlexLayout, Text, TextInput } from '~/ui';
+import { Button, ErrorMessage, FlexLayout, Text, TextInput } from '~/ui';
 
 export const LoginPage = () => {
   const history = useHistory();
@@ -10,39 +10,47 @@ export const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLoginSubmit = () => {
+    setError('');
+    setIsLoading(true);
+
     login({
       email,
       password,
     })
       .then(() => history.push('/dashboard'))
-      .catch((err) => console.log('err', err));
+      .catch((err) => setError(err.response.data.error))
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <FlexLayout alignItems="center" flexDirection="column" justifyContent="center" m={6}>
-      <FlexLayout
-        alignItems="center"
-        bg="black"
-        flexDirection="column"
-        p={6}
-        space={4}
-        sx={{ width: ['100%', '500px'] }}
-      >
+      <FlexLayout alignItems="center" bg="black" flexDirection="column" p={6} space={6}>
         <Text color="white" variant="display-heading-l">
           Login
         </Text>
-        <TextInput label="Email" type="email" value={email} onChange={setEmail} />
-        <TextInput
-          iconRight={showPassword ? 'eyeOff' : 'eye'}
-          label="Password"
-          type={showPassword ? 'text' : 'password'}
-          value={password}
-          onChange={setPassword}
-          onClickRightIcon={() => setShowPassword(!showPassword)}
-        />
-        <Button isDisabled={!email || !password} text="Submit" variant="primary" onClick={handleLoginSubmit} />
+        {error && <ErrorMessage text={error} />}
+        <FlexLayout as="form" flexDirection="column" space={4} sx={{ width: ['100%', '500px'] }}>
+          <TextInput label="Email" type="email" value={email} onChange={setEmail} />
+          <TextInput
+            iconRight={showPassword ? 'eyeOff' : 'eye'}
+            label="Password"
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={setPassword}
+            onClickRightIcon={() => setShowPassword(!showPassword)}
+          />
+          <Button
+            isDisabled={!email || !password}
+            isLoading={isLoading}
+            text="Submit"
+            variant="primary"
+            onClick={handleLoginSubmit}
+          />
+        </FlexLayout>
       </FlexLayout>
     </FlexLayout>
   );
