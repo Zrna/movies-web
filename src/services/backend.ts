@@ -19,6 +19,10 @@ export function backendService() {
     return config;
   });
 
+  instance.interceptors.response.use(async (response) => {
+    return response.data as any;
+  });
+
   return {
     get: instance.get as AxiosFunction,
     post: instance.post as AxiosDataFunction,
