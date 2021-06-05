@@ -28,7 +28,10 @@ export const LoginPage = () => {
       password,
     })
       .then(() => history.push('/dashboard'))
-      .catch((err) => setError(err.response.data.error))
+      .catch((err) => {
+        const errorMessage = err.reponse ? err.response.data.error : 'Something went wrong. Try again.';
+        setError(errorMessage);
+      })
       .finally(() => setIsLoading(false));
   };
 
