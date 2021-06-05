@@ -1,17 +1,23 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 import { login } from '~/api';
+import { useAccessToken } from '~/hooks';
 import { Button, ErrorMessage, FlexLayout, Text, TextInput } from '~/ui';
 
 export const LoginPage = () => {
   const history = useHistory();
+  const hasAccessToken = useAccessToken();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  if (hasAccessToken) {
+    return <Redirect to="/dashboard" />;
+  }
 
   const handleLoginSubmit = () => {
     setError('');
