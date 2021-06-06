@@ -1,12 +1,24 @@
 import { useQuery } from 'react-query';
 import { Link, Redirect } from 'react-router-dom';
 
-import { getAccountData } from '~/api';
-import { CenteredLoadingSpinner } from '~/components';
-import { FlexLayout, Text, TextInput } from '~/ui';
+import { deleteAccount, getAccountData } from '~/api';
+import { CenteredLoadingSpinner, TextWithIcon } from '~/components';
+import { useLogout } from '~/hooks';
+import { FlexLayout, showToast, Text, TextInput } from '~/ui';
+import { showErrorToast } from '~/utils';
 
 export const AccountPage = () => {
   const { data: account, error, isLoading } = useQuery('account', getAccountData);
+  const logout = useLogout();
+
+  const handleDeleteAccount = () => {
+    deleteAccount()
+      .then(() => {
+        logout();
+        showToast({ text: 'Account successfully deleted.', variant: 'success' });
+      })
+      .catch((err) => showErrorToast(err));
+  };
 
   if (isLoading) {
     return <CenteredLoadingSpinner />;
@@ -28,8 +40,13 @@ export const AccountPage = () => {
         <TextInput isDisabled label="Last name" value={lastName} onChange={() => undefined} />
         <TextInput iconRight="lock" isDisabled label="Email" value={email} onChange={() => undefined} />
       </FlexLayout>
-      <FlexLayout flexDirection="row" space={5}>
-        <Link to="/dashboard">Go to Dashboard</Link>
+      <FlexLayout flexDirection="column" space={5}>
+        <Link to="/dashboard">
+          <TextWithIcon iconLeft="arrowLeft" text="Go to Dashboard" />
+        </Link>
+        <Text color="red-500" variant="text-m" onClick={handleDeleteAccount}>
+          Delete account
+        </Text>
       </FlexLayout>
     </FlexLayout>
   );

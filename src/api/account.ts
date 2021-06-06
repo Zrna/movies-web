@@ -12,3 +12,7 @@ export interface AccountData {
 export const getAccountData = async () => {
   return await backend.get<AccountData>('/api/account');
 };
+
+export const deleteAccount = async () => {
+  return await backend.delete<true>('/api/account');
+};
