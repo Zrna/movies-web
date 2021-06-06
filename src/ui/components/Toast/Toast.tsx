@@ -64,6 +64,7 @@ export function showToast(props: ShowToastProps) {
         backgroundColor: theme.colors.black,
         color: theme.colors['white-alpha-75'],
         display: 'block',
+        width: '400px',
       },
     },
   );
