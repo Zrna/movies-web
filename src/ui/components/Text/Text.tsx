@@ -4,7 +4,7 @@ import { SxStyleProp } from 'theme-ui';
 import { theme } from '../../index';
 import { Box, BoxProps } from '../Box';
 
-interface TextProps extends BoxProps {
+export interface TextProps extends BoxProps {
   as?: React.ElementType;
   variant?: theme.TextVariant;
   sx?: SxStyleProp;
