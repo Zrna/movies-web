@@ -1,19 +1,9 @@
-import Cookies from 'js-cookie';
-import { useQueryClient } from 'react-query';
-import { useHistory } from 'react-router-dom';
-
 import { ButtonLink } from '~/components';
+import { useLogout } from '~/hooks';
 import { Button, FlexLayout, Text } from '~/ui';
 
 export const DashboardPage = () => {
-  const history = useHistory();
-  const queryClient = useQueryClient();
-
-  const handleLogout = () => {
-    Cookies.remove('access-token');
-    queryClient.invalidateQueries('account');
-    history.push('/login');
-  };
+  const logout = useLogout();
 
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
@@ -22,7 +12,7 @@ export const DashboardPage = () => {
       </Text>
       <FlexLayout flexDirection="row" space={5}>
         <ButtonLink text="Account" to="/account" />
-        <Button text="Logout" onClick={handleLogout} />
+        <Button text="Logout" onClick={logout} />
       </FlexLayout>
     </FlexLayout>
   );
