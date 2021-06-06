@@ -5,9 +5,9 @@ import { Box, BoxProps, theme } from '~/ui';
 import * as icons from '~/ui/assets/icons';
 
 const sizesMap = {
-  m: '24px',
-  l: '36px',
-  xl: '42px',
+  m: '16px',
+  l: '24px',
+  xl: '36px',
 };
 
 export interface IconProps extends BoxProps {
