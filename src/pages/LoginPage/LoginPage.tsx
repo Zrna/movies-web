@@ -4,6 +4,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '~/api';
 import { useAccessToken } from '~/hooks';
 import { Button, ErrorMessage, FlexLayout, Text, TextInput } from '~/ui';
+import { getErrorMessage } from '~/utils';
 
 export const LoginPage = () => {
   const history = useHistory();
@@ -29,7 +30,7 @@ export const LoginPage = () => {
     })
       .then(() => history.push('/dashboard'))
       .catch((err) => {
-        const errorMessage = err.reponse ? err.response.data.error : 'Something went wrong. Try again.';
+        const errorMessage = getErrorMessage(err);
         setError(errorMessage);
       })
       .finally(() => setIsLoading(false));
