@@ -1,29 +1,27 @@
 import { useState } from 'react';
+import { Form } from 'react-final-form';
 import { Redirect, useHistory } from 'react-router-dom';
 
-import { login } from '~/api';
+import { login, LoginArgs } from '~/api';
+import { FormPasswordInput, FormTextInput } from '~/components';
 import { useAccessToken } from '~/hooks';
-import { Button, ErrorMessage, FlexLayout, Text, TextInput } from '~/ui';
-import { getErrorMessage } from '~/utils';
+import { Button, ErrorMessage, FlexLayout, Text } from '~/ui';
+import { getErrorMessage, sleep } from '~/utils';
 
 export const LoginPage = () => {
   const history = useHistory();
   const hasAccessToken = useAccessToken();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   if (hasAccessToken) {
     return <Redirect to="/dashboard" />;
   }
 
-  const handleLoginSubmit = () => {
+  const handleLoginSubmit = async ({ email, password }: LoginArgs) => {
     setError('');
-    setIsLoading(true);
 
+    await sleep(1000);
     login({
       email,
       password,
@@ -32,8 +30,7 @@ export const LoginPage = () => {
       .catch((err) => {
         const errorMessage = getErrorMessage(err);
         setError(errorMessage);
-      })
-      .finally(() => setIsLoading(false));
+      });
   };
 
   return (
@@ -43,24 +40,28 @@ export const LoginPage = () => {
           Login
         </Text>
         {error && <ErrorMessage text={error} />}
-        <FlexLayout as="form" flexDirection="column" space={4} sx={{ width: ['100%', '500px'] }}>
-          <TextInput label="Email" type="email" value={email} onChange={setEmail} />
-          <TextInput
-            iconRight={showPassword ? 'eyeOff' : 'eye'}
-            label="Password"
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={setPassword}
-            onClickRightIcon={() => setShowPassword(!showPassword)}
-          />
-          <Button
-            isDisabled={!email || !password}
-            isLoading={isLoading}
-            text="Submit"
-            variant="primary"
-            onClick={handleLoginSubmit}
-          />
-        </FlexLayout>
+        <Form
+          render={({ handleSubmit, submitting, values }) => (
+            <FlexLayout
+              as="form"
+              flexDirection="column"
+              space={4}
+              sx={{ width: ['100%', '500px'] }}
+              onSubmit={handleSubmit}
+            >
+              <FormTextInput label="Email" name="email" type="text" />
+              <FormPasswordInput label="Password" name="password" />
+              <Button
+                isDisabled={!values.email || !values.password || submitting}
+                isLoading={submitting}
+                text="Submit"
+                type="sumbit"
+                variant="primary"
+              />
+            </FlexLayout>
+          )}
+          onSubmit={handleLoginSubmit}
+        />
       </FlexLayout>
     </FlexLayout>
   );
