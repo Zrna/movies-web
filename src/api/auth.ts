@@ -1,6 +1,6 @@
 import { backend } from '~/services';
 
-interface LoginArgs {
+export interface LoginArgs {
   email: string;
   password: string;
 }
