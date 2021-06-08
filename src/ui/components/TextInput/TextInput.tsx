@@ -119,7 +119,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         )}
       </FlexLayout>
       {error && (
-        <Text color="red-500" variant="text-m">
+        <Text color="red-500" variant="text-m-medium">
           {error}
         </Text>
       )}
