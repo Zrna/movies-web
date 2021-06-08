@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form } from 'react-final-form';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 
 import { login, LoginArgs } from '~/api';
 import { FormPasswordInput, FormTextInput } from '~/components';
@@ -53,8 +53,9 @@ export const LoginPage = () => {
               <FormPasswordInput label="Password" name="password" />
               <Button
                 isDisabled={!values.email || !values.password || submitting}
+                isFullWidth
                 isLoading={submitting}
-                text="Submit"
+                text="Log in"
                 type="sumbit"
                 variant="primary"
               />
@@ -62,6 +63,9 @@ export const LoginPage = () => {
           )}
           onSubmit={handleLoginSubmit}
         />
+        <Text color="primary" variant="text-m">
+          Don’t have an account? <Link to="/register">Create one</Link>
+        </Text>
       </FlexLayout>
     </FlexLayout>
   );

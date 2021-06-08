@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form } from 'react-final-form';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 
 import { register, RegisterArgs } from '~/api';
 import { FormPasswordInput, FormTextInput } from '~/components';
@@ -55,8 +55,9 @@ export const RegistrationPage = () => {
                 <FormPasswordInput label="Password" name="password" />
                 <Button
                   isDisabled={isSubmitDisabled}
+                  isFullWidth
                   isLoading={submitting}
-                  text="Submit"
+                  text="Create account"
                   type="sumbit"
                   variant="primary"
                 />
@@ -65,6 +66,9 @@ export const RegistrationPage = () => {
           }}
           onSubmit={handleRegisterSubmit}
         />
+        <Text color="primary" variant="text-m">
+          Already have an account? <Link to="/login">Log in</Link>
+        </Text>
       </FlexLayout>
     </FlexLayout>
   );
