@@ -1,24 +1,24 @@
-import { useQuery } from 'react-query';
+import isEqual from 'lodash/isEqual';
+import { Form } from 'react-final-form';
+import { useQuery, useQueryClient } from 'react-query';
 import { Link, Redirect } from 'react-router-dom';
 
-import { deleteAccount, getAccountData } from '~/api';
-import { CenteredLoadingSpinner, TextWithIcon } from '~/components';
+import { deleteAccount, getAccountData, updateAccount } from '~/api';
+import { CenteredLoadingSpinner, FormTextInput, TextWithIcon } from '~/components';
 import { useLogout } from '~/hooks';
-import { FlexLayout, showToast, Text, TextInput } from '~/ui';
+import { Button, FlexLayout, showToast, Text } from '~/ui';
 import { showErrorToast } from '~/utils';
 
-export const AccountPage = () => {
-  const { data: account, error, isLoading } = useQuery('account', getAccountData);
-  const logout = useLogout();
+interface UpdateAccountProps {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
 
-  const handleDeleteAccount = () => {
-    deleteAccount()
-      .then(() => {
-        logout();
-        showToast({ text: 'Account successfully deleted.', variant: 'success' });
-      })
-      .catch((err) => showErrorToast(err));
-  };
+export const AccountPage = () => {
+  const { data: account, error, isLoading, refetch: refetchAccount } = useQuery('account', getAccountData);
+  const queryClient = useQueryClient();
+  const logout = useLogout();
 
   if (isLoading) {
     return <CenteredLoadingSpinner />;
@@ -30,16 +30,59 @@ export const AccountPage = () => {
 
   const { email, firstName, lastName } = account;
 
+  const handleDeleteAccount = () => {
+    deleteAccount()
+      .then(() => {
+        logout();
+        showToast({ text: 'Account successfully deleted.', variant: 'success' });
+      })
+      .catch((err) => showErrorToast(err));
+  };
+
+  const handleUpdateAccount = async (data: UpdateAccountProps) => {
+    const { firstName, lastName } = data;
+
+    updateAccount({ firstName, lastName })
+      .then(() => {
+        queryClient.invalidateQueries('account');
+        refetchAccount();
+      })
+      .catch((err) => showErrorToast(err));
+  };
+
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
       <Text color="primary" variant="display-heading-m">
         Account
       </Text>
-      <FlexLayout as="form" flexDirection="column" mb={2} space={4} sx={{ width: ['100%', '500px'] }}>
-        <TextInput isDisabled label="First name" value={firstName} onChange={() => undefined} />
-        <TextInput isDisabled label="Last name" value={lastName} onChange={() => undefined} />
-        <TextInput iconRight="lock" isDisabled label="Email" value={email} onChange={() => undefined} />
-      </FlexLayout>
+      <Form
+        initialValues={{ email, firstName, lastName }}
+        render={({ handleSubmit, submitting, initialValues, values }) => {
+          const valuesNotChanged = isEqual(initialValues, values);
+
+          return (
+            <FlexLayout
+              as="form"
+              flexDirection="column"
+              mb={2}
+              space={4}
+              sx={{ width: ['100%', '500px'] }}
+              onSubmit={handleSubmit}
+            >
+              <FormTextInput label="First name" name="firstName" />
+              <FormTextInput label="Last name" name="lastName" />
+              <FormTextInput iconRight="lock" isDisabled label="Email" name="email" />
+              <Button
+                isDisabled={valuesNotChanged || !values.firstName || !values.lastName}
+                isLoading={submitting}
+                text="Update"
+                type="submit"
+              />
+            </FlexLayout>
+          );
+        }}
+        onSubmit={handleUpdateAccount}
+      />
       <FlexLayout flexDirection="column" space={5}>
         <Link to="/dashboard">
           <TextWithIcon iconLeft="arrowLeft" text="Go to Dashboard" />
