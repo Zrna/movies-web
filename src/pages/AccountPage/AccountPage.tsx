@@ -46,6 +46,7 @@ export const AccountPage = () => {
       .then(() => {
         queryClient.invalidateQueries('account');
         refetchAccount();
+        showToast({ text: 'Account updated.', variant: 'success' });
       })
       .catch((err) => showErrorToast(err));
   };
