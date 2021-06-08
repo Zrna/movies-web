@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 
-import { AccountPage, DashboardPage, HomePage, LoginPage } from '~/pages';
+import { AccountPage, DashboardPage, HomePage, LoginPage, RegistrationPage } from '~/pages';
 import { FlexLayout, Text } from '~/ui';
 
 import { ProtectedRoute } from './ProtectedRoute';
@@ -11,6 +11,7 @@ export const Routes = () => {
       <Switch>
         <ProtectedRoute component={AccountPage} path="/account" />
         <ProtectedRoute component={DashboardPage} path="/dashboard" />
+        <Route component={RegistrationPage} exact path="/register" />
         <Route component={LoginPage} exact path="/login" />
         <Route component={HomePage} exact path="/" />
         <Route path="*" render={() => <Text variant="display-heading-xl">404 Page Not Found</Text>} />
