@@ -7,7 +7,7 @@ import { deleteAccount, getAccountData, updateAccount } from '~/api';
 import { CenteredLoadingSpinner, FormTextInput, TextWithIcon } from '~/components';
 import { useLogout } from '~/hooks';
 import { Button, FlexLayout, showToast, Text } from '~/ui';
-import { showErrorToast } from '~/utils';
+import { showErrorToast, validator } from '~/utils';
 
 interface UpdateAccountProps {
   email: string;
@@ -58,7 +58,7 @@ export const AccountPage = () => {
       </Text>
       <Form
         initialValues={{ email, firstName, lastName }}
-        render={({ handleSubmit, submitting, initialValues, values }) => {
+        render={({ handleSubmit, hasValidationErrors, submitting, initialValues, values }) => {
           const valuesNotChanged = isEqual(initialValues, values);
 
           return (
@@ -70,11 +70,19 @@ export const AccountPage = () => {
               sx={{ width: ['100%', '500px'] }}
               onSubmit={handleSubmit}
             >
-              <FormTextInput label="First name" name="firstName" />
-              <FormTextInput label="Last name" name="lastName" />
+              <FormTextInput
+                label="First name"
+                name="firstName"
+                validate={validator.isEmpty("First name can't be empty")}
+              />
+              <FormTextInput
+                label="Last name"
+                name="lastName"
+                validate={validator.isEmpty("Last name can't be empty")}
+              />
               <FormTextInput iconRight="lock" isDisabled label="Email" name="email" />
               <Button
-                isDisabled={valuesNotChanged || !values.firstName || !values.lastName}
+                isDisabled={valuesNotChanged || hasValidationErrors}
                 isLoading={submitting}
                 text="Update"
                 type="submit"
@@ -84,7 +92,7 @@ export const AccountPage = () => {
         }}
         onSubmit={handleUpdateAccount}
       />
-      <FlexLayout flexDirection="column" space={5}>
+      <FlexLayout flexDirection="column" space={5} sx={{ width: '150px' }}>
         <Link to="/dashboard">
           <TextWithIcon iconLeft="arrowLeft" text="Go to Dashboard" />
         </Link>

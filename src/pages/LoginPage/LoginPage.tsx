@@ -6,7 +6,7 @@ import { login, LoginArgs } from '~/api';
 import { FormPasswordInput, FormTextInput } from '~/components';
 import { useAccessToken } from '~/hooks';
 import { Button, ErrorMessage, FlexLayout, Text } from '~/ui';
-import { getErrorMessage, sleep } from '~/utils';
+import { getErrorMessage, sleep, validator } from '~/utils';
 
 export const LoginPage = () => {
   const history = useHistory();
@@ -41,7 +41,7 @@ export const LoginPage = () => {
         </Text>
         {error && <ErrorMessage text={error} />}
         <Form
-          render={({ handleSubmit, submitting, values }) => (
+          render={({ handleSubmit, hasValidationErrors, submitting }) => (
             <FlexLayout
               as="form"
               flexDirection="column"
@@ -49,10 +49,10 @@ export const LoginPage = () => {
               sx={{ width: ['100%', '500px'] }}
               onSubmit={handleSubmit}
             >
-              <FormTextInput label="Email" name="email" type="text" />
+              <FormTextInput label="Email" name="email" type="text" validate={validator.isEmail()} />
               <FormPasswordInput label="Password" name="password" />
               <Button
-                isDisabled={!values.email || !values.password || submitting}
+                isDisabled={hasValidationErrors || submitting}
                 isFullWidth
                 isLoading={submitting}
                 text="Log in"

@@ -6,7 +6,7 @@ import { register, RegisterArgs } from '~/api';
 import { FormPasswordInput, FormTextInput } from '~/components';
 import { useAccessToken } from '~/hooks';
 import { Button, ErrorMessage, FlexLayout, Text } from '~/ui';
-import { getErrorMessage, sleep } from '~/utils';
+import { getErrorMessage, sleep, validator } from '~/utils';
 
 export const RegistrationPage = () => {
   const history = useHistory();
@@ -37,7 +37,7 @@ export const RegistrationPage = () => {
         </Text>
         {error && <ErrorMessage text={error} />}
         <Form
-          render={({ handleSubmit, submitting, values }) => {
+          render={({ handleSubmit, hasValidationErrors, submitting, values }) => {
             const { email, firstName, lastName, password } = values;
             const isSubmitDisabled = !firstName || !lastName || !email || !password || submitting;
 
@@ -49,12 +49,26 @@ export const RegistrationPage = () => {
                 sx={{ width: ['100%', '500px'] }}
                 onSubmit={handleSubmit}
               >
-                <FormTextInput label="First name" name="firstName" type="text" />
-                <FormTextInput label="Last Name" name="lastName" type="text" />
-                <FormTextInput label="Email" name="email" type="email" />
-                <FormPasswordInput label="Password" name="password" />
+                <FormTextInput
+                  label="First name"
+                  name="firstName"
+                  type="text"
+                  validate={validator.isEmpty("First name can't be empty")}
+                />
+                <FormTextInput
+                  label="Last Name"
+                  name="lastName"
+                  type="text"
+                  validate={validator.isEmpty("Last name can't be empty")}
+                />
+                <FormTextInput label="Email" name="email" type="text" validate={validator.isEmail()} />
+                <FormPasswordInput
+                  label="Password"
+                  name="password"
+                  validate={validator.isLength('Password must be at least 6 characters', { min: 6 })}
+                />
                 <Button
-                  isDisabled={isSubmitDisabled}
+                  isDisabled={isSubmitDisabled || hasValidationErrors}
                   isFullWidth
                   isLoading={submitting}
                   text="Create account"
