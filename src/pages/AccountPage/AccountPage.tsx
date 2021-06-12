@@ -1,11 +1,11 @@
 import isEqual from 'lodash/isEqual';
 import { Form } from 'react-final-form';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { Link, Redirect } from 'react-router-dom';
 
-import { deleteAccount, getAccountData, updateAccount } from '~/api';
+import { deleteAccount, updateAccount } from '~/api';
 import { CenteredLoadingSpinner, FormTextInput, TextWithIcon } from '~/components';
-import { useLogout } from '~/hooks';
+import { useAccount, useLogout } from '~/hooks';
 import { Button, FlexLayout, showToast, Text } from '~/ui';
 import { showErrorToast, validator } from '~/utils';
 
@@ -16,13 +16,9 @@ interface UpdateAccountProps {
 }
 
 export const AccountPage = () => {
-  const { data: account, error, isLoading, refetch: refetchAccount } = useQuery('account', getAccountData);
+  const { account, error, refetchAccount } = useAccount();
   const queryClient = useQueryClient();
   const logout = useLogout();
-
-  if (isLoading) {
-    return <CenteredLoadingSpinner />;
-  }
 
   if (error || !account) {
     return <Redirect to="/" />;
@@ -92,7 +88,7 @@ export const AccountPage = () => {
         }}
         onSubmit={handleUpdateAccount}
       />
-      <FlexLayout flexDirection="column" space={5} sx={{ width: '150px' }}>
+      <FlexLayout flexDirection="column" space={5} sx={{ width: '200px' }}>
         <Link to="/dashboard">
           <TextWithIcon iconLeft="arrowLeft" text="Go to Dashboard" />
         </Link>
