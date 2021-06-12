@@ -8,7 +8,7 @@ export function useLogout() {
 
   return () => {
     Cookies.remove('access-token');
-    queryClient.invalidateQueries(); // Invalidate every query in the cache
+    queryClient.removeQueries();
     history.push('/login');
   };
 }
