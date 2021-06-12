@@ -50,7 +50,11 @@ export const LoginPage = () => {
               onSubmit={handleSubmit}
             >
               <FormTextInput label="Email" name="email" type="text" validate={validator.isEmail()} />
-              <FormPasswordInput label="Password" name="password" />
+              <FormPasswordInput
+                label="Password"
+                name="password"
+                validate={validator.isEmpty("Field can't be empty")}
+              />
               <Button
                 isDisabled={hasValidationErrors || submitting}
                 isFullWidth
