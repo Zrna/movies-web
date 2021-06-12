@@ -1,5 +1,5 @@
 export const fonts = {
-  body: "'Roboto', sans-serif",
+  body: "'Montserrat', sans-serif",
 };
 
 export const fontStyles = {
