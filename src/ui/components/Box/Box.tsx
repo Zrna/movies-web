@@ -1,4 +1,5 @@
 import { forwardRef, useRef } from 'react';
+import useClickAway from 'react-use/lib/useClickAway';
 import { Box as ThemeBox, BoxProps as ThemeBoxProps, SxStyleProp } from 'theme-ui';
 
 import { styles, theme } from '~/ui';
@@ -8,16 +9,23 @@ export interface BoxProps extends ThemeBoxProps {
   isDisabled?: boolean;
   type?: string;
   value?: any;
-  onClick?: (event?: any) => void;
   target?: string;
   sx?: SxStyleProp;
+  onClick?: (event?: any) => void;
+  onOutsideClick?(event: Event): void;
 }
 
 export const Box: React.FC<BoxProps> = forwardRef<any, any>(
-  ({ isDisabled = false, sx, onClick, ...rest }, ref: any) => {
+  ({ isDisabled = false, sx, onClick, onOutsideClick, ...rest }, ref: any) => {
+    const clickableStyle = isDisabled || onClick ? styles.interactions.clickable : {};
+
     const innerRef = useRef(ref);
 
-    const clickableStyle = isDisabled || onClick ? styles.interactions.clickable : {};
+    useClickAway(innerRef, () => {
+      if (onOutsideClick) {
+        onOutsideClick();
+      }
+    });
 
     return (
       <ThemeBox
