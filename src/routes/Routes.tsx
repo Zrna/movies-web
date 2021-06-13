@@ -9,8 +9,8 @@ export const Routes = () => {
   return (
     <FlexLayout flexDirection="column" sx={{ maxWidth: '1920px', margin: '0 auto' }}>
       <Switch>
-        <ProtectedRoute component={AccountPage} path="/account" />
-        <ProtectedRoute component={DashboardPage} path="/dashboard" />
+        <ProtectedRoute component={AccountPage} exact path="/account" />
+        <ProtectedRoute component={DashboardPage} exact path="/dashboard" />
         <Route component={RegistrationPage} exact path="/register" />
         <Route component={LoginPage} exact path="/login" />
         <Route component={HomePage} exact path="/" />
