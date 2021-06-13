@@ -1,51 +1,20 @@
 import isEqual from 'lodash/isEqual';
 import { Form } from 'react-final-form';
-import { useQueryClient } from 'react-query';
 import { Link, Redirect } from 'react-router-dom';
 
-import { deleteAccount, updateAccount } from '~/api';
-import { CenteredLoadingSpinner, FormTextInput, TextWithIcon } from '~/components';
-import { useAccount, useLogout } from '~/hooks';
-import { Button, FlexLayout, showToast, Text } from '~/ui';
-import { showErrorToast, validator } from '~/utils';
-
-interface UpdateAccountProps {
-  email: string;
-  firstName: string;
-  lastName: string;
-}
+import { FormTextInput, TextWithIcon } from '~/components';
+import { useAccount } from '~/hooks';
+import { Button, FlexLayout, Text } from '~/ui';
+import { validator } from '~/utils';
 
 export const AccountPage = () => {
-  const { account, error, refetchAccount } = useAccount();
-  const queryClient = useQueryClient();
-  const logout = useLogout();
+  const { account, error, deleteAccount, updateAccount } = useAccount();
 
   if (error || !account) {
     return <Redirect to="/" />;
   }
 
   const { email, firstName, lastName } = account;
-
-  const handleDeleteAccount = () => {
-    deleteAccount()
-      .then(() => {
-        logout();
-        showToast({ text: 'Account successfully deleted.', variant: 'success' });
-      })
-      .catch((err) => showErrorToast(err));
-  };
-
-  const handleUpdateAccount = async (data: UpdateAccountProps) => {
-    const { firstName, lastName } = data;
-
-    updateAccount({ firstName, lastName })
-      .then(() => {
-        queryClient.invalidateQueries('account');
-        refetchAccount();
-        showToast({ text: 'Account updated.', variant: 'success' });
-      })
-      .catch((err) => showErrorToast(err));
-  };
 
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
@@ -86,13 +55,13 @@ export const AccountPage = () => {
             </FlexLayout>
           );
         }}
-        onSubmit={handleUpdateAccount}
+        onSubmit={(data) => updateAccount(data)}
       />
       <FlexLayout flexDirection="column" space={5} sx={{ width: '200px' }}>
         <Link to="/dashboard">
           <TextWithIcon iconLeft="arrowLeft" text="Go to Dashboard" />
         </Link>
-        <Text color="red-500" variant="text-m" onClick={handleDeleteAccount}>
+        <Text color="red-500" variant="text-m" onClick={deleteAccount}>
           Delete account
         </Text>
       </FlexLayout>
