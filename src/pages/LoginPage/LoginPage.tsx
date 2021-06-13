@@ -1,6 +1,7 @@
+import queryString from 'query-string';
 import { useState } from 'react';
 import { Form } from 'react-final-form';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect, useHistory, useLocation } from 'react-router-dom';
 
 import { login, LoginArgs } from '~/api';
 import { FormPasswordInput, FormTextInput } from '~/components';
@@ -11,6 +12,7 @@ import { getErrorMessage, sleep, validator } from '~/utils';
 export const LoginPage = () => {
   const history = useHistory();
   const hasAccessToken = useAccessToken();
+  const location = useLocation();
 
   const [error, setError] = useState('');
 
@@ -26,7 +28,11 @@ export const LoginPage = () => {
       email,
       password,
     })
-      .then(() => history.push('/dashboard'))
+      .then(() => {
+        const lastLocation = queryString.parse(location.search)?.redirectTo;
+        history.push(lastLocation ? `/${lastLocation}` : '/dashboard');
+        return;
+      })
       .catch((err) => {
         const errorMessage = getErrorMessage(err);
         setError(errorMessage);
