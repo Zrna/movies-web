@@ -15,6 +15,7 @@ export interface TextInputProps {
   iconRight?: theme.Icon;
   isDisabled?: boolean;
   label?: string;
+  labelColor?: theme.Color;
   width?: string;
   pattern?: string;
   placeholder?: string;
@@ -33,6 +34,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   iconRight,
   isDisabled = false,
   label,
+  labelColor = 'white-alpha-75',
   placeholder,
   type = 'text',
   value,
@@ -55,7 +57,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   return (
     <FlexLayout flexDirection="column" space={2} sx={{ width: width ?? '100%' }}>
       {label && (
-        <Text as="label" color="white-alpha-75" variant="text-m-bold">
+        <Text as="label" color={labelColor} variant="text-m-bold">
           {label}
         </Text>
       )}
