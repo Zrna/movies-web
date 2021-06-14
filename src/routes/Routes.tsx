@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 
-import { AccountPage, DashboardPage, HomePage, LoginPage, RegistrationPage } from '~/pages';
+import { AccountPage, CreateReviewPage, DashboardPage, HomePage, LoginPage, RegistrationPage } from '~/pages';
 import { FlexLayout, Text } from '~/ui';
 
 import { ProtectedRoute } from './ProtectedRoute';
@@ -10,6 +10,7 @@ export const Routes = () => {
     <FlexLayout flexDirection="column" sx={{ maxWidth: '1920px', margin: '0 auto' }}>
       <Switch>
         <ProtectedRoute component={AccountPage} exact path="/account" />
+        <ProtectedRoute component={CreateReviewPage} exact path="/create-review" />
         <ProtectedRoute component={DashboardPage} exact path="/dashboard" />
         <Route component={RegistrationPage} exact path="/register" />
         <Route component={LoginPage} exact path="/login" />

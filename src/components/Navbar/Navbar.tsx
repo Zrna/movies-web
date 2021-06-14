@@ -32,12 +32,17 @@ export const Navbar = () => {
         {isLoading ? (
           <LoadingSpinner />
         ) : account ? (
-          <TextWithIcon
-            iconRight={isAccountMenuOpen ? 'chevronUp' : 'chevronDown'}
-            sx={{ wordBreak: 'break-all' }}
-            text={account.firstName}
-            onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
-          />
+          <>
+            <Link to="/create-review">
+              <TextWithIcon iconLeft="plus" text="Create review" variant="display-paragraph-xl" />
+            </Link>
+            <TextWithIcon
+              iconRight={isAccountMenuOpen ? 'chevronUp' : 'chevronDown'}
+              sx={{ wordBreak: 'break-all' }}
+              text={account.firstName}
+              onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
+            />
+          </>
         ) : (
           <Link to="/login">
             <Text color="white">Login</Text>
