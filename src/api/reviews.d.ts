@@ -11,3 +11,8 @@ export interface GetReviews {
   data: Review[];
   totalRecords: number;
 }
+
+export interface CreateReview {
+  name: string;
+  review: string;
+}
