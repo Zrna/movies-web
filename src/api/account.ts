@@ -1,22 +1,10 @@
 import { backend } from '~/services';
 
-export interface AccountData {
-  id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { AccountData, UpdateAccountArgs } from './account.d';
 
 export const getAccountData = async () => {
   return await backend.get<AccountData>('/api/account');
 };
-
-interface UpdateAccountArgs {
-  firstName: string;
-  lastName: string;
-}
 
 export const updateAccount = async (data: UpdateAccountArgs) => {
   return await backend.put<AccountData>('/api/account', data);
