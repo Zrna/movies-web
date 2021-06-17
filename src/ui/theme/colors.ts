@@ -13,6 +13,7 @@ export const palette = {
   green: '#5cc639',
   primary: '#e84545',
   red: '#9d0b28',
+  yellow: '#ffe234',
   transparent: 'transparent',
   white: '#FFFFFF',
   'gray-400': '#F5F5F5',
