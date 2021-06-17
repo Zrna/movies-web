@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { Review } from '~/api';
 import { RatingStars } from '~/components';
 import { Divider, FlexLayout, Text, theme } from '~/ui';
@@ -21,14 +23,16 @@ export const ReviewCard: React.FC<ReviewProps> = ({ data }) => {
         borderRadius: 'm',
       }}
     >
-      <FlexLayout flexDirection="column" space={2}>
-        <Text color="white-alpha-50" variant="text-l-bold">
-          Name
-        </Text>
-        <Text color="primary" variant="text-l-bold">
-          {name}
-        </Text>
-      </FlexLayout>
+      <Link to={`/review/${id}`}>
+        <FlexLayout flexDirection="column" space={2}>
+          <Text color="white-alpha-50" variant="text-l-bold">
+            Name
+          </Text>
+          <Text color="primary" variant="text-l-bold">
+            {name}
+          </Text>
+        </FlexLayout>
+      </Link>
       <Divider color="gray-600" />
       <FlexLayout flexDirection="column" space={2}>
         <Text color="white-alpha-50" variant="text-l-bold">
