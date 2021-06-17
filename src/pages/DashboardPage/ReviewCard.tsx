@@ -1,4 +1,5 @@
 import { Review } from '~/api';
+import { RatingStars } from '~/components';
 import { Divider, FlexLayout, Text, theme } from '~/ui';
 
 interface ReviewProps {
@@ -6,7 +7,7 @@ interface ReviewProps {
 }
 
 export const ReviewCard: React.FC<ReviewProps> = ({ data }) => {
-  const { name, id, review } = data;
+  const { name, id, rating } = data;
 
   return (
     <FlexLayout
@@ -31,11 +32,9 @@ export const ReviewCard: React.FC<ReviewProps> = ({ data }) => {
       <Divider color="gray-600" />
       <FlexLayout flexDirection="column" space={2}>
         <Text color="white-alpha-50" variant="text-l-bold">
-          Review
+          Rating
         </Text>
-        <Text color="primary" variant="text-l-bold">
-          {review}
-        </Text>
+        <RatingStars isReadOnly rating={rating} />
       </FlexLayout>
     </FlexLayout>
   );
