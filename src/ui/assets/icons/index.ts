@@ -16,5 +16,7 @@ export { default as lock } from './lock.svg';
 export { default as login } from './login.svg';
 export { default as logout } from './logout.svg';
 export { default as plus } from './plus.svg';
+export { default as star } from './star.svg';
+export { default as starFull } from './star-full.svg';
 export { default as user } from './user.svg';
 export { default as videoCamera } from './video-camera.svg';
