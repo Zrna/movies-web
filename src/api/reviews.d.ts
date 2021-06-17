@@ -2,6 +2,7 @@ export interface Review {
   id: number;
   userId: number;
   name: string;
+  rating: number | null;
   review: string;
   createdAt: Date;
   updatedAt: Date;
