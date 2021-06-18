@@ -22,8 +22,9 @@ export const AccountMenu: React.FC<AccountMenuProps> = ({ onOutsideClick }) => {
         width: '200px',
         position: 'absolute',
         right: 0,
-        top: '68px',
+        top: ['48px', '68px'],
         border: `1px solid ${theme.colors.dark}`,
+        zIndex: '5',
       }}
       onOutsideClick={onOutsideClick}
     >
