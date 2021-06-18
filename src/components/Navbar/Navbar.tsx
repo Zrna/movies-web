@@ -28,7 +28,7 @@ export const Navbar = () => {
         sx={{ maxWidth: '1920px', margin: '0 auto' }}
       >
         <Link to={account ? '/dashboard' : '/'}>
-          <Icon color="primary" icon="videoCamera" size={isMobile ? 'l' : 'xl'} />
+          <Icon color="primary" icon="film" size={isMobile ? 'l' : 'xl'} />
         </Link>
         {isLoading ? (
           <LoadingSpinner />

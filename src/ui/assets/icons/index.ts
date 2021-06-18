@@ -12,6 +12,7 @@ export { default as chevronUp } from './chevron-up.svg';
 export { default as close } from './close.svg';
 export { default as eye } from './eye.svg';
 export { default as eyeOff } from './eye-off.svg';
+export { default as film } from './film.svg';
 export { default as lock } from './lock.svg';
 export { default as login } from './login.svg';
 export { default as logout } from './logout.svg';
