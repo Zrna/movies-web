@@ -4,7 +4,7 @@ import { useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 
 import { CreateReview, createReview } from '~/api';
-import { FormTextInput, RatingStars } from '~/components';
+import { FormTextarea, FormTextInput, RatingStars } from '~/components';
 import { Button, FlexLayout, showToast, Text } from '~/ui';
 import { showErrorToast, sleep, validator } from '~/utils';
 
@@ -46,11 +46,10 @@ export const CreateReviewPage = () => {
               type="text"
               validate={validator.isEmpty("Field can't be empty")}
             />
-            <FormTextInput
+            <FormTextarea
               label="Review"
               labelColor="white"
               name="review"
-              type="text"
               validate={validator.isEmpty("Field can't be empty")}
             />
             <FlexLayout flexDirection="column" space={2}>
