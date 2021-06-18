@@ -5,15 +5,17 @@ import { Icon } from '~/ui';
 interface RatingStarsProps {
   isReadOnly?: boolean;
   rating: number | null;
+  onChange?(value: number): void;
 }
 
-export const RatingStars: React.FC<RatingStarsProps> = ({ isReadOnly = false, rating }) => {
+export const RatingStars: React.FC<RatingStarsProps> = ({ isReadOnly = false, rating, onChange }) => {
   return (
     <Rating
       emptySymbol={<Icon icon="star" size="l" />}
       fullSymbol={<Icon icon="starFull" size="l" />}
       initialRating={rating ?? 0}
       readonly={isReadOnly}
+      onChange={onChange}
     />
   );
 };
