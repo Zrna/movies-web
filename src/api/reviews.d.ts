@@ -4,8 +4,8 @@ export interface Review {
   name: string;
   rating: number | null;
   review: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface GetReviews {

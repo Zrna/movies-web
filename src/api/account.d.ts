@@ -3,8 +3,8 @@ export interface AccountData {
   email: string;
   firstName: string;
   lastName: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface UpdateAccountArgs {
