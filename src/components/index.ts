@@ -1,3 +1,4 @@
+export * from './BackToLink';
 export * from './ButtonLink';
 export * from './CenteredLoadingSpinner';
 export * from './form';
