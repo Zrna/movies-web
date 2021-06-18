@@ -6,6 +6,10 @@ export const getReviews = async () => {
   return await backend.get<GetReviews>('/api/movies');
 };
 
+export const getReviewById = async (id: string) => {
+  return await backend.get<Review>(`/api/movies/${id}`);
+};
+
 export const createReview = async (data: CreateReview) => {
   return await backend.post<Review>('/api/movies', data);
 };
