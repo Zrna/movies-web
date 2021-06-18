@@ -3,13 +3,13 @@ import { Field, useField } from 'react-final-form';
 
 import { TextInput } from '~/ui';
 
-import { FormTextInputProps, getError } from './FormTextInput';
+import { FormFieldProps, getFieldError } from './utils';
 
-export const FormPasswordInput: React.FC<FormTextInputProps> = ({ name, label, validate }) => {
+export const FormPasswordInput: React.FC<FormFieldProps> = ({ name, label, validate }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { meta } = useField(name, { validate });
-  const error = getError(meta);
+  const error = getFieldError(meta);
 
   return (
     <Field name={name} validate={validate}>
