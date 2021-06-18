@@ -6,5 +6,6 @@ export * from './FlexLayout';
 export * from './Icon';
 export * from './LoadingSpinner';
 export * from './Text';
+export * from './Textarea';
 export * from './TextInput';
 export * from './Toast';
