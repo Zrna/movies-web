@@ -12,7 +12,7 @@ export const BackToLink: React.FC<BackToLinkProps> = ({ text, to }) => {
 
   return (
     <TextWithIcon
-      color="red-500"
+      color="white-alpha-75"
       iconLeft="arrowLeft"
       text={text}
       variant="text-s-medium"

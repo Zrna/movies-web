@@ -4,7 +4,7 @@ import { useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 
 import { CreateReview, createReview } from '~/api';
-import { FormTextarea, FormTextInput, RatingStars } from '~/components';
+import { BackToLink, FormTextarea, FormTextInput, RatingStars } from '~/components';
 import { Button, FlexLayout, showToast, Text } from '~/ui';
 import { showErrorToast, sleep, validator } from '~/utils';
 
@@ -29,7 +29,11 @@ export const CreateReviewPage = () => {
   };
 
   return (
-    <FlexLayout justifyContent="center" p={6}>
+    <FlexLayout flexDirection="column" p={4} space={6}>
+      <BackToLink text="back to dashboard" to="/dashboard" />
+      <Text color="primary" variant="display-heading-m">
+        Create review
+      </Text>
       <Form
         render={({ handleSubmit, hasValidationErrors, submitting }) => (
           <FlexLayout

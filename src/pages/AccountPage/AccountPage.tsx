@@ -2,7 +2,7 @@ import isEqual from 'lodash/isEqual';
 import { Form } from 'react-final-form';
 import { Link, Redirect } from 'react-router-dom';
 
-import { FormTextInput, TextWithIcon } from '~/components';
+import { BackToLink, FormTextInput } from '~/components';
 import { useAccount } from '~/hooks';
 import { Button, FlexLayout, Text } from '~/ui';
 import { validator } from '~/utils';
@@ -18,6 +18,7 @@ export const AccountPage = () => {
 
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
+      <BackToLink text="back to dashboard" to="/dashboard" />
       <Text color="primary" variant="display-heading-m">
         Account
       </Text>
@@ -58,9 +59,6 @@ export const AccountPage = () => {
         onSubmit={(data) => updateAccount(data)}
       />
       <FlexLayout flexDirection="column" space={5} sx={{ width: '200px' }}>
-        <Link to="/dashboard">
-          <TextWithIcon iconLeft="arrowLeft" text="Go to Dashboard" />
-        </Link>
         <Text color="red-500" variant="text-m" onClick={deleteAccount}>
           Delete account
         </Text>
