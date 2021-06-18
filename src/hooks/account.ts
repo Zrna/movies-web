@@ -45,7 +45,6 @@ export function useAccount(args: UseAccountArgs = { unauthorizedRedirect: false 
     try {
       await updateAccount({ firstName, lastName });
       queryClient.invalidateQueries('account');
-      refetchAccount();
       showToast({ text: 'Account updated.', variant: 'success' });
     } catch (err) {
       return showErrorToast(err);
