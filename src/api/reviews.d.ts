@@ -16,4 +16,5 @@ export interface GetReviews {
 export interface CreateReview {
   name: string;
   review: string;
+  rating?: number | null;
 }

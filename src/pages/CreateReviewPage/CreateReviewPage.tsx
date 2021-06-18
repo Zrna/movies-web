@@ -1,20 +1,25 @@
+import { useState } from 'react';
 import { Form } from 'react-final-form';
 import { useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 
 import { CreateReview, createReview } from '~/api';
-import { FormTextInput } from '~/components';
-import { Button, FlexLayout, showToast } from '~/ui';
+import { FormTextInput, RatingStars } from '~/components';
+import { Button, FlexLayout, showToast, Text } from '~/ui';
 import { showErrorToast, sleep, validator } from '~/utils';
 
 export const CreateReviewPage = () => {
   const history = useHistory();
   const queryClient = useQueryClient();
+  const [rating, setRating] = useState<number | null>(null);
 
   const handleCreateReview = async (data: CreateReview) => {
     try {
       await sleep(1000);
-      await createReview(data);
+      await createReview({
+        ...data,
+        rating,
+      });
       queryClient.invalidateQueries('reviews');
       history.push('/dashboard');
       showToast({ variant: 'success', text: 'Review successfully created' });
@@ -48,6 +53,12 @@ export const CreateReviewPage = () => {
               type="text"
               validate={validator.isEmpty("Field can't be empty")}
             />
+            <FlexLayout flexDirection="column" space={2}>
+              <Text as="label" color="white" variant="text-m-bold">
+                Rating
+              </Text>
+              <RatingStars rating={rating} onChange={(value) => setRating(value)} />
+            </FlexLayout>
             <Button
               isDisabled={hasValidationErrors || submitting}
               isFullWidth
