@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 
-import { deleteReviewById, getReviewById, getReviews } from '~/api';
+import { deleteReviewById, getReviewById, getReviews, UpdateReview, updateReviewById } from '~/api';
 import { showToast } from '~/ui';
 import { showErrorToast } from '~/utils';
 
@@ -54,11 +54,26 @@ export function useReviewById(id: string) {
     }
   };
 
+  const handleUpdateReviewById = async (id: string, data: UpdateReview) => {
+    const { rating, review } = data;
+
+    setIsRequestLoading(true);
+    updateReviewById(id, { rating, review })
+      .then(async () => {
+        await queryClient.invalidateQueries(['review', id]);
+        await queryClient.invalidateQueries('reviews');
+        showToast({ text: 'Review successfully updated.', variant: 'success' });
+      })
+      .catch((err) => showErrorToast(err))
+      .finally(() => setIsRequestLoading(false));
+  };
+
   return {
     review,
     error,
     isLoading: isLoading || isRequestLoading,
     refetchReview,
     deleteReviewById: handleDeleteReviewById,
+    updateReviewById: handleUpdateReviewById,
   };
 }
