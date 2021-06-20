@@ -14,14 +14,13 @@ interface UseParamsData {
 
 export const ReviewPage = () => {
   const { reviewId }: UseParamsData = useParams();
-  const { review, isLoading } = useReviewById(reviewId);
+  const { review, isLoading, deleteReviewById } = useReviewById(reviewId);
 
   if (isLoading) {
     return <CenteredLoadingSpinner />;
   }
 
   if (!review) {
-    // it will show toast with corresponding message
     return <Redirect to="/dashboard" />;
   }
 
@@ -37,11 +36,7 @@ export const ReviewPage = () => {
             Edit
           </Text>
           <Text variant="text-s-medium">|</Text>
-          <Text
-            color="white-alpha-75"
-            variant="text-s-medium"
-            onClick={() => window.confirm('Are you sure you want to delete this review?')}
-          >
+          <Text color="white-alpha-75" variant="text-s-medium" onClick={() => deleteReviewById(reviewId)}>
             Delete
           </Text>
         </FlexLayout>
