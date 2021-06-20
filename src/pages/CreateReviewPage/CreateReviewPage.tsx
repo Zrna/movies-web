@@ -16,12 +16,12 @@ export const CreateReviewPage = () => {
   const handleCreateReview = async (data: CreateReview) => {
     try {
       await sleep(1000);
-      await createReview({
+      const { id } = await createReview({
         ...data,
         rating,
       });
-      queryClient.invalidateQueries('reviews');
-      history.push('/dashboard');
+      await queryClient.invalidateQueries('reviews');
+      history.push(`/review/${id}`);
       showToast({ variant: 'success', text: 'Review successfully created' });
     } catch (e) {
       showErrorToast(e);
