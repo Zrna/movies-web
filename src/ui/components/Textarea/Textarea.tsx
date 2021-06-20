@@ -27,7 +27,6 @@ export const Textarea: React.FC<TextareaProps> = ({
   onChange,
   ...rest
 }) => {
-  console.log('error', error);
   return (
     <>
       {label && (
