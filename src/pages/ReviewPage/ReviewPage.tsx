@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Redirect, useParams } from 'react-router';
 
+import { UpdateReview } from '~/api';
 import { BackToLink, CenteredLoadingSpinner } from '~/components';
 import { useReviewById } from '~/hooks';
 import { FlexLayout, Text } from '~/ui';
@@ -14,7 +16,8 @@ interface UseParamsData {
 
 export const ReviewPage = () => {
   const { reviewId }: UseParamsData = useParams();
-  const { review, isLoading, deleteReviewById } = useReviewById(reviewId);
+  const { review, isLoading, deleteReviewById, updateReviewById } = useReviewById(reviewId);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
   if (isLoading) {
     return <CenteredLoadingSpinner />;
@@ -26,13 +29,18 @@ export const ReviewPage = () => {
 
   const { name, updatedAt } = review;
 
+  const handleEditReview = async ({ rating, review }: UpdateReview) => {
+    await updateReviewById(reviewId, { rating, review });
+    setIsEditMode(false);
+  };
+
   return (
     <FlexLayout flexDirection="column" p={4} space={5}>
       <BackToLink text="back to dashboard" to="/dashboard" />
       <FlexLayout flexDirection="column" space={3}>
         <Text variant="display-heading-m">{name}</Text>
         <FlexLayout flexDirection="row" space={4}>
-          <Text color="white-alpha-75" variant="text-s-medium" onClick={() => undefined}>
+          <Text color="white-alpha-75" variant="text-s-medium" onClick={() => setIsEditMode(!isEditMode)}>
             Edit
           </Text>
           <Text variant="text-s-medium">|</Text>
@@ -46,7 +54,7 @@ export const ReviewPage = () => {
       </FlexLayout>
       <FlexLayout flexDirection={['column', 'row']} space={5}>
         <Image />
-        <Content data={review} />
+        <Content data={review} isEditMode={isEditMode} onEdit={handleEditReview} />
       </FlexLayout>
     </FlexLayout>
   );
