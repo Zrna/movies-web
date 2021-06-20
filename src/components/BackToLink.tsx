@@ -14,6 +14,9 @@ export const BackToLink: React.FC<BackToLinkProps> = ({ text, to }) => {
     <TextWithIcon
       color="white-alpha-75"
       iconLeft="arrowLeft"
+      sx={{
+        width: 'fit-content',
+      }}
       text={text}
       variant="text-s-medium"
       onClick={() => history.push(to)}
