@@ -4,10 +4,11 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { BackToLink, FormTextInput } from '~/components';
 import { useAccount } from '~/hooks';
-import { Button, FlexLayout, Text } from '~/ui';
+import { Button, FlexLayout, Text, useScreenType } from '~/ui';
 import { validator } from '~/utils';
 
 export const AccountPage = () => {
+  const { isMobile } = useScreenType();
   const { account, error, deleteAccount, updateAccount } = useAccount();
 
   if (error || !account) {
@@ -49,8 +50,9 @@ export const AccountPage = () => {
               <FormTextInput iconRight="lock" isDisabled label="Email" name="email" />
               <Button
                 isDisabled={valuesNotChanged || hasValidationErrors}
+                isFullWidth={isMobile}
                 isLoading={submitting}
-                text="Update"
+                text="Update account"
                 type="submit"
               />
             </FlexLayout>
