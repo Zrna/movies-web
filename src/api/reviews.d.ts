@@ -18,3 +18,8 @@ export interface CreateReview {
   review: string;
   rating?: number | null;
 }
+
+export interface UpdateReview {
+  rating?: number | null;
+  review: string;
+}
