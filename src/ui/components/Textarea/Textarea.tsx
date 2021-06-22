@@ -45,7 +45,6 @@ export const Textarea: React.FC<TextareaProps> = ({
           border: error ? `1px solid ${theme.colors['red-500']}` : 'none',
           borderRadius: 's',
           outline: 'none',
-          resize: 'none',
           '::placeholder': {
             color: 'white-alpha-50',
           },
@@ -55,6 +54,8 @@ export const Textarea: React.FC<TextareaProps> = ({
           '&:focus-within': {
             backgroundColor: 'gray-500',
           },
+          maxWidth: '100%',
+          minWidth: '100%',
         }}
         value={value}
         variant="text.text-m"
