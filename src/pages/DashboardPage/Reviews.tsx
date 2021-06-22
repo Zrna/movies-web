@@ -1,6 +1,6 @@
 import { CenteredLoadingSpinner } from '~/components';
 import { useReviews } from '~/hooks';
-import { FlexLayout, Text } from '~/ui';
+import { Box, Text } from '~/ui';
 
 import { ReviewCard } from './ReviewCard';
 
@@ -20,10 +20,19 @@ export const Reviews = () => {
   }
 
   return (
-    <FlexLayout flexDirection="row" space={5}>
+    <Box
+      style={{
+        display: 'grid',
+        justifyContent: 'space-evenly',
+        alignContent: 'flex-end',
+        alignItems: 'start',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(0, 18rem))',
+        gridGap: '24px',
+      }}
+    >
       {reviews.data.map((review) => (
         <ReviewCard data={review} key={review.id} />
       ))}
-    </FlexLayout>
+    </Box>
   );
 };
