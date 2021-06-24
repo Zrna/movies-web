@@ -4,6 +4,7 @@ export interface Review {
   name: string;
   rating: number | null;
   review: string;
+  url: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -17,9 +18,11 @@ export interface CreateReview {
   name: string;
   review: string;
   rating?: number | null;
+  url?: string | null;
 }
 
 export interface UpdateReview {
   rating?: number | null;
   review: string;
+  url?: string | null;
 }
