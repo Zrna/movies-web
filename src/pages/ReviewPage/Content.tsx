@@ -2,19 +2,20 @@ import { useState } from 'react';
 
 import { Review, UpdateReview } from '~/api';
 import { RatingStars } from '~/components';
-import { Button, FlexLayout, Text, Textarea, useScreenType } from '~/ui';
+import { Button, FlexLayout, Text, Textarea, TextInput, useScreenType } from '~/ui';
 
 interface ContentProps {
   data: Review;
   isEditMode: boolean;
-  onEdit: ({ rating, review }: UpdateReview) => void;
+  onEdit: (data: UpdateReview) => void;
 }
 
 export const Content: React.FC<ContentProps> = ({ data, isEditMode, onEdit }) => {
   const { isMobile } = useScreenType();
-  const { rating, review } = data;
+  const { rating, review, url } = data;
   const [updatedReview, setUpdatedReview] = useState<string>(review);
   const [updatedRating, setUpdatedRating] = useState<number | null>(rating);
+  const [updatedUrl, setUpdatedUrl] = useState<string | null>(url);
 
   return (
     <FlexLayout flexDirection="column" space={4} sx={{ width: ['100%', '400px', '800px'] }}>
@@ -39,22 +40,36 @@ export const Content: React.FC<ContentProps> = ({ data, isEditMode, onEdit }) =>
       </FlexLayout>
       <FlexLayout flexDirection="column" space={2}>
         <Text color="white-alpha-50" variant="text-xl-bold">
+          URL
+        </Text>
+        {isEditMode ? (
+          <TextInput value={updatedUrl ?? ''} onChange={(value) => setUpdatedUrl(value)} />
+        ) : (
+          <Text color="primary" variant="text-l-medium">
+            {updatedUrl ? (
+              <a href={updatedUrl} rel="noreferrer" target="_blank">
+                {updatedUrl}
+              </a>
+            ) : (
+              'N/A'
+            )}
+          </Text>
+        )}
+      </FlexLayout>
+      <FlexLayout flexDirection="column" space={2}>
+        <Text color="white-alpha-50" variant="text-xl-bold">
           Review
         </Text>
         <Text color="primary" variant="text-l-medium">
-          {isEditMode ? (
-            <Textarea value={updatedReview} onChange={(value) => setUpdatedReview(value.trimStart())} />
-          ) : (
-            review
-          )}
+          {isEditMode ? <Textarea value={updatedReview} onChange={(value) => setUpdatedReview(value)} /> : review}
         </Text>
       </FlexLayout>
       {isEditMode && (
         <Button
-          isDisabled={!updatedReview || (updatedReview === review && updatedRating === rating)}
+          isDisabled={!updatedReview || (updatedReview === review && updatedRating === rating && updatedUrl === url)}
           isFullWidth={isMobile}
           text="Edit review"
-          onClick={() => onEdit({ rating: updatedRating, review: updatedReview })}
+          onClick={() => onEdit({ rating: updatedRating, review: updatedReview, url: updatedUrl })}
         />
       )}
     </FlexLayout>

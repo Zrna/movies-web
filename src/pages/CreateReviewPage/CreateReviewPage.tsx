@@ -56,6 +56,7 @@ export const CreateReviewPage = () => {
               name="review"
               validate={validator.isEmpty("Field can't be empty")}
             />
+            <FormTextInput label="URL" labelColor="white" name="url" type="text" validate={validator.isURL()} />
             <FlexLayout flexDirection="column" space={2}>
               <Text as="label" color="white" variant="text-m-bold">
                 Rating

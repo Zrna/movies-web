@@ -29,8 +29,10 @@ export const ReviewPage = () => {
 
   const { name, updatedAt } = review;
 
-  const handleEditReview = async ({ rating, review }: UpdateReview) => {
-    await updateReviewById(reviewId, { rating, review });
+  const handleEditReview = async (data: UpdateReview) => {
+    const { rating, review, url } = data;
+
+    await updateReviewById(reviewId, { rating, review, url });
     setIsEditMode(false);
   };
 
@@ -40,8 +42,12 @@ export const ReviewPage = () => {
       <FlexLayout flexDirection="column" space={3}>
         <Text variant="display-heading-m">{name}</Text>
         <FlexLayout flexDirection="row" space={4}>
-          <Text color="white-alpha-75" variant="text-s-medium" onClick={() => setIsEditMode(!isEditMode)}>
-            Edit
+          <Text
+            color={isEditMode ? 'primary' : 'white-alpha-75'}
+            variant="text-s-medium"
+            onClick={() => setIsEditMode(!isEditMode)}
+          >
+            {isEditMode ? 'Discard changes' : 'Edit'}
           </Text>
           <Text variant="text-s-medium">|</Text>
           <Text color="white-alpha-75" variant="text-s-medium" onClick={() => deleteReviewById(reviewId)}>
