@@ -1,11 +1,12 @@
 import { CenteredLoadingSpinner } from '~/components';
 import { useReviews } from '~/hooks';
-import { Box, Text } from '~/ui';
+import { Box, Text, useScreenType } from '~/ui';
 
 import { ReviewCard } from './ReviewCard';
 
 export const Reviews = () => {
   const { reviews, isLoading } = useReviews();
+  const { isMobile, isTablet } = useScreenType();
 
   if (isLoading) {
     return <CenteredLoadingSpinner />;
@@ -19,15 +20,18 @@ export const Reviews = () => {
     );
   }
 
+  const gridColumnsStyle = (): string => {
+    const numberOfCards = isMobile ? 1 : isTablet ? 2 : 4;
+
+    return `repeat(${numberOfCards}, 1fr)`;
+  };
+
   return (
     <Box
       style={{
         display: 'grid',
-        justifyContent: 'space-evenly',
-        alignContent: 'flex-end',
-        alignItems: 'start',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(0, 18rem))',
-        gridGap: '24px',
+        gridTemplateColumns: gridColumnsStyle(),
+        gap: '24px',
       }}
     >
       {reviews.data.map((review) => (

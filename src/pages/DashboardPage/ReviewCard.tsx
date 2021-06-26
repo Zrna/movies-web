@@ -18,7 +18,6 @@ export const ReviewCard: React.FC<ReviewProps> = ({ data }) => {
       p={4}
       space={4}
       sx={{
-        width: '300px',
         border: `1px solid ${theme.colors['gray-600']}`,
         borderRadius: 'm',
       }}
