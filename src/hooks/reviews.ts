@@ -55,10 +55,8 @@ export function useReviewById(id: string) {
   };
 
   const handleUpdateReviewById = async (id: string, data: UpdateReview) => {
-    const { rating, review } = data;
-
     setIsRequestLoading(true);
-    updateReviewById(id, { rating, review })
+    updateReviewById(id, data)
       .then(async () => {
         await queryClient.invalidateQueries(['review', id]);
         await queryClient.invalidateQueries('reviews');
