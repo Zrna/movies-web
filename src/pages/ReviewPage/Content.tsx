@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Review, UpdateReview } from '~/api';
 import { RatingStars } from '~/components';
 import { Button, FlexLayout, Text, Textarea, TextInput, useScreenType } from '~/ui';
+import { splitStringToNewLine } from '~/utils';
 
 interface ContentProps {
   data: Review;
@@ -61,7 +62,11 @@ export const Content: React.FC<ContentProps> = ({ data, isEditMode, onEdit }) =>
           Review
         </Text>
         <Text color="primary" variant="text-l-medium">
-          {isEditMode ? <Textarea value={updatedReview} onChange={(value) => setUpdatedReview(value)} /> : review}
+          {isEditMode ? (
+            <Textarea value={updatedReview} onChange={(value) => setUpdatedReview(value)} />
+          ) : (
+            splitStringToNewLine(review)
+          )}
         </Text>
       </FlexLayout>
       {isEditMode && (
