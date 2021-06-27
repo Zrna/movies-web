@@ -5,7 +5,7 @@ export { default as arrowLeft } from './arrow-left.svg';
 export { default as arrowRight } from './arrow-right.svg';
 export { default as arrowUp } from './arrow-up.svg';
 export { default as check } from './check.svg';
-export { default as checkmark } from './checkmark.svg';
+export { default as checkBadge } from './check-badge.svg';
 export { default as chevronDown } from './chevron-down.svg';
 export { default as chevronLeft } from './chevron-left.svg';
 export { default as chevronRight } from './chevron-right.svg';
