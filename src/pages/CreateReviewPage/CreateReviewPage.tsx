@@ -4,7 +4,7 @@ import { useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 
 import { CreateReview, createReview } from '~/api';
-import { BackToLink, FormTextarea, FormTextInput, RatingStars } from '~/components';
+import { BackToLink, FormCheckbox, FormTextarea, FormTextInput, RatingStars } from '~/components';
 import { Button, FlexLayout, showToast, Text } from '~/ui';
 import { showErrorToast, sleep, validator } from '~/utils';
 
@@ -63,6 +63,7 @@ export const CreateReviewPage = () => {
               </Text>
               <RatingStars rating={rating} onChange={(value) => setRating(value)} />
             </FlexLayout>
+            <FormCheckbox label="I would watch again or recommend" name="watchAgain" />
             <Button
               isDisabled={hasValidationErrors || submitting}
               isFullWidth

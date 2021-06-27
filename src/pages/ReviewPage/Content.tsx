@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Review, UpdateReview } from '~/api';
 import { RatingStars } from '~/components';
-import { Button, FlexLayout, Text, Textarea, TextInput, useScreenType } from '~/ui';
+import { Button, Checkbox, FlexLayout, Text, Textarea, TextInput, useScreenType } from '~/ui';
 import { splitStringToNewLine } from '~/utils';
 
 interface ContentProps {
@@ -13,10 +13,11 @@ interface ContentProps {
 
 export const Content: React.FC<ContentProps> = ({ data, isEditMode, onEdit }) => {
   const { isMobile } = useScreenType();
-  const { rating, review, url } = data;
+  const { rating, review, url, watchAgain } = data;
   const [updatedReview, setUpdatedReview] = useState<string>(review);
   const [updatedRating, setUpdatedRating] = useState<number | null>(rating);
   const [updatedUrl, setUpdatedUrl] = useState<string | null>(url);
+  const [updatedWatchAgain, setUpdatedWatchAgain] = useState<boolean>(watchAgain);
 
   return (
     <FlexLayout flexDirection="column" space={4} sx={{ width: ['100%', '400px', '800px'] }}>
@@ -59,6 +60,18 @@ export const Content: React.FC<ContentProps> = ({ data, isEditMode, onEdit }) =>
       </FlexLayout>
       <FlexLayout flexDirection="column" space={2}>
         <Text color="white-alpha-50" variant="text-xl-bold">
+          Would watch again or recommend?
+        </Text>
+        {isEditMode ? (
+          <Checkbox value={updatedWatchAgain} onChange={() => setUpdatedWatchAgain(!updatedWatchAgain)} />
+        ) : (
+          <Text color="primary" variant="text-l-medium">
+            {watchAgain ? 'Yes' : 'No'}
+          </Text>
+        )}
+      </FlexLayout>
+      <FlexLayout flexDirection="column" space={2}>
+        <Text color="white-alpha-50" variant="text-xl-bold">
           Review
         </Text>
         <Text color="primary" variant="text-l-medium">
@@ -71,10 +84,23 @@ export const Content: React.FC<ContentProps> = ({ data, isEditMode, onEdit }) =>
       </FlexLayout>
       {isEditMode && (
         <Button
-          isDisabled={!updatedReview || (updatedReview === review && updatedRating === rating && updatedUrl === url)}
+          isDisabled={
+            !updatedReview ||
+            (updatedReview === review &&
+              updatedRating === rating &&
+              updatedUrl === url &&
+              updatedWatchAgain === watchAgain)
+          }
           isFullWidth={isMobile}
           text="Edit review"
-          onClick={() => onEdit({ rating: updatedRating, review: updatedReview, url: updatedUrl })}
+          onClick={() =>
+            onEdit({
+              rating: updatedRating,
+              review: updatedReview,
+              url: updatedUrl,
+              watchAgain: updatedWatchAgain,
+            })
+          }
         />
       )}
     </FlexLayout>
