@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Redirect, useParams } from 'react-router';
 
 import { UpdateReview } from '~/api';
-import { BackToLink, CenteredLoadingSpinner } from '~/components';
+import { BackToLink, CenteredLoadingSpinner, TextWithIcon } from '~/components';
 import { useReviewById } from '~/hooks';
 import { FlexLayout, Text } from '~/ui';
 import { formatDate } from '~/utils';
@@ -27,12 +27,10 @@ export const ReviewPage = () => {
     return <Redirect to="/dashboard" />;
   }
 
-  const { name, updatedAt } = review;
+  const { name, updatedAt, watchAgain } = review;
 
   const handleEditReview = async (data: UpdateReview) => {
-    const { rating, review, url } = data;
-
-    await updateReviewById(reviewId, { rating, review, url });
+    await updateReviewById(reviewId, data);
     setIsEditMode(false);
   };
 
@@ -40,7 +38,14 @@ export const ReviewPage = () => {
     <FlexLayout flexDirection="column" p={4} space={5}>
       <BackToLink text="back to dashboard" to="/dashboard" />
       <FlexLayout flexDirection="column" space={3}>
-        <Text variant="display-heading-m">{name}</Text>
+        <TextWithIcon
+          iconColor="green"
+          iconRight={watchAgain ? 'checkBadge' : undefined}
+          iconSize="l"
+          iconTitle="I would watch again or recommend"
+          text={name}
+          variant="display-heading-m"
+        />
         <FlexLayout flexDirection="row" space={4}>
           <Text
             color={isEditMode ? 'primary' : 'white-alpha-75'}

@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 
 import { Review } from '~/api';
 import { RatingStars } from '~/components';
-import { Divider, FlexLayout, Text, theme } from '~/ui';
+import { Divider, FlexLayout, Icon, Text, theme } from '~/ui';
 
 interface ReviewProps {
   data: Review;
 }
 
 export const ReviewCard: React.FC<ReviewProps> = ({ data }) => {
-  const { name, id, rating } = data;
+  const { name, id, rating, watchAgain } = data;
 
   return (
     <FlexLayout
@@ -22,16 +22,19 @@ export const ReviewCard: React.FC<ReviewProps> = ({ data }) => {
         borderRadius: 'm',
       }}
     >
-      <Link to={`/review/${id}`}>
-        <FlexLayout flexDirection="column" space={2}>
-          <Text color="white-alpha-50" variant="text-l-bold">
-            Name
-          </Text>
-          <Text color="primary" variant="text-l-bold">
-            {name}
-          </Text>
-        </FlexLayout>
-      </Link>
+      <FlexLayout alignItems="flex-start" flexDirection="row" justifyContent="space-between" space={2}>
+        <Link style={{ width: '100%' }} to={`/review/${id}`}>
+          <FlexLayout flexDirection="column" space={2}>
+            <Text color="white-alpha-50" variant="text-l-bold">
+              Name
+            </Text>
+            <Text color="primary" variant="text-l-bold">
+              {name}
+            </Text>
+          </FlexLayout>
+        </Link>
+        {watchAgain && <Icon color="green" icon="checkBadge" size="l" title="I would watch again or recommend." />}
+      </FlexLayout>
       <Divider color="gray-600" />
       <FlexLayout flexDirection="column" space={2}>
         <Text color="white-alpha-50" variant="text-l-bold">
