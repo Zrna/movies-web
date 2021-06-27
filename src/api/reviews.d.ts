@@ -5,6 +5,7 @@ export interface Review {
   rating: number | null;
   review: string;
   url: string | null;
+  watchAgain: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -19,10 +20,12 @@ export interface CreateReview {
   review: string;
   rating?: number | null;
   url?: string | null;
+  watchAgain: boolean;
 }
 
 export interface UpdateReview {
   rating?: number | null;
   review: string;
   url?: string | null;
+  watchAgain: boolean;
 }
