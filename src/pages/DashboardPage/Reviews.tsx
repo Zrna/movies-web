@@ -1,18 +1,22 @@
+import { GetReviews } from '~/api';
 import { CenteredLoadingSpinner } from '~/components';
-import { useReviews } from '~/hooks';
 import { Box, Text, useScreenType } from '~/ui';
 
 import { ReviewCard } from './ReviewCard';
 
-export const Reviews = () => {
-  const { reviews, isLoading } = useReviews();
+interface ReviewsProps {
+  data: GetReviews | undefined;
+  isLoading: boolean;
+}
+
+export const Reviews: React.FC<ReviewsProps> = ({ data: reviews, isLoading }) => {
   const { isMobile, isTablet } = useScreenType();
 
   if (isLoading) {
     return <CenteredLoadingSpinner />;
   }
 
-  if (!reviews || reviews.totalRecords === 0) {
+  if (!reviews || reviews.totalRecords === 0 || reviews.data.length === 0) {
     return (
       <Text color="primary" variant="text-xl-bold">
         No reviews.
