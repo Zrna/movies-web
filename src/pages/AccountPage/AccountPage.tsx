@@ -1,6 +1,6 @@
 import isEqual from 'lodash/isEqual';
 import { Form } from 'react-final-form';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { BackToLink, FormTextInput } from '~/components';
 import { useAccount } from '~/hooks';

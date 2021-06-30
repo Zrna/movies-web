@@ -1,4 +1,4 @@
-import { FlexLayout, Icon, Text, theme } from '~/ui';
+import { FlexLayout, Icon, Text } from '~/ui';
 
 export interface CheckboxProps {
   isDisabled?: boolean;

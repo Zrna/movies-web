@@ -30,7 +30,7 @@ export const LoginPage = () => {
     })
       .then(() => {
         const lastLocation = queryString.parse(location.search)?.redirectTo;
-        history.push(lastLocation ? `/${lastLocation}` : '/dashboard');
+        history.push(`/${lastLocation ?? 'dashboard'}`);
         return;
       })
       .catch((err) => {
