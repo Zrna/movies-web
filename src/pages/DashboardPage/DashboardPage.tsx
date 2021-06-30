@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { TextWithIcon } from '~/components';
+import { CenteredLoadingSpinner, TextWithIcon } from '~/components';
 import { useReviews } from '~/hooks';
 import { FlexLayout, Text, theme } from '~/ui';
 
@@ -33,7 +33,7 @@ export const DashboardPage = () => {
         text="Show only watch again"
         onClick={() => setIsShowOnlyWatchAgain(!isShowOnlyWatchAgain)}
       />
-      <Reviews data={reviewsData} isLoading={isLoading} />
+      {isLoading ? <CenteredLoadingSpinner /> : <Reviews data={reviewsData} />}
     </FlexLayout>
   );
 };
