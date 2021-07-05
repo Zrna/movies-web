@@ -1,5 +1,6 @@
 import { Review } from '~/api';
 import { FlexLayout } from '~/ui';
+import defaultPoster from '~/ui/assets/images/default-poster.png';
 
 interface ImageProps {
   src: Review['image'];
@@ -8,7 +9,7 @@ interface ImageProps {
 export const Image: React.FC<ImageProps> = ({ src }) => {
   return (
     <FlexLayout flexDirection="column" space={4} sx={{ width: ['100%', '350px'] }}>
-      <img alt="Poster" src={src ?? 'https://via.placeholder.com/350x500'} />
+      <img alt="Poster" src={src ?? defaultPoster} />
     </FlexLayout>
   );
 };
