@@ -1,6 +1,6 @@
 export interface Review {
   id: number;
-  image: string | null;
+  img: string | null;
   userId: number;
   name: string;
   rating: number | null;

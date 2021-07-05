@@ -28,7 +28,7 @@ export const ReviewPage = () => {
     return <Redirect to="/dashboard" />;
   }
 
-  const { image, name, updatedAt, watchAgain } = review;
+  const { img, name, updatedAt, watchAgain } = review;
 
   const handleEditReview = async (data: UpdateReview) => {
     await updateReviewById(reviewId, data);
@@ -65,7 +65,7 @@ export const ReviewPage = () => {
         </Text>
       </FlexLayout>
       <FlexLayout flexDirection={['column', 'row']} space={5}>
-        <Image src={image} />
+        <Image src={img} />
         <Box sx={{ width: ['100%', '400px', '800px'] }}>
           {isEditMode ? <EditContentForm data={review} onSubmit={handleEditReview} /> : <Content data={review} />}
         </Box>
