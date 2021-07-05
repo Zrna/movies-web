@@ -6,10 +6,11 @@ import {
   DashboardPage,
   HomePage,
   LoginPage,
+  NotFoundPage,
   RegistrationPage,
   ReviewPage,
 } from '~/pages';
-import { FlexLayout, Text } from '~/ui';
+import { FlexLayout } from '~/ui';
 
 import { ProtectedRoute } from './ProtectedRoute';
 
@@ -24,7 +25,7 @@ export const Routes = () => {
         <Route component={RegistrationPage} exact path="/register" />
         <Route component={LoginPage} exact path="/login" />
         <Route component={HomePage} exact path="/" />
-        <Route path="*" render={() => <Text variant="display-heading-xl">404 Page Not Found</Text>} />
+        <Route component={NotFoundPage} path="*" />
       </Switch>
     </FlexLayout>
   );
