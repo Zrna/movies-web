@@ -7,7 +7,7 @@ interface ContentItemProps {
 
 export const ContentItem: React.FC<ContentItemProps> = ({ text, value }) => {
   return (
-    <FlexLayout flexDirection="column" space={2}>
+    <FlexLayout flexDirection="column" space={2} sx={{ wordBreak: 'break-word' }}>
       <Text color="white-alpha-50" variant="text-xl-bold">
         {text}
       </Text>
