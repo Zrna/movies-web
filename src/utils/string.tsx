@@ -7,3 +7,7 @@ export function splitStringToNewLine(str: string) {
     </Fragment>
   ));
 }
+
+export function pluralize(noun: string, length: number) {
+  return length === 1 ? noun : `${noun}s`;
+}
