@@ -11,7 +11,7 @@ export const Toast = () => {
       autoClose={3000}
       hideProgressBar={false}
       newestOnTop={false}
-      pauseOnFocusLoss
+      pauseOnFocusLoss={false}
       pauseOnHover
       position="bottom-center"
       rtl={false}
@@ -55,6 +55,7 @@ export function showToast(props: ShowToastProps) {
       closeOnClick: false,
       draggable: true,
       transition: Slide,
+      pauseOnFocusLoss: false,
       position: 'bottom-center',
       progressStyle: {
         background: variantsMap[variant].color,
