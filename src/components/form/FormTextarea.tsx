@@ -5,7 +5,7 @@ import { Textarea } from '~/ui';
 import { FormFieldProps, getFieldError } from './utils';
 
 export const FormTextarea: React.FC<FormFieldProps> = ({ name, label, validate, ...rest }) => {
-  const { value: ignoredValue, onChange: ignoredOnChange, ...newRest } = rest;
+  const { value: _ignoredValue, onChange: _ignoredOnChange, ...newRest } = rest;
 
   const { meta } = useField(name, { validate });
   const error = getFieldError(meta);

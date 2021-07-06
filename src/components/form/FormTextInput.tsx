@@ -7,7 +7,7 @@ import { FormFieldProps, getFieldError } from './utils';
 export const FormTextInput: React.FC<FormFieldProps> = ({ name, label, type = 'text', validate, ...rest }) => {
   // `value` and `onChange` from the `rest` are ignored,
   // because `<Field />` component has it's own `value` and `onChange`
-  const { value: ignoredValue, onChange: ignoredOnChange, ...newRest } = rest;
+  const { value: _ignoredValue, onChange: _ignoredOnChange, ...newRest } = rest;
 
   const { meta } = useField(name, { validate });
   const error = getFieldError(meta);
