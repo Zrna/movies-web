@@ -14,13 +14,18 @@
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
-  "plugins": ["simple-import-sort", "import"],
+  "plugins": ["simple-import-sort", "import", "unused-imports"],
   "rules": {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "import/first": "error",
     "import/newline-after-import": "error",
     "import/no-duplicates": "error",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+    ],
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
