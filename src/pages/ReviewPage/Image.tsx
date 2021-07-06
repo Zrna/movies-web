@@ -9,7 +9,7 @@ interface ImageProps {
 export const Image: React.FC<ImageProps> = ({ src }) => {
   return (
     <FlexLayout flexDirection="column" space={4} sx={{ width: ['100%', '350px'] }}>
-      <img alt="Poster" src={src ? src : defaultPoster} />
+      <img alt="Poster" src={src ? `data:image/jpeg;base64,${src}` : defaultPoster} />
     </FlexLayout>
   );
 };
