@@ -1,37 +1,50 @@
 import { useState } from 'react';
 
-import { CenteredLoadingSpinner, TextWithIcon } from '~/components';
+import { CenteredLoadingSpinner } from '~/components';
 import { useReviews } from '~/hooks';
-import { FlexLayout, Text, theme } from '~/ui';
+import { FlexLayout, Text } from '~/ui';
 
 import { Reviews } from './Reviews';
+import { SearchAndFilters } from './SearchAndFilters';
 
 export const DashboardPage = () => {
   const { reviews, isLoading } = useReviews();
   const [isShowOnlyWatchAgain, setIsShowOnlyWatchAgain] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>('');
 
-  const onlyWatchAgainReviews = {
-    data: reviews?.data.filter((data) => data.watchAgain === true) ?? [],
-    totalRecords: reviews?.totalRecords ?? 0,
+  const filterReviews = () => {
+    let filteredData = reviews?.data ?? [];
+
+    if (isShowOnlyWatchAgain) {
+      filteredData = filteredData.filter((review) => review.watchAgain === true);
+    }
+
+    if (searchValue) {
+      filteredData = filteredData.filter((review) =>
+        review.name.toLowerCase().includes(searchValue.toLowerCase().trim()),
+      );
+    }
+
+    return {
+      data: filteredData,
+      totalRecords: reviews?.totalRecords ?? 0,
+    };
   };
 
-  const reviewsData = isShowOnlyWatchAgain ? onlyWatchAgainReviews : reviews;
+  const reviewsData = filterReviews();
 
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
       <Text color="primary" variant="display-heading-m">
         Dashboard
       </Text>
-      <TextWithIcon
-        color={isShowOnlyWatchAgain ? 'green' : 'gray-500'}
-        iconLeft="eye"
-        sx={{
-          border: `1px solid ${theme.colors[isShowOnlyWatchAgain ? 'green' : 'gray-500']}`,
-          padding: 2,
-          width: 'fit-content',
-        }}
-        text="Show only watch again"
-        onClick={() => setIsShowOnlyWatchAgain(!isShowOnlyWatchAgain)}
+      <SearchAndFilters
+        activeLength={reviewsData.data.length}
+        isShowOnlyWatchAgain={isShowOnlyWatchAgain}
+        searchValue={searchValue}
+        totalLength={reviewsData.totalRecords}
+        onSearch={setSearchValue}
+        onShowWatchAgain={() => setIsShowOnlyWatchAgain(!isShowOnlyWatchAgain)}
       />
       {isLoading ? <CenteredLoadingSpinner /> : <Reviews data={reviewsData} />}
     </FlexLayout>
