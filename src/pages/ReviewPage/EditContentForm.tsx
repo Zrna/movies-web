@@ -19,17 +19,6 @@ export const EditContentForm: React.FC<EditContentFormProps> = ({ data, onSubmit
 
   return (
     <FlexLayout flexDirection="column" space={4}>
-      <Text color="white" variant="text-m">
-        * Only{' '}
-        <Text color="white" variant="text-m-medium">
-          rating
-        </Text>{' '}
-        and{' '}
-        <Text color="white" variant="text-m-medium">
-          review
-        </Text>{' '}
-        fields are editable
-      </Text>
       <Form
         initialValues={{ review, url, watchAgain }}
         render={({ handleSubmit, hasValidationErrors, submitting, initialValues, values }) => {

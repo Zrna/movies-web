@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { Redirect, useParams } from 'react-router';
 
 import { UpdateReview } from '~/api';
-import { BackToLink, CenteredLoadingSpinner, TextWithIcon } from '~/components';
+import { BackToLink, Base64Img, CenteredLoadingSpinner, TextWithIcon } from '~/components';
 import { useReviewById } from '~/hooks';
 import { Box, FlexLayout, Text } from '~/ui';
+import defaultPoster from '~/ui/assets/images/default-poster.png';
 import { formatDate } from '~/utils';
 
 import { Content } from './Content';
 import { EditContentForm } from './EditContentForm';
-import { Image } from './Image';
 
 interface UseParamsData {
   reviewId: string;
@@ -65,7 +65,9 @@ export const ReviewPage = () => {
         </Text>
       </FlexLayout>
       <FlexLayout flexDirection={['column', 'row']} space={5}>
-        <Image alt={`${name} poster`} src={img} />
+        <FlexLayout flexDirection="column" sx={{ width: ['100%', '350px'] }}>
+          <Base64Img alt={`${name} poster`} placeHolder={defaultPoster} src={img} />
+        </FlexLayout>
         <Box sx={{ width: ['100%', '400px', '800px'] }}>
           {isEditMode ? <EditContentForm data={review} onSubmit={handleEditReview} /> : <Content data={review} />}
         </Box>
