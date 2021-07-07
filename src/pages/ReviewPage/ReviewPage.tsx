@@ -65,7 +65,7 @@ export const ReviewPage = () => {
         </Text>
       </FlexLayout>
       <FlexLayout flexDirection={['column', 'row']} space={5}>
-        <Image src={img} />
+        <Image alt={`${name} poster`} src={img} />
         <Box sx={{ width: ['100%', '400px', '800px'] }}>
           {isEditMode ? <EditContentForm data={review} onSubmit={handleEditReview} /> : <Content data={review} />}
         </Box>

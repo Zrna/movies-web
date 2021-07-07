@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { Review } from '~/api';
-import { RatingStars, TextWithIcon } from '~/components';
+import { Base64Img, RatingStars, TextWithIcon } from '~/components';
 import { Divider, FlexLayout, Text, theme } from '~/ui';
 import defaultPoster from '~/ui/assets/images/default-poster.png';
 
@@ -24,9 +24,10 @@ export const ReviewCard: React.FC<ReviewProps> = ({ data }) => {
     >
       <FlexLayout alignItems="flex-start" flexDirection="row" justifyContent="space-between" space={2}>
         <Link style={{ width: '100%', height: '440px' }} to={`/review/${id}`}>
-          <img
+          <Base64Img
             alt={`${name} poster`}
-            src={img ? `data:image/jpeg;base64,${img}` : defaultPoster}
+            placeHolder={defaultPoster}
+            src={img}
             style={{
               width: '100%',
               height: '100%',
