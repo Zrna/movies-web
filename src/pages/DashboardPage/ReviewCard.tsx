@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { Review } from '~/api';
 import { Base64Img, RatingStars, TextWithIcon } from '~/components';
-import { Divider, FlexLayout, Text, theme } from '~/ui';
+import { FlexLayout, theme } from '~/ui';
 import defaultPoster from '~/ui/assets/images/default-poster.png';
 
 interface ReviewProps {
@@ -14,51 +14,41 @@ export const ReviewCard: React.FC<ReviewProps> = ({ data }) => {
 
   return (
     <FlexLayout
+      bg={theme.colors.dark}
       flexDirection="column"
       key={id}
-      space={4}
       sx={{
-        border: `1px solid ${theme.colors['gray-600']}`,
-        borderRadius: 'm',
+        transition: 'transform 500ms',
+        ':hover': {
+          boxShadow: `0px 0px 10px 5px ${theme.colors['gray-500']}`,
+          transform: 'scale(1.3)',
+          transition: 'transform 500ms',
+          zIndex: 1,
+        },
       }}
     >
-      <FlexLayout alignItems="flex-start" flexDirection="row" justifyContent="space-between" space={2}>
-        <Link style={{ width: '100%', height: '440px' }} to={`/review/${id}`}>
-          <Base64Img
-            alt={`${name} poster`}
-            placeHolder={defaultPoster}
-            src={img}
-            style={{
-              width: '100%',
-              height: '100%',
-              maxHeight: '440px',
-              objectFit: 'fill',
-            }}
-          />
-        </Link>
-      </FlexLayout>
-      <FlexLayout flexDirection="column" p={4} space={4}>
-        <FlexLayout flexDirection="column" space={2}>
-          <Text color="white-alpha-50" variant="text-l-bold">
-            Name
-          </Text>
+      <Link style={{ height: '100%' }} to={`/review/${id}`}>
+        <Base64Img
+          alt={`${name} poster`}
+          placeHolder={defaultPoster}
+          src={img}
+          style={{
+            width: '100%',
+            height: '80%',
+          }}
+        />
+        <FlexLayout alignItems="center" flexDirection="column" py={2} space={2}>
           <TextWithIcon
             iconColor="green"
             iconRight={watchAgain ? 'checkBadge' : undefined}
             iconSize="l"
             iconTitle="I would watch again or recommend."
             text={name}
-            variant="text-m-bold"
+            variant="text-l-medium"
           />
+          <RatingStars isReadOnly rating={rating} size="m" />
         </FlexLayout>
-        <Divider />
-        <FlexLayout flexDirection="column" space={2}>
-          <Text color="white-alpha-50" variant="text-l-bold">
-            Rating
-          </Text>
-          <RatingStars isReadOnly rating={rating} />
-        </FlexLayout>
-      </FlexLayout>
+      </Link>
     </FlexLayout>
   );
 };

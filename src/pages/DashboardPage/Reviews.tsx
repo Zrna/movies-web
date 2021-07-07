@@ -19,17 +19,17 @@ export const Reviews: React.FC<ReviewsProps> = ({ data: reviews }) => {
   }
 
   const gridColumnsStyle = (): string => {
-    const numberOfCards = isMobile ? 1 : isTablet ? 2 : 5;
+    const numberOfCards = isMobile ? 2 : isTablet ? 4 : 7;
 
     return `repeat(${numberOfCards}, 1fr)`;
   };
 
   return (
     <Box
-      style={{
+      sx={{
         display: 'grid',
         gridTemplateColumns: gridColumnsStyle(),
-        gap: '24px',
+        gap: isMobile ? '40px' : '24px',
       }}
     >
       {reviews.data.map((review) => (
