@@ -19,7 +19,7 @@ export const Reviews: React.FC<ReviewsProps> = ({ data: reviews }) => {
   }
 
   const gridColumnsStyle = (): string => {
-    const numberOfCards = isMobile ? 1 : isTablet ? 2 : 4;
+    const numberOfCards = isMobile ? 1 : isTablet ? 2 : 5;
 
     return `repeat(${numberOfCards}, 1fr)`;
   };
