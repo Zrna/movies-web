@@ -18,6 +18,10 @@ Fields with `*` are required.
 
 Created using: React.js, Typescript, React-Query, Theme-UI, Luxon, Axios
 
+## Video - how it works and looks
+
+https://user-images.githubusercontent.com/22341530/125055990-14060b00-e0a8-11eb-94f7-4f27fa6e1eb4.mov
+
 ## Installation
 
 ### 1. Backend part
