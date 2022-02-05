@@ -33,7 +33,7 @@ export function useAccount(args: UseAccountArgs = { unauthorizedRedirect: false 
         await deleteAccount();
         logout();
         showToast({ text: 'Account successfully deleted.', variant: 'success' });
-      } catch (err) {
+      } catch (err: any) {
         return showErrorToast(err);
       }
     }
@@ -46,7 +46,7 @@ export function useAccount(args: UseAccountArgs = { unauthorizedRedirect: false 
       await updateAccount({ firstName, lastName });
       queryClient.invalidateQueries('account');
       showToast({ text: 'Account updated.', variant: 'success' });
-    } catch (err) {
+    } catch (err: any) {
       return showErrorToast(err);
     }
   };

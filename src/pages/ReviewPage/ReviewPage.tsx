@@ -18,7 +18,7 @@ interface UseParamsData {
 export const ReviewPage = () => {
   const { reviewId }: UseParamsData = useParams();
   const { review, isLoading, deleteReviewById, updateReviewById } = useReviewById(reviewId);
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   if (isLoading) {
     return <CenteredLoadingSpinner />;

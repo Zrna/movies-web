@@ -34,7 +34,7 @@ export function useReviewById(id: string) {
 
   const history = useHistory();
   const queryClient = useQueryClient();
-  const [isRequestLoading, setIsRequestLoading] = useState<boolean>(false);
+  const [isRequestLoading, setIsRequestLoading] = useState(false);
 
   if (error) {
     showErrorToast(error as AxiosError);

@@ -9,8 +9,8 @@ import { SearchAndFilters } from './SearchAndFilters';
 
 export const DashboardPage = () => {
   const { reviews, isLoading } = useReviews();
-  const [isShowOnlyWatchAgain, setIsShowOnlyWatchAgain] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<string>('');
+  const [isShowOnlyWatchAgain, setIsShowOnlyWatchAgain] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   const filterReviews = () => {
     let filteredData = reviews?.data ?? [];

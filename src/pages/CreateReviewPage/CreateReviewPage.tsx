@@ -23,7 +23,7 @@ export const CreateReviewPage = () => {
       await queryClient.invalidateQueries('reviews');
       history.push(`/review/${id}`);
       showToast({ variant: 'success', text: 'Review successfully created' });
-    } catch (e) {
+    } catch (e: any) {
       showErrorToast(e);
     }
   };

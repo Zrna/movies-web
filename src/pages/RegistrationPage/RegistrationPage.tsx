@@ -13,8 +13,8 @@ import { Captcha } from './Captcha';
 export const RegistrationPage = () => {
   const history = useHistory();
   const hasAccessToken = useAccessToken();
-  const [error, setError] = useState<string>('');
-  const [isCaptchaValid, setIsCaptchaValid] = useState<boolean>(false);
+  const [error, setError] = useState('');
+  const [isCaptchaValid, setIsCaptchaValid] = useState(false);
 
   if (hasAccessToken) {
     return <Redirect to="/dashboard" />;

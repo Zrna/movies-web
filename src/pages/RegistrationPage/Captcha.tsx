@@ -10,8 +10,8 @@ interface CaptchaProps {
 }
 
 export const Captcha: React.FC<CaptchaProps> = ({ onChange }) => {
-  const [captchaValue, setCaptchaValue] = useState<string>('');
-  const [insertedCaptchaValue, setInsertedCaptchaValue] = useState<string>('');
+  const [captchaValue, setCaptchaValue] = useState('');
+  const [insertedCaptchaValue, setInsertedCaptchaValue] = useState('');
 
   useEffect(() => {
     setInsertedCaptchaValue('');

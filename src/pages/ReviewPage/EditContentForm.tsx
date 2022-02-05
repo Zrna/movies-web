@@ -15,7 +15,7 @@ interface EditContentFormProps {
 export const EditContentForm: React.FC<EditContentFormProps> = ({ data, onSubmit }) => {
   const { isMobile } = useScreenType();
   const { rating, url, review, watchAgain } = data;
-  const [updatedRating, setUpdatedRating] = useState<number | null>(rating);
+  const [updatedRating, setUpdatedRating] = useState(rating);
 
   return (
     <FlexLayout flexDirection="column" space={4}>
