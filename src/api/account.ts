@@ -7,7 +7,8 @@ export const getAccountData = async () => {
 };
 
 export const updateAccount = async (data: UpdateAccountArgs) => {
-  return await backend.put<AccountData>('/api/account', data);
+  const { firstName, lastName } = data;
+  return await backend.put<AccountData>('/api/account', { firstName, lastName });
 };
 
 export const deleteAccount = async () => {

@@ -1,5 +1,6 @@
+import { AxiosError } from 'axios';
 import { useEffect } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 
 import { deleteAccount, getAccountData, updateAccount } from '~/api';
@@ -14,49 +15,63 @@ interface UseAccountArgs {
 }
 
 export function useAccount(args: UseAccountArgs = { unauthorizedRedirect: false }) {
-  const { data: account, error, isLoading, refetch: refetchAccount } = useQuery('account', getAccountData);
+  const { data, error, isLoading, refetch } = useQuery('account', getAccountData);
   const history = useHistory();
-  const logout = useLogout();
-  const queryClient = useQueryClient();
 
   const { unauthorizedRedirect, path } = args;
 
   useEffect(() => {
-    if (unauthorizedRedirect && !isLoading && !account) {
+    if (unauthorizedRedirect && !isLoading && !data) {
       history.push(path ?? '/login');
     }
-  }, [account, isLoading, unauthorizedRedirect, path]);
-
-  const handleDeleteAccount = async () => {
-    if (window.confirm('Are you sure you want to delete your account?')) {
-      try {
-        await deleteAccount();
-        logout();
-        showToast({ text: 'Account successfully deleted.', variant: 'success' });
-      } catch (err: any) {
-        return showErrorToast(err);
-      }
-    }
-  };
-
-  const handleUpdateAccount = async (data: any) => {
-    const { firstName, lastName } = data;
-
-    try {
-      await updateAccount({ firstName, lastName });
-      queryClient.invalidateQueries('account');
-      showToast({ text: 'Account updated.', variant: 'success' });
-    } catch (err: any) {
-      return showErrorToast(err);
-    }
-  };
+  }, [data, isLoading, unauthorizedRedirect, path]);
 
   return {
-    account,
+    data,
     error,
     isLoading,
-    refetchAccount,
-    deleteAccount: handleDeleteAccount,
-    updateAccount: handleUpdateAccount,
+    refetch,
   };
+}
+
+export function useUpdateAccount() {
+  const queryClient = useQueryClient();
+
+  return useMutation(updateAccount, {
+    onMutate: (updatedData) => {
+      const oldData = queryClient.getQueryData('account');
+
+      queryClient.setQueryData('account', updatedData);
+
+      return () => queryClient.setQueryData('account', oldData);
+    },
+    onSuccess: (updatedData) => {
+      if (queryClient.getQueryData('account')) {
+        queryClient.setQueryData('account', updatedData);
+      } else {
+        queryClient.invalidateQueries('account');
+      }
+      showToast({ text: 'Account updated.', variant: 'success' });
+    },
+    onError: (err: AxiosError, updatedData, rollback: any) => {
+      if (rollback) rollback();
+      return showErrorToast(err);
+    },
+  });
+}
+
+export function useDeleteAccount() {
+  const queryClient = useQueryClient();
+  const logout = useLogout();
+
+  return useMutation(deleteAccount, {
+    onSuccess: () => {
+      queryClient.clear();
+      logout();
+      showToast({ text: 'Account successfully deleted.', variant: 'success' });
+    },
+    onError: (err: AxiosError) => {
+      return showErrorToast(err);
+    },
+  });
 }

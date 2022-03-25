@@ -8,10 +8,10 @@ import { Box, FlexLayout, Icon, LoadingSpinner, Text, useScreenType } from '~/ui
 import { AccountMenu } from './AccountMenu';
 
 export const Navbar = () => {
-  const { isMobile } = useScreenType();
+  const { data: account, isLoading } = useAccount();
   const { pathname } = useLocation();
+  const { isMobile } = useScreenType();
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
-  const { account, isLoading } = useAccount();
 
   useEffect(() => {
     setIsAccountMenuOpen(false);

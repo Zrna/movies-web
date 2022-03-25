@@ -3,13 +3,15 @@ import { Form } from 'react-final-form';
 import { Redirect } from 'react-router-dom';
 
 import { BackToLink, FormTextInput } from '~/components';
-import { useAccount } from '~/hooks';
+import { useAccount, useDeleteAccount, useUpdateAccount } from '~/hooks';
 import { Button, FlexLayout, Text, useScreenType } from '~/ui';
 import { validator } from '~/utils';
 
 export const AccountPage = () => {
+  const { data: account, error } = useAccount();
+  const { mutate: updateAccount } = useUpdateAccount();
+  const { mutate: deleteAccount } = useDeleteAccount();
   const { isMobile } = useScreenType();
-  const { account, error, deleteAccount, updateAccount } = useAccount();
 
   if (error || !account) {
     return <Redirect to="/" />;
@@ -58,10 +60,18 @@ export const AccountPage = () => {
             </FlexLayout>
           );
         }}
-        onSubmit={(data) => updateAccount(data)}
+        onSubmit={(data: any) => updateAccount(data)}
       />
       <FlexLayout flexDirection="column" space={5} sx={{ width: '200px' }}>
-        <Text color="red-500" variant="text-m" onClick={deleteAccount}>
+        <Text
+          color="red-500"
+          variant="text-m"
+          onClick={() => {
+            if (window.confirm('Are you sure you want to delete your account?')) {
+              deleteAccount();
+            }
+          }}
+        >
           Delete account
         </Text>
       </FlexLayout>
