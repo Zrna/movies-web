@@ -21,7 +21,7 @@ export const ReviewCard: React.FC<ReviewProps> = ({ data }) => {
         transition: 'transform 500ms',
         ':hover': {
           boxShadow: `0px 0px 10px 5px ${theme.colors['gray-500']}`,
-          transform: 'scale(1.3)',
+          transform: 'scale(1.1)',
           transition: 'transform 500ms',
           zIndex: 1,
         },
