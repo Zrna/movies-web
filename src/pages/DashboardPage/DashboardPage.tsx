@@ -8,7 +8,7 @@ import { Reviews } from './Reviews';
 import { SearchAndFilters } from './SearchAndFilters';
 
 export const DashboardPage = () => {
-  const { reviews, isLoading } = useReviews();
+  const { data: reviews, isLoading } = useReviews();
   const [isShowOnlyWatchAgain, setIsShowOnlyWatchAgain] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 

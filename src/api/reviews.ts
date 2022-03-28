@@ -14,8 +14,8 @@ export const getReviewById = async (id: string) => {
   return await backend.get<Review>(`/api/movies/${id}`);
 };
 
-export const updateReviewById = async (id: string, data: UpdateReview) => {
-  return await backend.put<UpdateReview>(`/api/movies/${id}`, data);
+export const updateReviewById = async ({ id, data }: { id: string; data: UpdateReview }) => {
+  return await backend.put<Review>(`/api/movies/${id}`, data);
 };
 
 export const deleteReviewById = async (id: string) => {

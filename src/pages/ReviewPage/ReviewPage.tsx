@@ -3,7 +3,7 @@ import { Redirect, useParams } from 'react-router';
 
 import { UpdateReview } from '~/api';
 import { BackToLink, Base64Img, CenteredLoadingSpinner, TextWithIcon } from '~/components';
-import { useReviewById } from '~/hooks';
+import { useDeleteReview, useReviewById, useUpdateReview } from '~/hooks';
 import { Box, FlexLayout, Text } from '~/ui';
 import defaultPoster from '~/ui/assets/images/default-poster.png';
 import { formatDate } from '~/utils';
@@ -17,7 +17,9 @@ interface UseParamsData {
 
 export const ReviewPage = () => {
   const { reviewId }: UseParamsData = useParams();
-  const { review, isLoading, deleteReviewById, updateReviewById } = useReviewById(reviewId);
+  const { data: review, isLoading } = useReviewById(reviewId);
+  const { mutate: updateReview } = useUpdateReview();
+  const { mutate: deleteReview } = useDeleteReview();
   const [isEditMode, setIsEditMode] = useState(false);
 
   if (isLoading) {
@@ -30,8 +32,8 @@ export const ReviewPage = () => {
 
   const { img, name, updatedAt, watchAgain } = review;
 
-  const handleEditReview = async (data: UpdateReview) => {
-    await updateReviewById(reviewId, data);
+  const handleEditReview = (data: UpdateReview) => {
+    updateReview({ id: reviewId, data });
     setIsEditMode(false);
   };
 
@@ -56,7 +58,15 @@ export const ReviewPage = () => {
             {isEditMode ? 'Discard changes' : 'Edit'}
           </Text>
           <Text variant="text-s-medium">|</Text>
-          <Text color="white-alpha-75" variant="text-s-medium" onClick={() => deleteReviewById(reviewId)}>
+          <Text
+            color="white-alpha-75"
+            variant="text-s-medium"
+            onClick={() => {
+              if (window.confirm('Are you sure you want to delete this review?')) {
+                deleteReview(reviewId);
+              }
+            }}
+          >
             Delete
           </Text>
         </FlexLayout>
