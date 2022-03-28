@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 
-import { deleteReviewById, getReviewById, getReviews, Review, updateReviewById } from '~/api';
+import { createReview, deleteReviewById, getReviewById, getReviews, Review, updateReviewById } from '~/api';
 import { showToast } from '~/ui';
 import { showErrorToast } from '~/utils';
 
@@ -17,6 +17,22 @@ export function useReviews() {
 export function useReviewById(id: string) {
   return useQuery(['reviews', id], () => getReviewById(id), {
     enabled: !!id,
+    onError: (err: AxiosError) => {
+      return showErrorToast(err);
+    },
+  });
+}
+
+export function useCreateReview() {
+  const queryClient = useQueryClient();
+  const history = useHistory();
+
+  return useMutation(createReview, {
+    onSuccess: (newReview) => {
+      queryClient.invalidateQueries('reviews');
+      history.push(`/review/${newReview.id}`);
+      showToast({ variant: 'success', text: 'Review successfully created' });
+    },
     onError: (err: AxiosError) => {
       return showErrorToast(err);
     },

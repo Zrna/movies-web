@@ -1,32 +1,17 @@
 import { useState } from 'react';
 import { Form } from 'react-final-form';
-import { useQueryClient } from 'react-query';
-import { useHistory } from 'react-router';
 
-import { CreateReview, createReview } from '~/api';
+import { CreateReview } from '~/api';
 import { BackToLink, FormCheckbox, FormTextarea, FormTextInput, RatingStars } from '~/components';
-import { Button, FlexLayout, showToast, Text } from '~/ui';
-import { showErrorToast, sleep, validator } from '~/utils';
+import { useCreateReview } from '~/hooks';
+import { Button, FlexLayout, Text } from '~/ui';
+import { validator } from '~/utils';
+
+type FormData = Omit<CreateReview, 'rating'>;
 
 export const CreateReviewPage = () => {
-  const history = useHistory();
-  const queryClient = useQueryClient();
+  const { mutate: createReview } = useCreateReview();
   const [rating, setRating] = useState<number | null>(null);
-
-  const handleCreateReview = async (data: CreateReview) => {
-    try {
-      await sleep(1000);
-      const { id } = await createReview({
-        ...data,
-        rating,
-      });
-      await queryClient.invalidateQueries('reviews');
-      history.push(`/review/${id}`);
-      showToast({ variant: 'success', text: 'Review successfully created' });
-    } catch (e: any) {
-      showErrorToast(e);
-    }
-  };
 
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
@@ -74,7 +59,7 @@ export const CreateReviewPage = () => {
             />
           </FlexLayout>
         )}
-        onSubmit={handleCreateReview}
+        onSubmit={(data: FormData) => createReview({ ...data, rating })}
       />
     </FlexLayout>
   );
