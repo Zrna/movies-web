@@ -1,24 +1,18 @@
-import { Dispatch, SetStateAction } from 'react';
-
 import { TextWithIcon } from '~/components';
-import { FlexLayout, Text, TextInput, theme } from '~/ui';
+import { FlexLayout, Text, theme } from '~/ui';
 import { pluralize } from '~/utils';
 
-interface SearchAndFiltersProps {
+interface FiltersProps {
   activeLength: number;
-  isShowOnlyWatchAgain: boolean;
-  searchValue: string;
+  showOnlyWatchAgain: boolean;
   totalLength: number;
-  onSearch: Dispatch<SetStateAction<string>>;
   onShowWatchAgain(): void;
 }
 
-export const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
+export const Filters: React.FC<FiltersProps> = ({
   activeLength,
-  isShowOnlyWatchAgain,
-  searchValue,
+  showOnlyWatchAgain,
   totalLength,
-  onSearch,
   onShowWatchAgain,
 }) => {
   if (totalLength < 1) {
@@ -27,12 +21,11 @@ export const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
 
   return (
     <FlexLayout flexDirection="column" space={5}>
-      <TextInput placeholder="Search review..." value={searchValue} onChange={onSearch} />
       <TextWithIcon
-        color={isShowOnlyWatchAgain ? 'green' : 'gray-500'}
+        color={showOnlyWatchAgain ? 'green' : 'gray-500'}
         iconLeft="eye"
         sx={{
-          border: `1px solid ${theme.colors[isShowOnlyWatchAgain ? 'green' : 'gray-500']}`,
+          border: `1px solid ${theme.colors[showOnlyWatchAgain ? 'green' : 'gray-500']}`,
           padding: 2,
           width: 'fit-content',
         }}
