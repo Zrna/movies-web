@@ -78,7 +78,12 @@ export const TextInput: React.FC<TextInputProps> = ({
         }}
       >
         {iconLeft && (
-          <Icon icon={iconLeft} size="l" sx={{ position: 'absolute', top: 4, bottom: 4, left: 4, zIndex: 1 }} />
+          <Icon
+            color="white-alpha-50"
+            icon={iconLeft}
+            size="l"
+            sx={{ position: 'absolute', top: 4, bottom: 4, left: 4, zIndex: 1 }}
+          />
         )}
         <Box
           as="input"
@@ -113,6 +118,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         />
         {iconRight && (
           <Icon
+            color="white-alpha-50"
             icon={iconRight}
             size="l"
             sx={{ position: 'absolute', top: 4, bottom: 4, right: 4, zIndex: 2 }}
