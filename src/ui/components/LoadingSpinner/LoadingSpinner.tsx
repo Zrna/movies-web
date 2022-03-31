@@ -6,9 +6,9 @@ import { Box, theme } from '~/ui';
 import loadingIcon from './loading-spinner.svg';
 
 const sizesMap = {
-  m: '24px',
-  l: '32px',
-  xl: '40px',
+  m: '40px',
+  l: '48px',
+  xl: '56px',
 };
 
 export interface LoadingSpinnerProps extends BoxProps {
