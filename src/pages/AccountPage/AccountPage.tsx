@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import { BackToLink, FormTextInput } from '~/components';
 import { useAccount, useDeleteAccount, useUpdateAccount } from '~/hooks';
-import { Button, FlexLayout, Text, useScreenType } from '~/ui';
+import { Button, FlexLayout, Text, useModal, useScreenType } from '~/ui';
 import { validator } from '~/utils';
 
 export const AccountPage = () => {
@@ -12,6 +12,14 @@ export const AccountPage = () => {
   const { mutate: updateAccount } = useUpdateAccount();
   const { mutate: deleteAccount } = useDeleteAccount();
   const { isMobile } = useScreenType();
+  const [modal, showModal] = useModal({
+    title: 'Delete account',
+    content: 'Are you sure you want to delete your account?',
+    actionButton: {
+      text: 'Delete account',
+      action: async () => deleteAccount(),
+    },
+  });
 
   if (error || !account) {
     return <Redirect to="/" />;
@@ -63,18 +71,11 @@ export const AccountPage = () => {
         onSubmit={(data: any) => updateAccount(data)}
       />
       <FlexLayout flexDirection="column" space={5} sx={{ width: '200px' }}>
-        <Text
-          color="red-500"
-          variant="text-m"
-          onClick={() => {
-            if (window.confirm('Are you sure you want to delete your account?')) {
-              deleteAccount();
-            }
-          }}
-        >
+        <Text color="red-500" variant="text-m" onClick={showModal}>
           Delete account
         </Text>
       </FlexLayout>
+      {modal}
     </FlexLayout>
   );
 };

@@ -4,7 +4,7 @@ import { Redirect, useParams } from 'react-router';
 import { UpdateReview } from '~/api';
 import { BackToLink, Base64Img, CenteredLoadingSpinner, TextWithIcon } from '~/components';
 import { useDeleteReview, useReviewById, useUpdateReview } from '~/hooks';
-import { Box, FlexLayout, Text } from '~/ui';
+import { Box, FlexLayout, Text, useModal } from '~/ui';
 import defaultPoster from '~/ui/assets/images/default-poster.png';
 import { formatDate } from '~/utils';
 
@@ -20,6 +20,14 @@ export const ReviewPage = () => {
   const { data: review, isLoading } = useReviewById(reviewId);
   const { mutate: updateReview } = useUpdateReview();
   const { mutate: deleteReview } = useDeleteReview();
+  const [modal, showModal] = useModal({
+    title: 'Delete review',
+    content: 'Are you sure you want to delete this review?',
+    actionButton: {
+      text: 'Delete review',
+      action: async () => deleteReview(reviewId),
+    },
+  });
   const [isEditMode, setIsEditMode] = useState(false);
 
   if (isLoading) {
@@ -58,15 +66,7 @@ export const ReviewPage = () => {
             {isEditMode ? 'Discard changes' : 'Edit'}
           </Text>
           <Text variant="text-s-medium">|</Text>
-          <Text
-            color="white-alpha-75"
-            variant="text-s-medium"
-            onClick={() => {
-              if (window.confirm('Are you sure you want to delete this review?')) {
-                deleteReview(reviewId);
-              }
-            }}
-          >
+          <Text color="white-alpha-75" variant="text-s-medium" onClick={showModal}>
             Delete
           </Text>
         </FlexLayout>
@@ -82,6 +82,7 @@ export const ReviewPage = () => {
           {isEditMode ? <EditContentForm data={review} onSubmit={handleEditReview} /> : <Content data={review} />}
         </Box>
       </FlexLayout>
+      {modal}
     </FlexLayout>
   );
 };
