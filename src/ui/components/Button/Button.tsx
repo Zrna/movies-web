@@ -1,6 +1,12 @@
 import { Box, BoxProps, FlexLayout, Icon, LoadingSpinner, styles, Text, theme } from '~/ui';
 
 const sizesMap = {
+  s: {
+    height: 'input-s-height',
+    px: 2,
+    space: 2,
+    textVariant: 'text-m' as theme.TextVariant,
+  },
   m: {
     height: 'input-m-height',
     px: 4,
@@ -121,7 +127,7 @@ export const Button: React.FC<ButtonProps> = ({
           justifyContent="center"
           sx={{ bottom: 0, left: 0, position: 'absolute', right: 0, top: 0 }}
         >
-          <LoadingSpinner color={color} size={size} />
+          <LoadingSpinner color={color} size={size === 's' ? 'm' : size} />
         </FlexLayout>
       )}
     </Box>
