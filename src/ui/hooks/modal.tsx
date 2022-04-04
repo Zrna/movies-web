@@ -9,7 +9,7 @@ import { FlexLayout, Icon } from '../components';
 
 interface UseModalProps {
   title: string;
-  content: any;
+  content: React.ReactElement | string;
   actionButton: {
     text: string;
     action(): Promise<any>;
@@ -56,7 +56,13 @@ export const useModal = ({
           <Text variant="title-m">{title}</Text>
           <Icon icon="close" onClick={closeModal} />
         </FlexLayout>
-        {content}
+        {typeof content === 'string' ? (
+          <Text color="white" variant="display-paragraph-m">
+            {content}
+          </Text>
+        ) : (
+          content
+        )}
         <FlexLayout space={2}>
           <Button
             isDisabled={isLoading}
