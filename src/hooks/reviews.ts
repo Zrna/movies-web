@@ -52,7 +52,18 @@ export function useUpdateReview() {
       const oldReviewsData: CachedReviews | undefined = queryClient.getQueryData('reviews');
       const oldCurrentReviewData = oldReviewsData?.data.find((old) => old.id === Number(updatedData.id));
 
-      queryClient.setQueryData(['reviews', updatedData.id], updatedData.data);
+      const { rating, review, url, watchAgain } = updatedData.data;
+      const updated = oldCurrentReviewData
+        ? {
+            ...oldCurrentReviewData,
+            rating,
+            review,
+            url,
+            watchAgain,
+          }
+        : updatedData.data;
+
+      queryClient.setQueryData(['reviews', updatedData.id], updated);
 
       return () => {
         if (oldReviewsData) {
