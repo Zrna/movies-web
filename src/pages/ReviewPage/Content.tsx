@@ -19,7 +19,7 @@ export const Content: React.FC<ContentProps> = ({ data }) => {
         text="URL"
         value={
           url ? (
-            <a href={url} rel="noreferrer" target="_blank">
+            <a href={url.startsWith('http') ? url : `https://${url}`} rel="noreferrer" target="_blank">
               {url}
             </a>
           ) : (
