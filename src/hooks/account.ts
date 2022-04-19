@@ -7,7 +7,7 @@ import { deleteAccount, getAccountData, updateAccount } from '~/api';
 import { showToast } from '~/ui';
 import { showErrorToast } from '~/utils';
 
-import { useLogout } from './index';
+import { useAccessToken, useLogout } from './index';
 
 interface UseAccountArgs {
   unauthorizedRedirect: boolean;
@@ -15,7 +15,8 @@ interface UseAccountArgs {
 }
 
 export function useAccount(args: UseAccountArgs = { unauthorizedRedirect: false }) {
-  const { data, error, isLoading, refetch } = useQuery('account', getAccountData);
+  const accessToken = useAccessToken();
+  const { data, error, isLoading, refetch } = useQuery('account', getAccountData, { enabled: !!accessToken });
   const history = useHistory();
 
   const { unauthorizedRedirect, path } = args;
