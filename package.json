@@ -47,7 +47,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "craco test --bail --onlyChanged",
     "eject": "craco eject",
     "typecheck": "tsc --noEmit --incremental false --tsBuildInfoFile null",
     "lint": "npm run typecheck && eslint '*/**/*.{js,ts,tsx,mdx}'",
@@ -68,6 +68,11 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^~/(.*)$": "<rootDir>/src/$1"
+    }
   },
   "browserslist": {
     "production": [
