@@ -9,6 +9,7 @@ export interface FormFieldProps extends Omit<TextInputProps, 'value' | 'onChange
   validate?: any;
   value?: null;
   onChange?(): null;
+  'data-testid'?: string;
 }
 
 export function getFieldError(meta: FieldMetaState<any>) {

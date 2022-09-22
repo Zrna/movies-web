@@ -35,7 +35,7 @@ export const DashboardPage = () => {
 
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
-      <FlexLayout flexDirection={['column', 'row']} justifyContent="space-between">
+      <FlexLayout data-testid="dashboard" flexDirection={['column', 'row']} justifyContent="space-between">
         <Text color="primary" variant="display-heading-m">
           Dashboard
         </Text>

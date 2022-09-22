@@ -41,7 +41,7 @@ export const LoginPage = () => {
 
   return (
     <FlexLayout alignItems="center" flexDirection="column" justifyContent="center" m={6}>
-      <FlexLayout alignItems="center" bg="black" flexDirection="column" p={6} space={6}>
+      <FlexLayout alignItems="center" bg="black" data-testid="login-form" flexDirection="column" p={6} space={6}>
         <Text color="white" variant="display-heading-l">
           Login
         </Text>
@@ -55,13 +55,21 @@ export const LoginPage = () => {
               sx={{ width: ['100%', '500px'] }}
               onSubmit={handleSubmit}
             >
-              <FormTextInput label="Email" name="email" type="text" validate={validator.isEmail()} />
+              <FormTextInput
+                data-testid="login-email"
+                label="Email"
+                name="email"
+                type="text"
+                validate={validator.isEmail()}
+              />
               <FormPasswordInput
+                data-testid="login-password"
                 label="Password"
                 name="password"
                 validate={validator.isEmpty("Field can't be empty")}
               />
               <Button
+                data-testid="login-confirm"
                 isDisabled={hasValidationErrors || submitting}
                 isFullWidth
                 isLoading={submitting}

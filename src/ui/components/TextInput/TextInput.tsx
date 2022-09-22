@@ -26,6 +26,7 @@ export interface TextInputProps {
   onChange(value: string): void;
   onClickRightIcon?(): void;
   id?: string;
+  'data-testid'?: string;
 }
 
 export const TextInput: React.FC<TextInputProps> = ({
@@ -41,6 +42,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   width,
   onChange,
   onClickRightIcon,
+  'data-testid': dataTestId,
   ...rest
 }) => {
   let px = paddingMap.default;
@@ -89,6 +91,7 @@ export const TextInput: React.FC<TextInputProps> = ({
           as="input"
           bg="transparent"
           color="white"
+          data-testid={dataTestId}
           pl={pl}
           placeholder={placeholder}
           pr={pr}

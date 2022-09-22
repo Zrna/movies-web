@@ -13,10 +13,11 @@ export interface BoxProps extends ThemeBoxProps {
   sx?: SxStyleProp;
   onClick?: (event?: any) => void;
   onOutsideClick?(event: Event): void;
+  'data-testid'?: string;
 }
 
 export const Box: React.FC<BoxProps> = forwardRef<any, any>(
-  ({ isDisabled = false, sx, onClick, onOutsideClick, ...rest }, ref: any) => {
+  ({ isDisabled = false, sx, onClick, onOutsideClick, 'data-testid': dataTestId, ...rest }, ref: any) => {
     const clickableStyle = isDisabled || onClick ? styles.interactions.clickable : {};
 
     const innerRef = useRef(ref);
@@ -29,6 +30,7 @@ export const Box: React.FC<BoxProps> = forwardRef<any, any>(
 
     return (
       <ThemeBox
+        data-testid={dataTestId}
         ref={innerRef}
         sx={{ ...clickableStyle, ...sx }}
         onClick={!isDisabled && onClick ? onClick : undefined}

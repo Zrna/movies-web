@@ -5,7 +5,7 @@ import { TextInput } from '~/ui';
 
 import { FormFieldProps, getFieldError } from './utils';
 
-export const FormPasswordInput: React.FC<FormFieldProps> = ({ name, label, validate }) => {
+export const FormPasswordInput: React.FC<FormFieldProps> = ({ name, label, validate, 'data-testid': dataTestId }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { meta } = useField(name, { validate });
@@ -15,6 +15,7 @@ export const FormPasswordInput: React.FC<FormFieldProps> = ({ name, label, valid
     <Field name={name} validate={validate}>
       {({ input: { name, value, onChange, onBlur, onFocus } }) => (
         <TextInput
+          data-testid={dataTestId}
           error={error}
           iconRight={showPassword ? 'eyeOff' : 'eye'}
           label={label}
