@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import Cookies from 'js-cookie';
 
 type AxiosFunction = <T>(url: string, config?: AxiosRequestConfig) => Promise<T>;
 type AxiosDataFunction = <T>(url: string, data?: any, config?: AxiosRequestConfig) => Promise<T>;
@@ -19,9 +20,21 @@ export function backendService() {
     return config;
   });
 
-  instance.interceptors.response.use(async (response) => {
-    return response.data as any;
-  });
+  instance.interceptors.response.use(
+    async (response) => {
+      return response.data as any;
+    },
+    async (error: AxiosError) => {
+      const { response } = error;
+
+      if (response?.data?.error.includes('JsonWebTokenError')) {
+        Cookies.remove('access-token');
+        return;
+      }
+
+      return Promise.reject(error);
+    },
+  );
 
   return {
     get: instance.get as AxiosFunction,
