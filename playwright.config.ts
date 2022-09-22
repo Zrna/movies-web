@@ -42,6 +42,16 @@ const config: PlaywrightTestConfig = {
     trace: 'on-first-retry',
   },
 
+  /* Run your local dev server before starting the tests */
+  webServer: {
+    command: 'npm run start --filter="./example"',
+    reuseExistingServer: !process.env.CI,
+    url: 'http://localhost:3000',
+    env: {
+      NODE_ENV: 'test',
+    },
+  },
+
   /* Configure projects for major browsers */
   projects: [
     {
@@ -96,12 +106,6 @@ const config: PlaywrightTestConfig = {
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   // outputDir: 'test-results/',
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   port: 3000,
-  // },
 };
 
 export default config;
