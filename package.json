@@ -52,7 +52,7 @@
     "typecheck": "tsc --noEmit --incremental false --tsBuildInfoFile null",
     "lint": "npm run typecheck && eslint '*/**/*.{js,ts,tsx,mdx}'",
     "lint:fix": "eslint --quiet --fix src/",
-    "pretest": "tsc --incremental -p tests/tsconfig.json",
+    "pretest": "tsc --incremental -p tsconfig.json",
     "playwright": "npx playwright test"
   },
   "husky": {
