@@ -5,11 +5,7 @@ import { Divider, FlexLayout, theme } from '~/ui';
 
 import { TextWithIcon } from '../TextWithIcon';
 
-interface AccountMenuProps {
-  onOutsideClick(): void;
-}
-
-export const AccountMenu: React.FC<AccountMenuProps> = ({ onOutsideClick }) => {
+export const AccountMenu = ({ onOutsideClick }: { onOutsideClick: () => void }) => {
   const logout = useLogout();
 
   return (
