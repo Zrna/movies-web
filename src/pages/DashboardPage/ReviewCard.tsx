@@ -5,11 +5,7 @@ import { Base64Img, RatingStars, TextWithIcon } from '~/components';
 import { FlexLayout, theme } from '~/ui';
 import defaultPoster from '~/ui/assets/images/default-poster.png';
 
-interface ReviewProps {
-  data: Review;
-}
-
-export const ReviewCard: React.FC<ReviewProps> = ({ data }) => {
+export const ReviewCard = ({ data }: { data: Review }) => {
   const { id, img, name, rating, watchAgain } = data;
 
   return (

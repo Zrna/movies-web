@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { CenteredLoadingSpinner } from '~/components';
 import { useReviews } from '~/hooks';
-import { Box, FlexLayout, Text, TextInput, theme } from '~/ui';
+import { FlexLayout } from '~/ui';
 
 import { Filters } from './Filters';
 import { Reviews } from './Reviews';
@@ -35,33 +35,13 @@ export const DashboardPage = () => {
 
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
-      <FlexLayout data-testid="dashboard" flexDirection={['column', 'row']} justifyContent="space-between">
-        <Text color="primary" variant="display-heading-m">
-          Dashboard
-        </Text>
-        <Box
-          sx={{
-            'div > div, div > div:hover, div > div:focus-within, div > div:active': {
-              backgroundColor: 'transparent',
-            },
-            border: `1px solid ${theme.colors['gray-700']}`,
-          }}
-        >
-          <TextInput
-            iconLeft="search"
-            iconRight={searchValue ? 'close' : undefined}
-            placeholder="Search review..."
-            value={searchValue}
-            onChange={setSearchValue}
-            onClickRightIcon={() => setSearchValue('')}
-          />
-        </Box>
-      </FlexLayout>
       <Filters
         activeLength={reviewsData.data.length}
+        searchValue={searchValue}
         showOnlyWatchAgain={showOnlyWatchAgain}
         totalLength={reviewsData.totalRecords}
-        onShowWatchAgain={() => setShowOnlyWatchAgain(!showOnlyWatchAgain)}
+        onSearch={(value) => setSearchValue(value ?? '')}
+        onShowOnlyWatchAgain={() => setShowOnlyWatchAgain(!showOnlyWatchAgain)}
       />
       {isLoading ? <CenteredLoadingSpinner /> : <Reviews data={reviewsData} />}
     </FlexLayout>

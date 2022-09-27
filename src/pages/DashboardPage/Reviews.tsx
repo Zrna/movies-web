@@ -3,11 +3,7 @@ import { Box, Text, useScreenType } from '~/ui';
 
 import { ReviewCard } from './ReviewCard';
 
-interface ReviewsProps {
-  data: GetReviews | undefined;
-}
-
-export const Reviews: React.FC<ReviewsProps> = ({ data: reviews }) => {
+export const Reviews = ({ data: reviews }: { data: GetReviews | undefined }) => {
   const { isMobile, isTablet } = useScreenType();
 
   if (!reviews || reviews.totalRecords === 0 || reviews.data.length === 0) {
@@ -18,8 +14,16 @@ export const Reviews: React.FC<ReviewsProps> = ({ data: reviews }) => {
     );
   }
 
-  const gridColumnsStyle = (): string => {
-    const numberOfCards = isMobile ? 2 : isTablet ? 4 : 7;
+  const gridColumnsStyle = () => {
+    let numberOfCards = 7;
+
+    if (isMobile) {
+      numberOfCards = 2;
+    }
+
+    if (isTablet) {
+      numberOfCards = 4;
+    }
 
     return `repeat(${numberOfCards}, 1fr)`;
   };
