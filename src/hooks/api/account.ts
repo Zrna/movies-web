@@ -7,7 +7,7 @@ import { deleteAccount, getAccountData, updateAccount } from '~/api';
 import { showToast } from '~/ui';
 import { showErrorToast } from '~/utils';
 
-import { useAccessToken, useLogout } from './index';
+import { useAccessToken, useLogout } from '../index';
 
 interface UseAccountArgs {
   unauthorizedRedirect: boolean;
