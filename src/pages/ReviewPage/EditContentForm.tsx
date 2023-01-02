@@ -10,9 +10,10 @@ import { validator } from '~/utils';
 interface EditContentFormProps {
   data: Review;
   onSubmit: (data: UpdateReview) => void;
+  onCancel: () => void;
 }
 
-export const EditContentForm: React.FC<EditContentFormProps> = ({ data, onSubmit }) => {
+export const EditContentForm: React.FC<EditContentFormProps> = ({ data, onSubmit, onCancel }) => {
   const { isMobile } = useScreenType();
   const { rating, url, review, watchAgain } = data;
   const [updatedRating, setUpdatedRating] = useState(rating);
@@ -40,13 +41,16 @@ export const EditContentForm: React.FC<EditContentFormProps> = ({ data, onSubmit
                 name="review"
                 validate={validator.isEmpty("Field can't be empty")}
               />
-              <Button
-                isDisabled={valuesNotChanged || hasValidationErrors}
-                isFullWidth={isMobile}
-                isLoading={submitting}
-                text="Edit review"
-                type="submit"
-              />
+              <FlexLayout flexDirection={['column', 'row']} space={[2, 5]}>
+                <Button
+                  isDisabled={valuesNotChanged || hasValidationErrors}
+                  isFullWidth={isMobile}
+                  isLoading={submitting}
+                  text="Edit review"
+                  type="submit"
+                />
+                <Button isFullWidth={isMobile} text="Cancel" type="cancel" onClick={onCancel} />
+              </FlexLayout>
             </FlexLayout>
           );
         }}
