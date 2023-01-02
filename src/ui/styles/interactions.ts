@@ -3,7 +3,7 @@ export const clickable = {
   // applies to any element with the disabled attribute
 
   '&[disabled]': {
-    opacity: 0.5,
-    pointerEvents: 'none',
+    opacity: 0.25,
+    pointerEvents: 'none' as any,
   },
 };

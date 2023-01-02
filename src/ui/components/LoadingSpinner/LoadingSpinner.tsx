@@ -1,5 +1,5 @@
 import SVG from 'react-inlinesvg';
-import { BoxProps, SxStyleProp } from 'theme-ui';
+import { BoxProps, ThemeUIStyleObject } from 'theme-ui';
 
 import { Box, theme } from '~/ui';
 
@@ -14,7 +14,7 @@ const sizesMap = {
 export interface LoadingSpinnerProps extends BoxProps {
   color?: theme.Color;
   size?: keyof typeof sizesMap;
-  sx?: SxStyleProp;
+  sx?: ThemeUIStyleObject;
 }
 
 export function LoadingSpinner({ color = 'white', size = 'm' }: LoadingSpinnerProps) {

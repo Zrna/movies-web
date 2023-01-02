@@ -7,7 +7,7 @@ export default {
     fontWeight: fontWeights.normal,
     fontSize: '96px',
     lineHeight: '104px',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as any,
   },
   'display-heading-l': {
     fontFamily: fonts.body,
@@ -15,7 +15,7 @@ export default {
     fontWeight: fontWeights.normal,
     fontSize: '56px',
     lineHeight: '64px',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as any,
   },
   'display-heading-m': {
     fontFamily: fonts.body,
@@ -23,7 +23,7 @@ export default {
     fontWeight: fontWeights.normal,
     fontSize: '36px',
     lineHeight: '48px',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as any,
   },
   'display-paragraph-xxl': {
     fontFamily: fonts.body,
@@ -31,7 +31,7 @@ export default {
     fontWeight: fontWeights.normal,
     fontSize: '24px',
     lineHeight: '40px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-xxl-medium': {
     fontFamily: fonts.body,
@@ -39,7 +39,7 @@ export default {
     fontWeight: fontWeights.medium,
     fontSize: '24px',
     lineHeight: '40px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-xxl-bold': {
     fontFamily: fonts.body,
@@ -47,7 +47,7 @@ export default {
     fontWeight: fontWeights.bold,
     fontSize: '24px',
     lineHeight: '40px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-xl': {
     fontFamily: fonts.body,
@@ -55,7 +55,7 @@ export default {
     fontWeight: fontWeights.normal,
     fontSize: '21px',
     lineHeight: '32px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-xl-medium': {
     fontFamily: fonts.body,
@@ -63,7 +63,7 @@ export default {
     fontWeight: fontWeights.medium,
     fontSize: '21px',
     lineHeight: '32px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-xl-bold': {
     fontFamily: fonts.body,
@@ -71,7 +71,7 @@ export default {
     fontWeight: fontWeights.bold,
     fontSize: '21px',
     lineHeight: '32px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-l': {
     fontFamily: fonts.body,
@@ -79,7 +79,7 @@ export default {
     fontWeight: fontWeights.normal,
     fontSize: '18px',
     lineHeight: '32px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-l-medium': {
     fontFamily: fonts.body,
@@ -87,7 +87,7 @@ export default {
     fontWeight: fontWeights.medium,
     fontSize: '18px',
     lineHeight: '32px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-l-bold': {
     fontFamily: fonts.body,
@@ -95,7 +95,7 @@ export default {
     fontWeight: fontWeights.bold,
     fontSize: '18px',
     lineHeight: '32px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-m': {
     fontFamily: fonts.body,
@@ -103,7 +103,7 @@ export default {
     fontWeight: fontWeights.normal,
     fontSize: '16px',
     lineHeight: '24px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-m-medium': {
     fontFamily: fonts.body,
@@ -111,7 +111,7 @@ export default {
     fontWeight: fontWeights.medium,
     fontSize: '16px',
     lineHeight: '24px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'display-paragraph-m-bold': {
     fontFamily: fonts.body,
@@ -119,6 +119,6 @@ export default {
     fontWeight: fontWeights.bold,
     fontSize: '16px',
     lineHeight: '24px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
 };

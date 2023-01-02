@@ -7,7 +7,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.normal,
     lineHeight: '32px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'text-xl-medium': {
     fontFamily: fonts.body,
@@ -15,7 +15,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.medium,
     lineHeight: '32px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'text-xl-bold': {
     fontFamily: fonts.body,
@@ -23,7 +23,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.bold,
     lineHeight: '32px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'text-l': {
     fontFamily: fonts.body,
@@ -31,7 +31,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.normal,
     lineHeight: '24px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'text-l-medium': {
     fontFamily: fonts.body,
@@ -39,7 +39,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.medium,
     lineHeight: '24px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'text-l-bold': {
     fontFamily: fonts.body,
@@ -47,7 +47,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.bold,
     lineHeight: '24px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'text-m': {
     fontFamily: fonts.body,
@@ -55,7 +55,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.normal,
     lineHeight: '24px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'text-m-medium': {
     fontFamily: fonts.body,
@@ -63,7 +63,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.medium,
     lineHeight: '24px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'text-m-bold': {
     fontFamily: fonts.body,
@@ -71,7 +71,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.bold,
     lineHeight: '24px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'text-s': {
     fontFamily: fonts.body,
@@ -79,7 +79,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.normal,
     lineHeight: '16px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
   'text-s-medium': {
     fontFamily: fonts.body,
@@ -87,6 +87,6 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.medium,
     lineHeight: '16px',
-    textTransform: 'none',
+    textTransform: 'none' as any,
   },
 };

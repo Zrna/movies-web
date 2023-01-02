@@ -1,5 +1,5 @@
 import SVG from 'react-inlinesvg';
-import { SxStyleProp } from 'theme-ui';
+import { ThemeUIStyleObject } from 'theme-ui';
 
 import { Box, BoxProps, theme } from '~/ui';
 import * as icons from '~/ui/assets/icons';
@@ -14,7 +14,7 @@ export interface IconProps extends BoxProps {
   color?: theme.Color;
   icon: theme.Icon;
   size?: keyof typeof sizesMap;
-  sx?: SxStyleProp;
+  sx?: ThemeUIStyleObject;
 }
 
 export const Icon: React.FC<IconProps> = ({ color, icon, size = 'm', onClick, sx, ...rest }) => {

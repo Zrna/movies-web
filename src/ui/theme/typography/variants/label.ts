@@ -7,7 +7,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.medium,
     lineHeight: '24px',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as any,
   },
   'label-s': {
     fontFamily: fonts.body,
@@ -15,7 +15,7 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.medium,
     lineHeight: '16px',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as any,
   },
   'label-xs': {
     fontFamily: fonts.body,
@@ -23,6 +23,6 @@ export default {
     fontStyle: fontStyles.normal,
     fontWeight: fontWeights.medium,
     lineHeight: '24px',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as any,
   },
 };

@@ -1,7 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { useBreakpointIndex } from '@theme-ui/match-media';
-import last from 'lodash/last';
 import mapValues from 'lodash/mapValues';
 import { useEffect, useState } from 'react';
 
@@ -31,14 +30,15 @@ export function useScreenType() {
   return mapValues(screenIndexMap, (screenIndex) => screenIndex === bpIndex);
 }
 
-export function useResponsiveSelector() {
-  const bpIndex = useBpIndex();
+// TODO: improve hook
+// export function useResponsiveSelector() {
+//   const bpIndex = useBpIndex();
 
-  return <T>(...alternatives: T[]): T => {
-    if (alternatives[bpIndex] === undefined) {
-      return last(alternatives) as T;
-    }
+//   return <T>(...alternatives: T[]): T => {
+//     if (alternatives[bpIndex] === undefined) {
+//       return last(alternatives) as T;
+//     }
 
-    return alternatives[bpIndex];
-  };
-}
+//     return alternatives[bpIndex];
+//   };
+// }

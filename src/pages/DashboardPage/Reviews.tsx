@@ -33,7 +33,7 @@ export const Reviews = ({ data: reviews }: { data: GetReviews | undefined }) => 
       sx={{
         display: 'grid',
         gridTemplateColumns: gridColumnsStyle(),
-        gap: isMobile ? '40px' : '24px',
+        gap: isMobile ? '40px' : 5,
       }}
     >
       {reviews.data.map((review) => (
