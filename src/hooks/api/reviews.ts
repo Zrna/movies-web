@@ -96,8 +96,8 @@ export function useDeleteReview() {
 
   return useMutation(deleteReviewById, {
     onSuccess: () => {
-      queryClient.invalidateQueries('reviews');
       history.push('/dashboard');
+      queryClient.invalidateQueries('reviews');
       showToast({ text: 'Review successfully deleted.', variant: 'success' });
     },
     onError: (err: AxiosError, data, rollback: any) => {
