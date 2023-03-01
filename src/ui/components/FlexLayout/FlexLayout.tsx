@@ -13,27 +13,11 @@ export interface FlexLayoutProps extends BoxProps {
   space?: number | number[];
 }
 
-// type PossiblyArray<T> = T | T[];
-
-// function mapArrayOrOne<T, V>(items: PossiblyArray<T>, f: (value: T) => V) {
-//   return Array.isArray(items) ? items.map(f) : f(items);
-// }
-
 export const FlexLayout = forwardRef<any, FlexLayoutProps>(
   (
     { alignItems, flexDirection = 'row', flexGrow, flexShrink, flexWrap, justifyContent, space = 0, sx = {}, ...rest },
     ref,
   ) => {
-    // TODO: improve useResponsiveSelector
-    // const r = useResponsiveSelector();
-
-    // const spaceValue = Array.isArray(space) ? r(...space) : space;
-
-    // const allButLast = {
-    //   mb: mapArrayOrOne(flexDirection, (d) => (d === 'column' ? spaceValue : 0)),
-    //   mr: mapArrayOrOne(flexDirection, (d) => (d === 'row' ? spaceValue : 0)),
-    // };
-
     return (
       <Box
         ref={ref}
