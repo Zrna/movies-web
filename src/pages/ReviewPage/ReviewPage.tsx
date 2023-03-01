@@ -4,7 +4,7 @@ import { Redirect, useParams } from 'react-router';
 import { UpdateReview } from '~/api';
 import { BackToLink, Base64Img, CenteredLoadingSpinner, TextWithIcon } from '~/components';
 import { useDeleteReview, useReviewById, useUpdateReview } from '~/hooks';
-import { Box, FlexLayout, Text, useModal, useScreenType } from '~/ui';
+import { Box, FlexLayout, Only, Text, useModal, useScreenType } from '~/ui';
 import defaultPoster from '~/ui/assets/images/default-poster.png';
 import { formatDate } from '~/utils';
 
@@ -29,7 +29,7 @@ export const ReviewPage = () => {
       action: async () => deleteReview(reviewId),
     },
   });
-  const { isMobile, isTablet } = useScreenType();
+  const { isTablet } = useScreenType();
   const [isEditMode, setIsEditMode] = useState(false);
 
   if (isLoading) {
@@ -49,14 +49,18 @@ export const ReviewPage = () => {
 
   return (
     <FlexLayout flexDirection="row" space={5}>
-      {!isMobile && (
+      <Only for="tabletAndDesktop">
         <Base64Img
           alt={`${name} poster`}
           placeHolder={defaultPoster}
           src={img}
-          style={{ height: 'calc(100vh - 68px)', objectFit: 'cover', maxWidth: isTablet ? '320px' : '570px' }}
+          style={{
+            height: 'calc(100vh - 68px)',
+            objectFit: 'cover',
+            maxWidth: isTablet ? '320px' : '570px',
+          }}
         />
-      )}
+      </Only>
       <FlexLayout flexDirection="column" p={4} space={4}>
         <FlexLayout flexDirection="column" space={6}>
           <BackToLink text="back to dashboard" to="/dashboard" />
