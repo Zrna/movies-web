@@ -16,7 +16,7 @@ export const CreateReviewPage = () => {
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
       <BackToLink text="back to dashboard" to="/dashboard" />
-      <Text color="primary" variant="display-heading-m">
+      <Text color="primary" variant="headline-h2">
         Create review
       </Text>
       <Form
@@ -43,7 +43,7 @@ export const CreateReviewPage = () => {
             />
             <FormTextInput label="URL" labelColor="white" name="url" type="text" validate={validator.isURL()} />
             <FlexLayout flexDirection="column" space={2}>
-              <Text as="label" color="white" variant="text-m-bold">
+              <Text as="label" color="white" variant="paragraph-default">
                 Rating
               </Text>
               <RatingStars rating={rating} onChange={(value) => setRating(value)} />

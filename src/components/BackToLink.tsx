@@ -18,7 +18,7 @@ export const BackToLink: React.FC<BackToLinkProps> = ({ text, to }) => {
         width: 'fit-content',
       }}
       text={text}
-      variant="text-s-medium"
+      variant="paragraph-default"
       onClick={() => history.push(to)}
     />
   );

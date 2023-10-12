@@ -13,7 +13,7 @@ export const NotFoundPage = () => {
       space={6}
       sx={{ marginTop: '30vh', textAlign: 'center' }}
     >
-      <Text variant="display-heading-l">Page Not Found</Text>
+      <Text variant="headline-h2">Page Not Found</Text>
       <ButtonLink iconLeft="arrowLeft" text={`Go to ${accessToken ? 'dashboard' : 'home page'}`} to="/" />
     </FlexLayout>
   );

@@ -8,7 +8,7 @@ export const Reviews = ({ data: reviews }: { data: GetReviews | undefined }) => 
 
   if (!reviews || reviews.totalRecords === 0 || reviews.data.length === 0) {
     return (
-      <Text color="primary" variant="text-xl-bold">
+      <Text color="primary" variant="paragraph-big">
         No reviews.
       </Text>
     );

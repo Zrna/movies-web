@@ -42,7 +42,7 @@ export const LoginPage = () => {
   return (
     <FlexLayout alignItems="center" flexDirection="column" justifyContent="center" m={6}>
       <FlexLayout alignItems="center" bg="black" data-testid="login-form" flexDirection="column" p={6} space={6}>
-        <Text color="white" variant="display-heading-l">
+        <Text color="white" variant="headline-h2">
           Login
         </Text>
         {error && <ErrorMessage text={error} />}
@@ -81,7 +81,7 @@ export const LoginPage = () => {
           )}
           onSubmit={handleLoginSubmit}
         />
-        <Text color="primary" variant="text-m">
+        <Text color="primary">
           Don’t have an account? <Link to="/register">Create one</Link>
         </Text>
       </FlexLayout>

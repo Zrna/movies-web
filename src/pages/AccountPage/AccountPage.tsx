@@ -30,7 +30,7 @@ export const AccountPage = () => {
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
       <BackToLink text="back to dashboard" to="/dashboard" />
-      <Text color="primary" variant="display-heading-m">
+      <Text color="primary" variant="headline-h2">
         Account
       </Text>
       <Form
@@ -71,7 +71,7 @@ export const AccountPage = () => {
         onSubmit={(data: any) => updateAccount(data)}
       />
       <FlexLayout flexDirection="column" space={5} sx={{ width: '200px' }}>
-        <Text color="red-500" variant="text-m" onClick={showModal}>
+        <Text color="red-500" onClick={showModal}>
           Delete account
         </Text>
       </FlexLayout>

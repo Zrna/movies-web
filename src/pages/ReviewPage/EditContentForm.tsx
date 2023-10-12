@@ -28,9 +28,7 @@ export const EditContentForm: React.FC<EditContentFormProps> = ({ data, onSubmit
           return (
             <FlexLayout as="form" flexDirection="column" space={4} onSubmit={handleSubmit}>
               <FlexLayout flexDirection="column" space={2}>
-                <Text color="white" variant="text-m-bold">
-                  Rating
-                </Text>
+                <Text color="white">Rating</Text>
                 <RatingStars rating={updatedRating} onChange={(value) => setUpdatedRating(value)} />
               </FlexLayout>
               <FormTextInput label="URL" labelColor="white" name="url" type="text" validate={validator.isURL()} />

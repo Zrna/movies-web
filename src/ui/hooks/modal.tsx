@@ -53,16 +53,10 @@ export const useModal = ({
     <Modal isVisible={isVisible}>
       <FlexLayout flexDirection="column" space={4} onOutsideClick={closeModal}>
         <FlexLayout justifyContent="space-between" space={2}>
-          <Text variant="title-m">{title}</Text>
+          <Text variant="headline-h4">{title}</Text>
           <Icon icon="close" onClick={closeModal} />
         </FlexLayout>
-        {typeof content === 'string' ? (
-          <Text color="white" variant="display-paragraph-m">
-            {content}
-          </Text>
-        ) : (
-          content
-        )}
+        {typeof content === 'string' ? <Text color="white">{content}</Text> : content}
         <FlexLayout space={2}>
           <Button
             isDisabled={isLoading}

@@ -72,9 +72,9 @@ export const ReviewPage = () => {
                 iconSize="l"
                 iconTitle="I would watch again or recommend"
                 text={name}
-                variant="display-heading-m"
+                variant="headline-h3"
               />
-              <Text color="white-alpha-50" variant="text-s-medium">
+              <Text color="white-alpha-50" variant="paragraph-small">
                 <i>Last updated on {formatDate(updatedAt)}</i>
               </Text>
             </FlexLayout>

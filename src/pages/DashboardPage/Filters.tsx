@@ -37,7 +37,7 @@ export const Filters: React.FC<FiltersProps> = ({
           text="Show only watch again"
           onClick={onShowOnlyWatchAgain}
         />
-        <Text color="white-alpha-50" variant="text-s-medium">
+        <Text color="white-alpha-50" variant="paragraph-small">
           Showing {activeLength} of {totalLength} {pluralize('review', totalLength)}.
         </Text>
       </FlexLayout>

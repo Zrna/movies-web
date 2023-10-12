@@ -10,7 +10,7 @@ import typography from './typography';
 export * from './breakpoints';
 
 const themeUiColors = {
-  background: palette.dark,
+  background: palette.black,
   text: palette.white,
   primary: palette.white,
 };

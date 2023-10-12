@@ -10,7 +10,7 @@ export interface TextProps extends BoxProps {
   sx?: ThemeUIStyleObject;
 }
 
-export const Text = forwardRef<any, TextProps>(({ as = 'span', variant = 'text-m', sx, ...rest }, ref) => {
+export const Text = forwardRef<any, TextProps>(({ as = 'span', variant = 'paragraph-default', sx, ...rest }, ref) => {
   return (
     <Box
       as={as}

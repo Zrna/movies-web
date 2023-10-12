@@ -46,7 +46,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ isDisabled = false, label, v
       >
         {value && <Icon color="green" icon="check" size="l" />}
       </FlexLayout>
-      {label && <Text variant="text-m-bold">{label}</Text>}
+      {label && <Text>{label}</Text>}
     </FlexLayout>
   );
 };

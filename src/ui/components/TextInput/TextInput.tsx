@@ -59,7 +59,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   return (
     <FlexLayout flexDirection="column" space={2} sx={{ width: width ?? '100%' }}>
       {label && (
-        <Text as="label" color={labelColor} variant="text-m-bold">
+        <Text as="label" color={labelColor}>
           {label}
         </Text>
       )}
@@ -129,11 +129,7 @@ export const TextInput: React.FC<TextInputProps> = ({
           />
         )}
       </FlexLayout>
-      {error && (
-        <Text color="red-500" variant="text-m-medium">
-          {error}
-        </Text>
-      )}
+      {error && <Text color="red-500">{error}</Text>}
     </FlexLayout>
   );
 };

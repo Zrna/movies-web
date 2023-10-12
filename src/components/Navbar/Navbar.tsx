@@ -38,7 +38,7 @@ export const Navbar = () => {
               <TextWithIcon
                 iconLeft="plus"
                 text="Create review"
-                variant={isMobile ? 'display-paragraph-l' : 'display-paragraph-xl'}
+                variant={isMobile ? 'paragraph-big' : 'paragraph-default'}
               />
             </Link>
             {isMobile ? (

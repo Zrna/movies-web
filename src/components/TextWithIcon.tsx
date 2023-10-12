@@ -19,7 +19,7 @@ export const TextWithIcon: React.FC<TextWithIconProps> = ({
   iconTitle,
   text,
   sx,
-  variant = 'text-m',
+  variant = 'paragraph-default',
   onClick,
 }) => {
   return (

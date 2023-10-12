@@ -35,7 +35,7 @@ export const RegistrationPage = () => {
   return (
     <FlexLayout alignItems="center" flexDirection="column" justifyContent="center" m={6}>
       <FlexLayout alignItems="center" bg="black" flexDirection="column" p={6} space={6}>
-        <Text color="white" variant="display-heading-l">
+        <Text color="white" variant="headline-h2">
           Register
         </Text>
         {error && <ErrorMessage text={error} />}
@@ -84,7 +84,7 @@ export const RegistrationPage = () => {
           }}
           onSubmit={handleRegisterSubmit}
         />
-        <Text color="primary" variant="text-m">
+        <Text color="primary">
           Already have an account? <Link to="/login">Log in</Link>
         </Text>
       </FlexLayout>

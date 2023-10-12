@@ -1,11 +1,9 @@
-import display from './display';
+import headline from './headline';
 import label from './label';
-import text from './text';
-import title from './title';
+import paragraph from './paragraph';
 
 export default {
-  ...display,
-  ...title,
-  ...text,
+  ...headline,
+  ...paragraph,
   ...label,
 };

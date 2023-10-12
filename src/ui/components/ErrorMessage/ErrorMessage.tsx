@@ -7,7 +7,7 @@ interface ErrorMessageProps {
   variant?: theme.TextVariant;
 }
 
-export const ErrorMessage: React.FC<ErrorMessageProps> = ({ text, variant = 'text-m-medium' }) => {
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({ text, variant = 'paragraph-big' }) => {
   return (
     <Text color="red-500" variant={variant}>
       {text}

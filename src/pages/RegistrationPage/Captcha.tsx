@@ -22,7 +22,7 @@ export const Captcha: React.FC<CaptchaProps> = ({ onChange }) => {
 
   return (
     <FlexLayout flexDirection="column" space={3}>
-      <Text as="label" color="white-alpha-75" variant="text-m-bold">
+      <Text as="label" color="white-alpha-75" variant="paragraph-big">
         Retype the characters from the picture
       </Text>
       <ClientCaptcha captchaCode={setCaptchaValue} charsCount={5} fontSize={18} />

@@ -27,7 +27,7 @@ export const Options: React.FC<OptionsProps> = ({ isEditMode, onEdit, onDelete }
             color="white-alpha-75"
             iconLeft="pencil"
             text={isEditMode ? 'Discard' : 'Edit'}
-            variant="text-s-medium"
+            variant="paragraph-small"
             onClick={() => {
               onEdit(!isEditMode);
               setShowOptions(false);
@@ -38,7 +38,7 @@ export const Options: React.FC<OptionsProps> = ({ isEditMode, onEdit, onDelete }
             color="white-alpha-75"
             iconLeft="trash"
             text="Delete"
-            variant="text-s-medium"
+            variant="paragraph-small"
             onClick={() => {
               onDelete();
               setShowOptions(false);

@@ -5,19 +5,19 @@ const sizesMap = {
     height: 'input-s-height',
     px: 2,
     space: 2,
-    textVariant: 'text-m' as theme.TextVariant,
+    textVariant: 'paragraph-default' as theme.TextVariant,
   },
   m: {
     height: 'input-m-height',
     px: 4,
     space: 2,
-    textVariant: 'text-l' as theme.TextVariant,
+    textVariant: 'paragraph-big' as theme.TextVariant,
   },
   l: {
     height: 'input-l-height',
     px: 5,
     space: 3,
-    textVariant: 'text-xl' as theme.TextVariant,
+    textVariant: 'paragraph-big' as theme.TextVariant,
   },
 };
 

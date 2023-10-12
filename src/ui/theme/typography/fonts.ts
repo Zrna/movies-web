@@ -1,5 +1,5 @@
 export const fonts = {
-  body: "'Montserrat', sans-serif",
+  body: "'Poppins', sans-serif",
 };
 
 export const fontStyles = {
@@ -9,5 +9,6 @@ export const fontStyles = {
 export const fontWeights = {
   normal: 'normal',
   medium: '500',
+  'semi-bold': '600',
   bold: '700',
 };

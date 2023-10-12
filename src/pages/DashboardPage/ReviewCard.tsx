@@ -40,7 +40,7 @@ export const ReviewCard = ({ data }: { data: Review }) => {
             iconSize="l"
             iconTitle="I would watch again or recommend."
             text={name}
-            variant="text-l-medium"
+            variant="paragraph-default"
           />
           <RatingStars isReadOnly rating={rating} size="m" />
         </FlexLayout>

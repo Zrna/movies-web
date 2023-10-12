@@ -30,7 +30,7 @@ export const Textarea: React.FC<TextareaProps> = ({
   return (
     <>
       {label && (
-        <Text as="label" color={labelColor} variant="text-m-bold">
+        <Text as="label" color={labelColor}>
           {label}
         </Text>
       )}
@@ -62,11 +62,7 @@ export const Textarea: React.FC<TextareaProps> = ({
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)}
         {...rest}
       />
-      {error && (
-        <Text color="red-500" variant="text-m-medium">
-          {error}
-        </Text>
-      )}
+      {error && <Text color="red-500">{error}</Text>}
     </>
   );
 };
