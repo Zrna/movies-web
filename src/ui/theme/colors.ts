@@ -1,3 +1,10 @@
+export const alerts = {
+  'alert-success': '#23c06b',
+  'alert-error': '#C02323',
+  'alert-warning': '#C09423',
+  'alert-info': '#4C23C0',
+};
+
 export const alphas = {
   'black-alpha-25': 'rgba(0, 0, 0, 0.25)',
   'black-alpha-50': 'rgba(0, 0, 0, 0.5)',
@@ -8,18 +15,21 @@ export const alphas = {
 };
 
 export const palette = {
-  black: '#000000',
-  dark: '#1a1a1a',
-  green: '#5cc639',
-  primary: '#e84545',
-  red: '#9d0b28',
-  yellow: '#ffe234',
-  transparent: 'transparent',
+  primary: '#23C06B',
+  'light-dark': '#202020',
+  dark: '#1E252B',
+  dimmed: '#D0D0D0',
   white: '#FFFFFF',
-  'gray-400': '#F5F5F5',
-  'gray-500': '#737373',
-  'gray-600': '#4d4d4d',
-  'gray-700': '#3D3D3D',
-  'red-500': '#d70f37',
-  'red-700': '#77081e',
+  black: '#000000',
+  transparent: 'transparent',
+  'green-50': '#e9f9f0',
+  'green-100': '#bbebd1',
+  'green-200': '#9ae2bb',
+  'green-300': '#6cd59c',
+  'green-400': '#4fcd89',
+  'green-500': '#23c06b',
+  'green-600': '#20af61',
+  'green-700': '#19884c',
+  'green-800': '#136a3b',
+  'green-900': '#0f512d',
 };

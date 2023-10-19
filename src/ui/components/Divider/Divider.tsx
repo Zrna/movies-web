@@ -6,7 +6,7 @@ interface DividerProps {
   color?: theme.Color;
 }
 
-export const Divider: React.FC<DividerProps> = ({ color = 'gray-600' }) => {
+export const Divider: React.FC<DividerProps> = ({ color = 'dimmed' }) => {
   return (
     <Box
       bg={color}

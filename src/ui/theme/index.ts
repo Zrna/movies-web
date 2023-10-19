@@ -1,7 +1,7 @@
 import * as icons from '../assets/icons';
 import borders from './borders';
 import { breakpoints } from './breakpoints';
-import { alphas, palette } from './colors';
+import { alerts, alphas, palette } from './colors';
 import radii from './radii';
 import sizes from './sizes';
 import space from './space';
@@ -16,6 +16,7 @@ const themeUiColors = {
 };
 
 export const colors = {
+  ...alerts,
   ...alphas,
   ...palette,
   ...themeUiColors,

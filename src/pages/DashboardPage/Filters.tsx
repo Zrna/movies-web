@@ -27,10 +27,10 @@ export const Filters: React.FC<FiltersProps> = ({
     <FlexLayout data-testid="dashboard" flexDirection={['column', 'row']} justifyContent="space-between" space={4}>
       <FlexLayout flexDirection="column" space={5}>
         <TextWithIcon
-          color={showOnlyWatchAgain ? 'green' : 'gray-500'}
+          color={showOnlyWatchAgain ? 'green-500' : 'dimmed'}
           iconLeft="eye"
           sx={{
-            border: `1px solid ${theme.colors[showOnlyWatchAgain ? 'green' : 'gray-500']}`,
+            border: `1px solid ${theme.colors[showOnlyWatchAgain ? 'green-500' : 'dimmed']}`,
             padding: 2,
             width: 'fit-content',
           }}
@@ -46,7 +46,7 @@ export const Filters: React.FC<FiltersProps> = ({
           'div > div, div > div:hover, div > div:focus-within, div > div:active': {
             backgroundColor: 'transparent',
           },
-          border: `1px solid ${theme.colors['gray-700']}`,
+          border: `1px solid ${theme.colors.dimmed}`,
           height: '100%',
         }}
       >

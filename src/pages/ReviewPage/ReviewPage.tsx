@@ -67,7 +67,7 @@ export const ReviewPage = () => {
           <FlexLayout alignItems="center" flexDirection="row" justifyContent="space-between" space={4}>
             <FlexLayout flexDirection="column" space={2}>
               <TextWithIcon
-                iconColor="green"
+                iconColor="green-500"
                 iconRight={watchAgain ? 'checkBadge' : undefined}
                 iconSize="l"
                 iconTitle="I would watch again or recommend"

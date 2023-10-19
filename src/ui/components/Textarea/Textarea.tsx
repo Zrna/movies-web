@@ -35,24 +35,24 @@ export const Textarea: React.FC<TextareaProps> = ({
         </Text>
       )}
       <ThemeTextarea
-        bg="gray-700"
+        bg="dimmed"
         disabled={isDisabled}
         opacity={isDisabled ? 0.5 : 1}
         p={4}
         placeholder={placeholder}
         rows={rows}
         sx={{
-          border: error ? `1px solid ${theme.colors['red-500']}` : 'none',
+          border: error ? `1px solid ${theme.colors['alert-error']}` : 'none',
           borderRadius: 's',
           outline: 'none',
           '::placeholder': {
             color: 'white-alpha-50',
           },
           '&:hover': {
-            backgroundColor: 'gray-600',
+            backgroundColor: 'dimmed',
           },
           '&:focus-within': {
-            backgroundColor: 'gray-500',
+            backgroundColor: 'dimmed',
           },
           maxWidth: '100%',
           minWidth: '100%',
@@ -62,7 +62,7 @@ export const Textarea: React.FC<TextareaProps> = ({
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)}
         {...rest}
       />
-      {error && <Text color="red-500">{error}</Text>}
+      {error && <Text color="alert-error">{error}</Text>}
     </>
   );
 };

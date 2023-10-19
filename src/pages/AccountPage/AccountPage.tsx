@@ -71,7 +71,7 @@ export const AccountPage = () => {
         onSubmit={(data: any) => updateAccount(data)}
       />
       <FlexLayout flexDirection="column" space={5} sx={{ width: '200px' }}>
-        <Text color="red-500" onClick={showModal}>
+        <Text color="alert-error" onClick={showModal}>
           Delete account
         </Text>
       </FlexLayout>

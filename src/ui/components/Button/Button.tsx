@@ -25,37 +25,37 @@ const variantsMap = {
   primary: {
     bg: 'black',
     color: 'white' as theme.Color,
-    border: `1px solid ${theme.colors['gray-700']}`,
+    border: `1px solid ${theme.colors.dimmed}`,
     borderRadius: 's',
     activeStyles: {
-      bg: 'gray-700',
+      bg: 'dimmed',
     },
     hoverStyles: {
-      bg: 'gray-600',
+      bg: 'dimmed',
     },
   },
   secondary: {
     bg: 'white',
     color: 'black' as theme.Color,
-    border: `1px solid ${theme.colors['gray-500']}`,
+    border: `1px solid ${theme.colors.dimmed}`,
     borderRadius: 's',
     activeStyles: {
-      bg: 'gray-500',
+      bg: 'dimmed',
     },
     hoverStyles: {
-      bg: 'gray-400',
+      bg: 'dimmed',
     },
   },
   danger: {
     bg: 'red',
     color: 'white' as theme.Color,
-    border: `1px solid ${theme.colors['red-700']}`,
+    border: `1px solid ${theme.colors.dimmed}`,
     borderRadius: 's',
     activeStyles: {
       bg: 'red-700',
     },
     hoverStyles: {
-      bg: 'red-500',
+      bg: 'alert-error',
     },
   },
 };

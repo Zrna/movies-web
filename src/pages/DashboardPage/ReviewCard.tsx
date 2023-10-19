@@ -16,7 +16,7 @@ export const ReviewCard = ({ data }: { data: Review }) => {
       sx={{
         transition: 'transform 500ms',
         ':hover': {
-          boxShadow: `0px 0px 10px 5px ${theme.colors['gray-500']}`,
+          boxShadow: `0px 0px 10px 5px ${theme.colors.dimmed}`,
           transform: 'scale(1.1)',
           transition: 'transform 500ms',
           zIndex: 1,
@@ -35,7 +35,7 @@ export const ReviewCard = ({ data }: { data: Review }) => {
         />
         <FlexLayout alignItems="center" flexDirection="column" py={2} space={2}>
           <TextWithIcon
-            iconColor="green"
+            iconColor="green-500"
             iconRight={watchAgain ? 'checkBadge' : undefined}
             iconSize="l"
             iconTitle="I would watch again or recommend."

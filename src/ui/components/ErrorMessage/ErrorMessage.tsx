@@ -9,7 +9,7 @@ interface ErrorMessageProps {
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({ text, variant = 'paragraph-big' }) => {
   return (
-    <Text color="red-500" variant={variant}>
+    <Text color="alert-error" variant={variant}>
       {text}
     </Text>
   );

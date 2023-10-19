@@ -65,17 +65,17 @@ export const TextInput: React.FC<TextInputProps> = ({
       )}
       <FlexLayout
         alignItems="center"
-        bg="gray-700"
+        bg="dimmed"
         isDisabled={isDisabled}
         sx={{
           borderRadius: 's',
           height: 'input-l-height',
           position: 'relative',
           '&:hover': {
-            backgroundColor: 'gray-600',
+            backgroundColor: 'dimmed',
           },
           '&:focus-within': {
-            backgroundColor: 'gray-500',
+            backgroundColor: 'dimmed',
           },
         }}
       >
@@ -98,7 +98,7 @@ export const TextInput: React.FC<TextInputProps> = ({
           py={0}
           sx={{
             ...styles.interactions.clickable,
-            border: error ? `1px solid ${theme.colors['red-500']}` : 'none',
+            border: error ? `1px solid ${theme.colors['alert-error']}` : 'none',
             caretColor: 'white',
             height: '100%',
             outline: 'none',
@@ -129,7 +129,7 @@ export const TextInput: React.FC<TextInputProps> = ({
           />
         )}
       </FlexLayout>
-      {error && <Text color="red-500">{error}</Text>}
+      {error && <Text color="alert-error">{error}</Text>}
     </FlexLayout>
   );
 };

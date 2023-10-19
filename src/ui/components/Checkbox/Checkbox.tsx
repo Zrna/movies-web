@@ -28,12 +28,12 @@ export const Checkbox: React.FC<CheckboxProps> = ({ isDisabled = false, label, v
         justifyContent="center"
         role="checkbox"
         sx={{
-          bg: 'gray-700',
+          bg: 'dimmed',
           borderRadius: 's',
           height: '24px',
           width: '24px',
           '&:hover': {
-            bg: 'gray-600',
+            bg: 'dimmed',
           },
         }}
         tabIndex={tabIndex || 0}
@@ -44,7 +44,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ isDisabled = false, label, v
           }
         }}
       >
-        {value && <Icon color="green" icon="check" size="l" />}
+        {value && <Icon color="green-500" icon="check" size="l" />}
       </FlexLayout>
       {label && <Text>{label}</Text>}
     </FlexLayout>

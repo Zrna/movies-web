@@ -29,11 +29,11 @@ interface ShowToastProps {
 const variantsMap = {
   error: {
     icon: 'close' as theme.Icon,
-    color: theme.colors['red-500'] as theme.Color,
+    color: theme.colors['alert-error'] as theme.Color,
   },
   success: {
     icon: 'check' as theme.Icon,
-    color: theme.colors.green as theme.Color,
+    color: theme.colors['alert-success'] as theme.Color,
   },
 };
 
