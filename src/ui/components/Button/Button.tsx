@@ -149,7 +149,7 @@ export const Button: React.FC<ButtonProps> = ({
         width: isFullWidth ? '100%' : 'fit-content',
         '&:hover': hoverStyles,
         '&:active': activeStyles,
-        '&:disabled': disabledStyles,
+        '&:disabled': isLoading ? {} : disabledStyles,
         ...styles.interactions.clickable,
       }}
       onClick={onClick}
