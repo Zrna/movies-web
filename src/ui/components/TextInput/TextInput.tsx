@@ -65,12 +65,7 @@ export const TextInput: React.FC<TextInputProps> = ({
           {label}
         </Text>
       )}
-      <FlexLayout
-        alignItems="center"
-        bg="dark"
-        isDisabled={isDisabled}
-        sx={{ height: 'input-l-height', position: 'relative' }}
-      >
+      <FlexLayout alignItems="center" isDisabled={isDisabled} sx={{ height: 'input-l-height', position: 'relative' }}>
         {iconLeft && (
           <Icon
             color={error ? 'alert-error' : 'dimmed'}
