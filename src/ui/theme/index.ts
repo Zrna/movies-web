@@ -12,7 +12,7 @@ export * from './breakpoints';
 const themeUiColors = {
   background: palette.black,
   text: palette.white,
-  primary: palette.white,
+  primary: palette.primary,
 };
 
 export const colors = {

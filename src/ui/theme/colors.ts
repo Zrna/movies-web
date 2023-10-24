@@ -17,7 +17,7 @@ export const alphas = {
 export const palette = {
   primary: '#23C06B',
   'light-dark': '#202020',
-  dark: '#1E252B',
+  dark: '#0E0E0E',
   dimmed: '#D0D0D0',
   white: '#FFFFFF',
   black: '#000000',
