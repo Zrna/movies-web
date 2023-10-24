@@ -10,6 +10,7 @@ const paddingMap = {
 export interface TextInputProps {
   autoComplete?: string;
   error?: string;
+  helperText?: string;
   name?: string;
   iconLeft?: theme.Icon;
   iconRight?: theme.Icon;
@@ -31,11 +32,12 @@ export interface TextInputProps {
 
 export const TextInput: React.FC<TextInputProps> = ({
   error,
+  helperText,
   iconLeft,
   iconRight,
   isDisabled = false,
   label,
-  labelColor = 'white-alpha-75',
+  labelColor = 'dimmed',
   placeholder,
   type = 'text',
   value,
@@ -59,29 +61,19 @@ export const TextInput: React.FC<TextInputProps> = ({
   return (
     <FlexLayout flexDirection="column" space={2} sx={{ width: width ?? '100%' }}>
       {label && (
-        <Text as="label" color={labelColor}>
+        <Text as="label" color={error ? 'alert-error' : labelColor} variant="paragraph-default">
           {label}
         </Text>
       )}
       <FlexLayout
         alignItems="center"
-        bg="dimmed"
+        bg="dark"
         isDisabled={isDisabled}
-        sx={{
-          borderRadius: 's',
-          height: 'input-l-height',
-          position: 'relative',
-          '&:hover': {
-            backgroundColor: 'dimmed',
-          },
-          '&:focus-within': {
-            backgroundColor: 'dimmed',
-          },
-        }}
+        sx={{ height: 'input-l-height', position: 'relative' }}
       >
         {iconLeft && (
           <Icon
-            color="white-alpha-50"
+            color={error ? 'alert-error' : 'dimmed'}
             icon={iconLeft}
             size="l"
             sx={{ position: 'absolute', top: 4, bottom: 4, left: 4, zIndex: 1 }}
@@ -89,7 +81,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         )}
         <Box
           as="input"
-          bg="transparent"
+          bg="dark"
           color="white"
           data-testid={dataTestId}
           pl={pl}
@@ -98,15 +90,16 @@ export const TextInput: React.FC<TextInputProps> = ({
           py={0}
           sx={{
             ...styles.interactions.clickable,
-            border: error ? `1px solid ${theme.colors['alert-error']}` : 'none',
+            border: error ? `1px solid ${theme.colors['alert-error']}` : `1px solid ${theme.colors['light-dark']}`,
+            borderRadius: '8px',
             caretColor: 'white',
             height: '100%',
             outline: 'none',
-            variant: 'text.text-m',
+            variant: 'text.paragraph-default',
             width: '100%',
             zIndex: 2,
             '::placeholder': {
-              color: 'white-alpha-50',
+              color: 'dimmed',
             },
             ':-webkit-autofill': {
               WebkitTextFillColor: 'white',
@@ -121,7 +114,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         />
         {iconRight && (
           <Icon
-            color="white-alpha-50"
+            color={error ? 'alert-error' : 'dimmed'}
             icon={iconRight}
             size="l"
             sx={{ position: 'absolute', top: 4, bottom: 4, right: 4, zIndex: 2 }}
@@ -129,7 +122,16 @@ export const TextInput: React.FC<TextInputProps> = ({
           />
         )}
       </FlexLayout>
-      {error && <Text color="alert-error">{error}</Text>}
+      {helperText && (
+        <Text color="dimmed" variant="paragraph-small">
+          {helperText}
+        </Text>
+      )}
+      {error && (
+        <Text color="alert-error" variant="paragraph-default">
+          {error}
+        </Text>
+      )}
     </FlexLayout>
   );
 };
