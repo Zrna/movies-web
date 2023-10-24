@@ -63,7 +63,7 @@ export const useModal = ({
             isLoading={isLoading}
             size="s"
             text={actionButton.text}
-            variant="danger"
+            variant="outlined-secondary"
             onClick={handleActionClick}
           />
           <Button isDisabled={isLoading} size="s" text={cancelButtonText} variant="primary" onClick={closeModal} />

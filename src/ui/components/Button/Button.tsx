@@ -5,57 +5,102 @@ const sizesMap = {
     height: 'input-s-height',
     px: 2,
     space: 2,
-    textVariant: 'paragraph-default' as theme.TextVariant,
+    textVariant: 'label-button' as theme.TextVariant,
   },
   m: {
     height: 'input-m-height',
     px: 4,
     space: 2,
-    textVariant: 'paragraph-big' as theme.TextVariant,
+    textVariant: 'label-button' as theme.TextVariant,
   },
   l: {
     height: 'input-l-height',
     px: 5,
     space: 3,
-    textVariant: 'paragraph-big' as theme.TextVariant,
+    textVariant: 'label-button' as theme.TextVariant,
   },
 };
 
 const variantsMap = {
   primary: {
-    bg: 'black',
+    bg: theme.colors.primary,
     color: 'white' as theme.Color,
-    border: `1px solid ${theme.colors.dimmed}`,
-    borderRadius: 's',
+    border: `1px solid ${theme.colors.primary}`,
+    borderRadius: '10px',
     activeStyles: {
-      bg: 'dimmed',
+      border: `1px solid ${theme.colors['green-800']}`,
+      bg: 'green-800',
     },
     hoverStyles: {
+      border: `1px solid ${theme.colors['green-800']}`,
+      bg: 'green-800',
+    },
+    disabledStyles: {
+      border: `1px solid ${theme.colors.dimmed}`,
       bg: 'dimmed',
+      color: 'light-dark' as theme.Color,
     },
   },
   secondary: {
-    bg: 'white',
-    color: 'black' as theme.Color,
-    border: `1px solid ${theme.colors.dimmed}`,
-    borderRadius: 's',
+    bg: 'dark',
+    color: 'primary' as theme.Color,
+    border: `1px solid ${theme.colors.dark}`,
+    borderRadius: '10px',
     activeStyles: {
-      bg: 'dimmed',
+      border: `1px solid ${theme.colors.dark}`,
+      bg: 'dark',
     },
     hoverStyles: {
+      border: `1px solid ${theme.colors.dark}`,
+      bg: 'dark',
+      color: 'green-100',
+    },
+    disabledStyles: {
+      border: `1px solid ${theme.colors.dimmed}`,
       bg: 'dimmed',
+      color: 'light-dark' as theme.Color,
     },
   },
-  danger: {
-    bg: 'red',
+  outlined: {
+    bg: 'black',
     color: 'white' as theme.Color,
-    border: `1px solid ${theme.colors.dimmed}`,
-    borderRadius: 's',
+    border: `1px solid ${theme.colors.primary}`,
+    borderRadius: '10px',
     activeStyles: {
-      bg: 'red-700',
+      bg: 'black',
+      border: `1px solid ${theme.colors.primary}`,
+      color: 'primary',
     },
     hoverStyles: {
-      bg: 'alert-error',
+      bg: 'black',
+      border: `1px solid ${theme.colors.primary}`,
+      color: 'primary',
+    },
+    disabledStyles: {
+      border: `1px solid ${theme.colors.dimmed}`,
+      bg: 'dimmed',
+      color: 'light-dark' as theme.Color,
+    },
+  },
+  'outlined-secondary': {
+    bg: 'black',
+    color: 'dimmed' as theme.Color,
+    border: `1px solid ${theme.colors['light-dark']}`,
+    borderRadius: '10px',
+    activeStyles: {
+      bg: 'black',
+      border: `1px solid ${theme.colors['light-dark']}`,
+      color: 'primary',
+    },
+    hoverStyles: {
+      bg: 'black',
+      border: `1px solid ${theme.colors['light-dark']}`,
+      color: 'primary',
+    },
+    disabledStyles: {
+      border: `1px solid ${theme.colors.dimmed}`,
+      bg: 'dimmed',
+      color: 'light-dark' as theme.Color,
     },
   },
 };
@@ -84,7 +129,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   const { height, px, space, textVariant } = sizesMap[size];
-  const { bg, color, border, borderRadius, activeStyles, hoverStyles } = variantsMap[variant];
+  const { bg, color, border, borderRadius, activeStyles, hoverStyles, disabledStyles } = variantsMap[variant];
 
   return (
     <Box
@@ -104,6 +149,7 @@ export const Button: React.FC<ButtonProps> = ({
         width: isFullWidth ? '100%' : 'fit-content',
         '&:hover': hoverStyles,
         '&:active': activeStyles,
+        '&:disabled': disabledStyles,
         ...styles.interactions.clickable,
       }}
       onClick={onClick}
