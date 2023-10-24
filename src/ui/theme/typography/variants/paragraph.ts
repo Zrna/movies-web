@@ -19,7 +19,7 @@ export default {
     fontFamily: fonts.body,
     fontSize: '16px',
     fontStyle: fontStyles.normal,
-    fontWeight: fontWeights.bold,
+    fontWeight: fontWeights.normal,
     lineHeight: '24px',
   },
   'paragraph-small': {
