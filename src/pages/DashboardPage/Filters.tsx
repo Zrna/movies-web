@@ -41,15 +41,7 @@ export const Filters: React.FC<FiltersProps> = ({
           Showing {activeLength} of {totalLength} {pluralize('review', totalLength)}.
         </Text>
       </FlexLayout>
-      <Box
-        sx={{
-          'div > div, div > div:hover, div > div:focus-within, div > div:active': {
-            backgroundColor: 'transparent',
-          },
-          border: `1px solid ${theme.colors.dimmed}`,
-          height: '100%',
-        }}
-      >
+      <Box>
         <TextInput
           iconLeft="search"
           iconRight={searchValue ? 'close' : undefined}

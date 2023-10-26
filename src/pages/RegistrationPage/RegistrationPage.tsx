@@ -33,8 +33,8 @@ export const RegistrationPage = () => {
   };
 
   return (
-    <FlexLayout alignItems="center" flexDirection="column" justifyContent="center" m={6}>
-      <FlexLayout alignItems="center" bg="black" flexDirection="column" p={6} space={6}>
+    <FlexLayout alignItems="center" flexDirection="column" justifyContent="center">
+      <FlexLayout alignItems="center" bg="black" flexDirection="column" p={5} space={6}>
         <Text color="white" variant="headline-h2">
           Register
         </Text>
@@ -48,7 +48,7 @@ export const RegistrationPage = () => {
               <FlexLayout
                 as="form"
                 flexDirection="column"
-                space={4}
+                space={5}
                 sx={{ width: ['100%', '500px'] }}
                 onSubmit={handleSubmit}
               >
@@ -84,8 +84,8 @@ export const RegistrationPage = () => {
           }}
           onSubmit={handleRegisterSubmit}
         />
-        <Text color="primary">
-          Already have an account? <Link to="/login">Log in</Link>
+        <Text>
+          Already have an account? <Link to="/login">Sign in</Link>
         </Text>
       </FlexLayout>
     </FlexLayout>
