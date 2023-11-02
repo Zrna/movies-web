@@ -42,7 +42,7 @@ export const LoginPage = () => {
 
   return (
     <FlexLayout alignItems="center" justifyContent="center" space={6}>
-      <FlexLayout alignItems="center" flexDirection="column" sx={{ width: '50%' }}>
+      <FlexLayout alignItems="center" flexDirection="column" sx={{ width: ['100%', '50%'] }}>
         <FlexLayout bg="black" data-testid="login-form" flexDirection="column" p={5} space={6}>
           <Text color="white" variant="headline-h2">
             Sign In
