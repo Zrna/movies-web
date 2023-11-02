@@ -7,6 +7,7 @@ interface TextWithIconProps extends TextProps {
   iconSize?: 'm' | 'l' | 'xl';
   iconTitle?: string;
   text: string;
+  space?: number;
   onClick?(): void;
 }
 
@@ -19,11 +20,12 @@ export const TextWithIcon: React.FC<TextWithIconProps> = ({
   iconTitle,
   text,
   sx,
+  space = 2,
   variant = 'paragraph-default',
   onClick,
 }) => {
   return (
-    <FlexLayout alignItems="center" space={2} sx={sx} onClick={onClick}>
+    <FlexLayout alignItems="center" space={space} sx={sx} onClick={onClick}>
       {iconLeft && <Icon color={iconColor ?? color} icon={iconLeft} size={iconSize} title={iconTitle} />}
       <FlexLayout flexDirection="column" space={1}>
         <Text color={color} variant={variant}>
