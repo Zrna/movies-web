@@ -8,6 +8,7 @@ export * from './Icon';
 export * from './LoadingSpinner';
 export * from './Modal';
 export * from './Only';
+export * from './Search';
 export * from './Text';
 export * from './Textarea';
 export * from './TextInput';
