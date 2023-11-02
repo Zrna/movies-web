@@ -1,28 +1,27 @@
-import { useState } from 'react';
-
 import { CenteredLoadingSpinner } from '~/components';
+import { Tabs } from '~/components/Navbar/Tabs';
+import { useSearch, useSelectedTabFilter } from '~/context';
 import { useReviews } from '~/hooks';
-import { FlexLayout } from '~/ui';
+import { FlexLayout, Only, Text } from '~/ui';
+import { pluralize } from '~/utils';
 
-import { Filters } from './Filters';
 import { Reviews } from './Reviews';
 
 export const DashboardPage = () => {
   const { data: reviews, isLoading } = useReviews();
-  const [showOnlyWatchAgain, setShowOnlyWatchAgain] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
+
+  const { search } = useSearch();
+  const { selectedTabFilter } = useSelectedTabFilter();
 
   const filterReviews = () => {
     let filteredData = reviews?.data ?? [];
 
-    if (showOnlyWatchAgain) {
+    if (selectedTabFilter === 'watch again') {
       filteredData = filteredData.filter((review) => review.watchAgain === true);
     }
 
-    if (searchValue) {
-      filteredData = filteredData.filter((review) =>
-        review.name.toLowerCase().includes(searchValue.toLowerCase().trim()),
-      );
+    if (search !== '') {
+      filteredData = filteredData.filter((review) => review.name.toLowerCase().includes(search.toLowerCase().trim()));
     }
 
     return {
@@ -35,14 +34,23 @@ export const DashboardPage = () => {
 
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
-      <Filters
-        activeLength={reviewsData.data.length}
-        searchValue={searchValue}
-        showOnlyWatchAgain={showOnlyWatchAgain}
-        totalLength={reviewsData.totalRecords}
-        onSearch={(value) => setSearchValue(value ?? '')}
-        onShowOnlyWatchAgain={() => setShowOnlyWatchAgain(!showOnlyWatchAgain)}
-      />
+      {reviewsData.totalRecords < 1 ? null : (
+        <FlexLayout
+          alignItems={['flex-start', 'center', 'unset']}
+          data-testid="dashboard"
+          flexDirection={['column', 'row']}
+          justifyContent="space-between"
+          space={4}
+        >
+          <Only for="mobileAndTablet">
+            <Tabs tabs={['All Reviews', 'Watch Again', 'Bucket List']} />
+          </Only>
+          <Text color="white-alpha-50" variant="paragraph-small">
+            Showing {reviewsData.data.length} of {reviewsData.totalRecords}{' '}
+            {pluralize('review', reviewsData.totalRecords)}.
+          </Text>
+        </FlexLayout>
+      )}
       {isLoading ? <CenteredLoadingSpinner /> : <Reviews data={reviewsData} />}
     </FlexLayout>
   );

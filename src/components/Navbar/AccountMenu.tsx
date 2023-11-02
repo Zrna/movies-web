@@ -15,20 +15,20 @@ export const AccountMenu = ({ onOutsideClick }: { onOutsideClick: () => void }) 
       p={4}
       space={5}
       sx={{
-        width: '200px',
+        width: '130px',
         position: 'absolute',
-        right: 0,
+        right: '10px',
         top: ['48px', '68px'],
-        border: `1px solid ${theme.colors.dark}`,
+        border: `1px solid ${theme.colors['light-dark']}`,
         zIndex: '5',
       }}
       onOutsideClick={onOutsideClick}
     >
       <Link to="/account">
-        <TextWithIcon iconLeft="user" text="Account" />
+        <TextWithIcon iconLeft="user" text="Edit" />
       </Link>
       <Divider />
-      <TextWithIcon iconLeft="logout" text="Logout" onClick={logout} />
+      <TextWithIcon iconLeft="logout" text="Sign Out" onClick={logout} />
     </FlexLayout>
   );
 };
