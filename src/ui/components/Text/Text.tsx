@@ -11,6 +11,8 @@ export interface TextProps extends BoxProps {
 }
 
 export const Text = forwardRef<any, TextProps>(({ as = 'span', variant = 'paragraph-default', sx, ...rest }, ref) => {
+  const { color = 'white' } = rest;
+
   return (
     <Box
       as={as}
@@ -18,6 +20,7 @@ export const Text = forwardRef<any, TextProps>(({ as = 'span', variant = 'paragr
       sx={{
         ...sx,
         variant: `text.${variant}`,
+        color,
       }}
       {...rest}
     />
