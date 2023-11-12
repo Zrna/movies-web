@@ -2,7 +2,7 @@ import { CenteredLoadingSpinner } from '~/components';
 import { Tabs } from '~/components/Navbar/Tabs';
 import { useSearch, useSelectedTabFilter } from '~/context';
 import { useReviews } from '~/hooks';
-import { FlexLayout, Only, Text } from '~/ui';
+import { Box, FlexLayout, Only, Text } from '~/ui';
 import { pluralize } from '~/utils';
 
 import { Reviews } from './Reviews';
@@ -51,7 +51,14 @@ export const DashboardPage = () => {
           </Text>
         </FlexLayout>
       )}
-      {isLoading ? <CenteredLoadingSpinner /> : <Reviews data={reviewsData} />}
+      {isLoading ? (
+        <CenteredLoadingSpinner />
+      ) : (
+        <FlexLayout space={5}>
+          <Reviews data={reviewsData} />
+          <Box></Box>
+        </FlexLayout>
+      )}
     </FlexLayout>
   );
 };
