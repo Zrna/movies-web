@@ -11,9 +11,13 @@ export const ContentItem: React.FC<ContentItemProps> = ({ text, value }) => {
       <Text color="white-alpha-50" data-testid="content-item-component-text" variant="paragraph-big">
         {text}
       </Text>
-      <Text color="primary" data-testid="content-item-component-value" variant="paragraph-default">
-        {value}
-      </Text>
+      {typeof value === 'string' ? (
+        <Text color="primary" data-testid="content-item-component-value" variant="paragraph-default">
+          {value}
+        </Text>
+      ) : (
+        value
+      )}
     </FlexLayout>
   );
 };
