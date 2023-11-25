@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Form } from 'react-final-form';
 
 import { CreateReview } from '~/api';
-import { BackToLink, FormCheckbox, FormTextarea, FormTextInput, RatingStars } from '~/components';
+import { BackToLink, FormCheckbox, FormTextarea, FormTextInput, Rating } from '~/components';
 import { useCreateReview } from '~/hooks';
 import { Button, FlexLayout, Text } from '~/ui';
 import { validator } from '~/utils';
@@ -46,7 +46,7 @@ export const CreateReviewPage = () => {
               <Text as="label" color="white" variant="paragraph-default">
                 Rating
               </Text>
-              <RatingStars rating={rating} onChange={(value) => setRating(value)} />
+              <Rating rating={rating} onChange={(value) => setRating(value)} />
             </FlexLayout>
             <FormCheckbox label="I would watch again or recommend" name="watchAgain" />
             <Button

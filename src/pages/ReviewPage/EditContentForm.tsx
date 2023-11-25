@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Form } from 'react-final-form';
 
 import { Review, UpdateReview } from '~/api';
-import { FormCheckbox, FormTextarea, FormTextInput, RatingStars } from '~/components';
+import { FormCheckbox, FormTextarea, FormTextInput, Rating } from '~/components';
 import { Button, FlexLayout, Text, useScreenType } from '~/ui';
 import { validator } from '~/utils';
 
@@ -29,7 +29,7 @@ export const EditContentForm: React.FC<EditContentFormProps> = ({ data, onSubmit
             <FlexLayout as="form" flexDirection="column" space={4} onSubmit={handleSubmit}>
               <FlexLayout flexDirection="column" space={2}>
                 <Text color="white">Rating</Text>
-                <RatingStars rating={updatedRating} onChange={(value) => setUpdatedRating(value)} />
+                <Rating rating={updatedRating} onChange={(value) => setUpdatedRating(value)} />
               </FlexLayout>
               <FormTextInput label="URL" labelColor="white" name="url" type="text" validate={validator.isURL()} />
               <FormCheckbox label="I would watch again or recommend" name="watchAgain" />

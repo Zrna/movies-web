@@ -1,5 +1,5 @@
 import { Review } from '~/api';
-import { RatingStars } from '~/components';
+import { Rating } from '~/components';
 import { FlexLayout } from '~/ui';
 import { splitStringToNewLine } from '~/utils';
 
@@ -14,7 +14,7 @@ export const Content: React.FC<ContentProps> = ({ data }) => {
 
   return (
     <FlexLayout flexDirection="column" space={4}>
-      <ContentItem text="Rating" value={<RatingStars isReadOnly rating={rating} />} />
+      <ContentItem text="Rating" value={<Rating isReadOnly rating={rating} />} />
       <ContentItem
         text="URL"
         value={

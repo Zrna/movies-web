@@ -5,5 +5,5 @@ export * from './CenteredLoadingSpinner';
 export * from './form';
 export * from './Indicator';
 export * from './Navbar';
-export * from './RatingStars';
+export * from './Rating';
 export * from './TextWithIcon';
