@@ -34,6 +34,7 @@ const variantsMap = {
     hoverStyles: {
       border: `1px solid ${theme.colors['green-800']}`,
       bg: 'green-800',
+      color: 'white',
     },
     disabledStyles: {
       border: `1px solid ${theme.colors.dimmed}`,
@@ -150,6 +151,7 @@ export const Button: React.FC<ButtonProps> = ({
         '&:hover': hoverStyles,
         '&:active': activeStyles,
         '&:disabled': isLoading ? {} : disabledStyles,
+        '&:hover span': { color: hoverStyles.color },
         ...styles.interactions.clickable,
       }}
       onClick={onClick}
