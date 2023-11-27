@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { GetReviews } from '~/api';
-import { Box, FlexLayout, Text, useScreenType } from '~/ui';
+import { Box, FlexLayout, Only, Text, useScreenType } from '~/ui';
 
 import { ReviewCard } from './ReviewCard';
+import { CreateReviewBox } from './SideContainer/CreateReviewBox';
 
 const ReviewsWrapper = (props: { columns: string; children: React.ReactNode }) => {
   const { columns, children } = props;
@@ -49,9 +50,19 @@ export const Reviews = ({ data: reviews }: { data: GetReviews | undefined }) => 
           <ReviewCard data={review} isBig={isDesktop && i === 0} key={review.id} />
         ))}
       </ReviewsWrapper>
+      <Only for="mobileAndTablet">
+        <CreateReviewBox />
+      </Only>
       <ReviewsWrapper columns={gridColumnsStyle()}>
-        {reviews.data.slice(2).map((review) => (
-          <ReviewCard data={review} key={review.id} />
+        {reviews.data.slice(2).map((review, i) => (
+          <React.Fragment key={review.id}>
+            {(i + 1) % 4 === 0 && (
+              <Only for="mobileAndTablet">
+                <CreateReviewBox />
+              </Only>
+            )}
+            <ReviewCard data={review} />
+          </React.Fragment>
         ))}
       </ReviewsWrapper>
     </FlexLayout>
