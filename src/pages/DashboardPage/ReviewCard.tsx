@@ -29,13 +29,15 @@ export const ReviewCard = ({ data, isBig = false }: { data: Review; isBig?: bool
       flexDirection="column"
       key={id}
       sx={{
-        width: isBig ? ['312px', '648px'] : '312px',
+        width: isBig ? ['312px', '624px'] : 'auto',
+        maxWidth: isBig ? '624px' : ['100%', '100%', '312px'],
+        minWidth: '280px',
         height: '370px',
         position: 'relative',
         borderRadius: '30px',
         transition: 'transform 500ms',
         ':hover': {
-          transform: 'scale(1.1)',
+          transform: 'scale(1.05)',
           transition: 'transform 500ms',
           zIndex: 1,
         },
