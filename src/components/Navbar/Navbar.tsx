@@ -39,9 +39,11 @@ export const Navbar = () => {
         <Link to="/dashboard">
           <img alt="Moovier logo" src={logo} style={{ width: isDesktop ? '100%' : '100px' }} />
         </Link>
-        <Only for="desktop">
-          <Tabs tabs={['All Reviews', 'Watch Again', 'Bucket List']} />
-        </Only>
+        {pathname === '/dashboard' && (
+          <Only for="desktop">
+            <Tabs tabs={['All Reviews', 'Watch Again', 'Bucket List']} />
+          </Only>
+        )}
         <>
           {isMobile ? (
             <FlexLayout space={2}>
