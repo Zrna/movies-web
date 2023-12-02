@@ -26,7 +26,19 @@ export const Reviews = ({ data: reviews }: { data: GetReviews | undefined }) => 
   const { isMobile, isTablet, isDesktop } = useScreenType();
 
   if (!reviews || reviews.totalRecords === 0 || reviews.data.length === 0) {
-    return <Text variant="paragraph-big">No reviews.</Text>;
+    return (
+      <FlexLayout
+        flexDirection={['column', 'column', 'row']}
+        justifyContent="center"
+        space={6}
+        sx={{ width: ['100%', '100%', '924px'] }}
+      >
+        <Text variant="headline-h4">No reviews.</Text>
+        <Only for="mobileAndTablet">
+          <CreateReviewBox />
+        </Only>
+      </FlexLayout>
+    );
   }
 
   const gridColumnsStyle = () => {
