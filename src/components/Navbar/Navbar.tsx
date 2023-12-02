@@ -66,7 +66,7 @@ export const Navbar = () => {
             </FlexLayout>
           ) : (
             <FlexLayout space={5}>
-              <Search isMini value={search} onChange={setSearch} />
+              <Search value={search} onChange={setSearch} />
               <TextWithIcon
                 iconLeft="user"
                 iconRight={isAccountMenuOpen ? 'chevronUp' : 'chevronDown'}
