@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Redirect, useParams } from 'react-router';
+import { useKey } from 'react-use';
 
 import { UpdateReview } from '~/api';
 import { BackToLink, Base64Img, CenteredLoadingSpinner, TextWithIcon } from '~/components';
@@ -31,6 +32,8 @@ export const ReviewPage = () => {
   });
   const { isTablet } = useScreenType();
   const [isEditMode, setIsEditMode] = useState(false);
+
+  useKey('Escape', () => setIsEditMode(false));
 
   if (isLoading) {
     return <CenteredLoadingSpinner />;

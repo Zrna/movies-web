@@ -57,16 +57,16 @@ export const useModal = ({
           <Icon icon="close" onClick={closeModal} />
         </FlexLayout>
         {typeof content === 'string' ? <Text color="white">{content}</Text> : content}
-        <FlexLayout space={2}>
+        <FlexLayout mt={3} space={2}>
           <Button
             isDisabled={isLoading}
             isLoading={isLoading}
             size="s"
             text={actionButton.text}
-            variant="outlined-secondary"
+            variant="primary"
             onClick={handleActionClick}
           />
-          <Button isDisabled={isLoading} size="s" text={cancelButtonText} variant="primary" onClick={closeModal} />
+          <Button isDisabled={isLoading} size="s" text={cancelButtonText} variant="secondary" onClick={closeModal} />
         </FlexLayout>
       </FlexLayout>
     </Modal>
