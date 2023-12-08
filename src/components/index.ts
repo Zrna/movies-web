@@ -6,5 +6,6 @@ export * from './form';
 export * from './Indicator';
 export * from './Navbar';
 export * from './Rating';
+export * from './ReviewRating';
 export * from './StreamingApp';
 export * from './TextWithIcon';
