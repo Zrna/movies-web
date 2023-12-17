@@ -1,17 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Redirect, useParams } from 'react-router';
 import { useKey } from 'react-use';
 
-import { UpdateReview } from '~/api';
-import { BackToLink, Base64Img, CenteredLoadingSpinner, TextWithIcon } from '~/components';
+import { CenteredLoadingSpinner, Rating, ReviewRating, StreamingApp } from '~/components';
 import { useDeleteReview, useReviewById, useUpdateReview } from '~/hooks';
-import { Box, FlexLayout, Only, Text, useModal, useScreenType } from '~/ui';
-import defaultPoster from '~/ui/assets/images/default-poster.png';
-import { formatDate } from '~/utils';
+import { Box, Button, Checkbox, FlexLayout, Icon, Text, Textarea, TextInput, useModal, useScreenType } from '~/ui';
+import { formatDate, getUrlDomain, splitStringToNewLine, validator } from '~/utils';
 
-import { Content } from './Content';
-import { EditContentForm } from './EditContentForm';
-import { Options } from './Options';
+import { ActionIcons } from './ActionIcons';
+import { HeaderImage } from './HeaderImage';
+import { RoundedBox } from './RoundedBox';
+import { reactionsMap } from './utils';
 
 interface UseParamsData {
   reviewId: string;
@@ -19,9 +18,11 @@ interface UseParamsData {
 
 export const ReviewPage = () => {
   const { reviewId }: UseParamsData = useParams();
+
+  const { isMobile } = useScreenType();
   const { data: review, isLoading } = useReviewById(reviewId);
-  const { mutate: updateReview } = useUpdateReview();
-  const { mutate: deleteReview } = useDeleteReview();
+  const { mutateAsync: updateReview, isLoading: isUpdating } = useUpdateReview();
+  const { mutateAsync: deleteReview } = useDeleteReview();
   const [deleteModal, showDeleteModal] = useModal({
     title: 'Delete review',
     content: 'Are you sure you want to delete this review?',
@@ -30,10 +31,29 @@ export const ReviewPage = () => {
       action: async () => deleteReview(reviewId),
     },
   });
-  const { isTablet } = useScreenType();
-  const [isEditMode, setIsEditMode] = useState(false);
 
-  useKey('Escape', () => setIsEditMode(false));
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [updatedReview, setUpdatedReview] = useState(review?.review);
+  const [updatedUrl, setUpdatedUrl] = useState(review?.url);
+  const [updatedWatchAgain, setUpdatedWatchAgain] = useState(review?.watchAgain);
+  const [updatedRating, setUpdatedRating] = useState(review?.rating);
+
+  useEffect(() => {
+    setInitialUpdatedValues();
+  }, [review]);
+
+  useKey('Escape', () => {
+    setIsEditMode(false);
+  });
+
+  const setInitialUpdatedValues = () => {
+    if (review) {
+      setUpdatedReview(review.review);
+      setUpdatedUrl(review.url);
+      setUpdatedWatchAgain(review.watchAgain);
+      setUpdatedRating(review.rating);
+    }
+  };
 
   if (isLoading) {
     return <CenteredLoadingSpinner />;
@@ -43,56 +63,116 @@ export const ReviewPage = () => {
     return <Redirect to="/dashboard" />;
   }
 
-  const { img, name, updatedAt, watchAgain } = review;
+  const { img, name, updatedAt, watchAgain, rating, url } = review;
+  const reviewUrlDomain = url && getUrlDomain(url);
 
-  const handleEditReview = (data: UpdateReview) => {
-    updateReview({ id: reviewId, data });
-    setIsEditMode(false);
-  };
+  const isUpdateReviewDisabled = !!(
+    (review.review === updatedReview || typeof validator.isEmpty("Field can't be empty")(updatedReview) === 'string') &&
+    (review.url === updatedUrl || typeof validator.isURL()(updatedUrl) === 'string') &&
+    review.watchAgain === updatedWatchAgain &&
+    review.rating === updatedRating
+  );
 
   return (
-    <FlexLayout flexDirection="row" space={5}>
-      <Only for="tabletAndDesktop">
-        <Base64Img
-          alt={`${name} poster`}
-          placeHolder={defaultPoster}
-          src={img}
-          style={{
-            height: 'calc(100vh - 68px)',
-            objectFit: 'cover',
-            maxWidth: isTablet ? '320px' : '570px',
-          }}
-        />
-      </Only>
-      <FlexLayout flexDirection="column" p={4} space={4}>
+    <FlexLayout flexDirection="column" p={4} pb={8} space={[6, 8, 10]}>
+      <Box sx={{ position: 'relative' }}>
+        <HeaderImage img={img} name={name} />
+        <ActionIcons isEditMode={isEditMode} onDelete={showDeleteModal} onEdit={() => setIsEditMode(!isEditMode)} />
+        <Box sx={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translate(-50%, 45%)' }}>
+          {isEditMode ? (
+            <Rating rating={updatedRating ?? null} onChange={(value) => setUpdatedRating(value)} />
+          ) : (
+            <ReviewRating rating={rating} />
+          )}
+        </Box>
+      </Box>
+      <FlexLayout flexDirection="column" space={7}>
+        <Text sx={{ alignSelf: 'center' }} variant={isMobile ? 'headline-h2' : 'headline-h1'}>
+          {name}
+        </Text>
         <FlexLayout flexDirection="column" space={6}>
-          <BackToLink text="back to dashboard" to="/dashboard" />
-          <FlexLayout alignItems="center" flexDirection="row" justifyContent="space-between" space={4}>
-            <FlexLayout flexDirection="column" space={2}>
-              <TextWithIcon
-                iconColor="green-500"
-                iconRight={watchAgain ? 'checkBadge' : undefined}
-                iconSize="l"
-                iconTitle="I would watch again or recommend"
-                text={name}
-                variant="headline-h3"
+          <FlexLayout flexDirection={['column', 'row']} space={[3, 3, 5]} sx={{ alignSelf: ['unset', 'center'] }}>
+            <RoundedBox
+              element={
+                isEditMode ? (
+                  <TextInput error={validator.isURL()(updatedUrl)} value={updatedUrl ?? ''} onChange={setUpdatedUrl} />
+                ) : (
+                  <StreamingApp link={url} name={reviewUrlDomain} showName />
+                )
+              }
+              info={reviewUrlDomain || isEditMode ? '' : 'Link not provided.'}
+              title="Watch it here"
+            />
+            <RoundedBox
+              element={
+                isEditMode ? (
+                  <Checkbox value={!!updatedWatchAgain} onChange={(value) => setUpdatedWatchAgain(!!value)} />
+                ) : (
+                  watchAgain && (
+                    <FlexLayout bg="dark" p={[2, 3]} sx={{ borderRadius: '50%' }}>
+                      <Icon color="white" icon="check" size="l" />
+                    </FlexLayout>
+                  )
+                )
+              }
+              info={watchAgain && updatedWatchAgain ? 'Yes, for sure!' : "I'm not sure."}
+              title="Watch again or recommend?"
+            />
+            <RoundedBox
+              element={<Icon icon={reactionsMap[rating ?? 0].icon} size="xxl" />}
+              info={reactionsMap[rating ?? 0].text}
+              title="Your reaction"
+            />
+          </FlexLayout>
+          <FlexLayout flexDirection="column" space={5}>
+            <Text variant="headline-h5">Your review</Text>
+            {isEditMode ? (
+              <Textarea
+                error={validator.isEmpty("Field can't be empty")(updatedReview)}
+                value={updatedReview}
+                onChange={setUpdatedReview}
               />
-              <Text color="white-alpha-50" variant="paragraph-small">
-                <i>Last updated on {formatDate(updatedAt)}</i>
-              </Text>
-            </FlexLayout>
-            <Options isEditMode={isEditMode} onDelete={showDeleteModal} onEdit={setIsEditMode} />
+            ) : (
+              <FlexLayout flexDirection="column" space={5}>
+                <Text color="dimmed">{splitStringToNewLine(review.review)}</Text>
+                <Text color="dimmed" variant="paragraph-small">
+                  <i>Last updated on {formatDate(updatedAt)}</i>
+                </Text>
+              </FlexLayout>
+            )}
           </FlexLayout>
         </FlexLayout>
-        <FlexLayout flexDirection={['column', 'row']} space={5}>
-          <Box sx={{ width: ['100%', '400px', '800px'] }}>
-            {isEditMode ? (
-              <EditContentForm data={review} onCancel={() => setIsEditMode(false)} onSubmit={handleEditReview} />
-            ) : (
-              <Content data={review} />
-            )}
-          </Box>
-        </FlexLayout>
+        {isEditMode && (
+          <FlexLayout flexDirection={['column', 'row']} space={[4, 5]}>
+            <Button
+              isDisabled={isUpdating || isUpdateReviewDisabled}
+              isFullWidth={isMobile}
+              isLoading={isUpdating}
+              text="Save changes"
+              onClick={async () => {
+                await updateReview({
+                  id: reviewId,
+                  data: {
+                    review: updatedReview as string,
+                    rating: updatedRating,
+                    url: updatedUrl,
+                    watchAgain: !!updatedWatchAgain,
+                  },
+                });
+                setIsEditMode(false);
+              }}
+            />
+            <Button
+              isFullWidth={isMobile}
+              text="Cancel"
+              variant="secondary"
+              onClick={() => {
+                setIsEditMode(false);
+                setInitialUpdatedValues();
+              }}
+            />
+          </FlexLayout>
+        )}
       </FlexLayout>
       {deleteModal}
     </FlexLayout>
