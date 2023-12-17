@@ -8,6 +8,7 @@ const sizesMap = {
   m: '16px',
   l: '24px',
   xl: '36px',
+  xxl: '48px',
 };
 
 export interface IconProps extends BoxProps {
