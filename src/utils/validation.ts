@@ -4,7 +4,8 @@ import isURLValidator from 'validator/lib/isURL';
 
 export const isEmail = () => (value: string) => value && isEmailValidator(value) ? undefined : 'Invalid email format';
 
-export const isEmpty = (message: string) => (value: string) => value && value.trim().length > 0 ? undefined : message;
+export const isEmpty = (message: string) => (value: string | undefined) =>
+  value && value.trim().length > 0 ? undefined : message;
 
 interface IsLengthOptionsArgs {
   min: number;
@@ -16,7 +17,7 @@ export const isLength =
   (value: string) =>
     value && isLengthValidator(value, { min, max }) ? undefined : message;
 
-export const isURL = (message?: string) => (value: string) => {
+export const isURL = (message?: string) => (value: string | undefined | null) => {
   if (value) {
     if (value.trim().length > 0 && isURLValidator(value)) {
       return undefined;
