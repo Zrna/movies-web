@@ -33,7 +33,7 @@ export const Icon: React.FC<IconProps> = ({ color, icon, size = 'm', onClick, sx
       onClick={onClick}
       {...rest}
     >
-      <SVG height="100%" src={iconSrc} viewBox="0 0 24 24" width="100%" />
+      <SVG height="100%" src={iconSrc} width="100%" />
     </Box>
   );
 };
