@@ -85,7 +85,13 @@ export const Navbar = () => {
           </Only>
         )}
         <FlexLayout space={[2, 5]}>
-          {isDashboard && <Search isMini={isMobile} value={search} onChange={setSearch} />}
+          {isDashboard ? (
+            <Search isMini={isMobile} value={search} onChange={setSearch} />
+          ) : (
+            <Link to="/create-review">
+              <Icon bg="primary" color="white" icon="plus" isRounded size={isMobile ? 'm' : 'l'} />
+            </Link>
+          )}
           <UserMenu
             isOpen={isAccountMenuOpen}
             name={getUserInitials(account)}
