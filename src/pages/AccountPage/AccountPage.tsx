@@ -29,7 +29,7 @@ export const AccountPage = () => {
 
   return (
     <FlexLayout flexDirection="column" p={4} space={6}>
-      <BackToLink text="back to dashboard" to="/dashboard" />
+      <BackToLink text="Back to All Reviews" to="/dashboard" />
       <Text variant="headline-h2">Account</Text>
       <Form
         initialValues={{ email, firstName, lastName }}
