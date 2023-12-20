@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Box, FlexLayout, Icon, styles, Text, theme, useScreenType } from '~/ui';
+import { Box, FlexLayout, Icon, Text, theme, useScreenType } from '~/ui';
 
 const paddingMap = {
   both: ['52px', '52px'],
@@ -126,7 +126,6 @@ export const TextInput: React.FC<TextInputProps> = ({
               pr={pr}
               py={0}
               sx={{
-                ...styles.interactions.clickable,
                 border: error ? `1px solid ${theme.colors['alert-error']}` : `1px solid ${theme.colors['light-dark']}`,
                 borderRadius: isTypeSearch ? '50px' : '8px',
                 caretColor: 'white',
