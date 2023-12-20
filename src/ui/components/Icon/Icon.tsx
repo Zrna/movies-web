@@ -12,14 +12,36 @@ const sizesMap = {
 };
 
 export interface IconProps extends BoxProps {
+  bg?: theme.Color;
   color?: theme.Color;
   icon: theme.Icon;
+  isRounded?: boolean;
   size?: keyof typeof sizesMap;
   sx?: ThemeUIStyleObject;
 }
 
-export const Icon: React.FC<IconProps> = ({ color, icon, size = 'm', onClick, sx, ...rest }) => {
+export const Icon: React.FC<IconProps> = ({ bg, color, icon, isRounded = false, size = 'm', onClick, sx, ...rest }) => {
   const iconSrc = icons[icon];
+
+  if (isRounded && bg) {
+    return (
+      <Box bg={bg} p={3} sx={{ backdropFilter: 'blur(5px)', borderRadius: '50%' }}>
+        <Box
+          sx={{
+            ...sx,
+            color,
+            flex: 'none',
+            height: sizesMap[size],
+            width: sizesMap[size],
+          }}
+          onClick={onClick}
+          {...rest}
+        >
+          <SVG height="100%" src={iconSrc} width="100%" />
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <Box
