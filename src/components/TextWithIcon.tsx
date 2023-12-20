@@ -27,11 +27,9 @@ export const TextWithIcon: React.FC<TextWithIconProps> = ({
   return (
     <FlexLayout alignItems="center" space={space} sx={sx} onClick={onClick}>
       {iconLeft && <Icon color={iconColor ?? color} icon={iconLeft} size={iconSize} title={iconTitle} />}
-      <FlexLayout flexDirection="column" space={1}>
-        <Text color={color} variant={variant}>
-          {text}
-        </Text>
-      </FlexLayout>
+      <Text color={color} sx={{ height: iconSize === 'm' ? '20px' : 'initial' }} variant={variant}>
+        {text}
+      </Text>
       {iconRight && <Icon color={iconColor ?? color} icon={iconRight} size={iconSize} title={iconTitle} />}
     </FlexLayout>
   );
