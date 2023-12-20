@@ -1,4 +1,6 @@
-import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
+
+import { Box } from '~/ui';
 
 import { TextWithIcon } from './TextWithIcon';
 
@@ -8,18 +10,15 @@ interface BackToLinkProps {
 }
 
 export const BackToLink: React.FC<BackToLinkProps> = ({ text, to }) => {
-  const history = useHistory();
-
   return (
-    <TextWithIcon
-      color="white-alpha-75"
-      iconLeft="arrowLeft"
+    <Box
       sx={{
         width: 'fit-content',
       }}
-      text={text}
-      variant="paragraph-default"
-      onClick={() => history.push(to)}
-    />
+    >
+      <Link to={to}>
+        <TextWithIcon color="dimmed" iconLeft="chevronLeft" text={text} />
+      </Link>
+    </Box>
   );
 };
