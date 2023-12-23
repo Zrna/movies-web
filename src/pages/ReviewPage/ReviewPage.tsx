@@ -82,7 +82,9 @@ export const ReviewPage = () => {
           <ActionIcons isEditMode={isEditMode} onDelete={showDeleteModal} onEdit={() => setIsEditMode(!isEditMode)} />
           <Box sx={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translate(-50%, 45%)' }}>
             {isEditMode ? (
-              <Rating rating={updatedRating ?? null} onChange={(value) => setUpdatedRating(value)} />
+              <Box bg="white-alpha-25" px={3} py={2} sx={{ borderRadius: '50px', backdropFilter: 'blur(5px)' }}>
+                <Rating rating={updatedRating ?? null} onChange={(value) => setUpdatedRating(value)} />
+              </Box>
             ) : (
               <ReviewRating rating={rating} />
             )}
