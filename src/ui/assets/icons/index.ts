@@ -1,5 +1,6 @@
 // Icons from https://heroicons.dev/
 
+export { default as appleTv } from './apple-tv.svg';
 export { default as arrowDown } from './arrow-down.svg';
 export { default as arrowLeft } from './arrow-left.svg';
 export { default as arrowRight } from './arrow-right.svg';
@@ -11,6 +12,7 @@ export { default as chevronLeft } from './chevron-left.svg';
 export { default as chevronRight } from './chevron-right.svg';
 export { default as chevronUp } from './chevron-up.svg';
 export { default as close } from './close.svg';
+export { default as disneyPlus } from './disney-plus.svg';
 export { default as dotsVertical } from './dots-vertical.svg';
 export { default as eye } from './eye.svg';
 export { default as eyeOff } from './eye-off.svg';

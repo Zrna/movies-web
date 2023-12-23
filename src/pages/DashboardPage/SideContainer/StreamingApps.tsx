@@ -9,10 +9,12 @@ export const StreamingApps = () => {
       space={5}
       sx={{ border: `2px solid ${theme.colors['light-dark']}`, borderRadius: '30px' }}
     >
-      <Text variant="headline-h5">Your Streaming Apps</Text>
+      <Text variant="headline-h5">Streaming Apps</Text>
       <FlexLayout space={2}>
         <StreamingApp name="netflix" />
         <StreamingApp name="hbomax" />
+        <StreamingApp name="disney+" />
+        <StreamingApp name="appleTv" />
       </FlexLayout>
     </FlexLayout>
   );

@@ -1,18 +1,32 @@
 import capitalize from 'lodash/capitalize';
 
-import { FlexLayout, Text, useScreenType } from '~/ui';
+import { FlexLayout, Text, theme, useScreenType } from '~/ui';
+import appleTv from '~/ui/assets/icons/apple-tv.svg';
+import disneyPlus from '~/ui/assets/icons/disney-plus.svg';
 import hbomax from '~/ui/assets/icons/hbo-max.svg';
 import netflixImg from '~/ui/assets/icons/netflix.svg';
 import { addUrlProtocol } from '~/utils';
 
-const streamingAppsMap: { [key: string]: { link: string; img: string } } = {
+const streamingAppsMap: { [key: string]: { link: string; img: string; showBorder: boolean } } = {
   netflix: {
     link: 'https://www.netflix.com/',
     img: netflixImg,
+    showBorder: false,
   },
   hbomax: {
     link: 'https://play.hbomax.com/',
     img: hbomax,
+    showBorder: false,
+  },
+  'disney+': {
+    link: 'https://www.disneyplus.com',
+    img: disneyPlus,
+    showBorder: true,
+  },
+  appleTv: {
+    link: 'https://tv.apple.com/',
+    img: appleTv,
+    showBorder: true,
   },
 };
 
@@ -41,6 +55,9 @@ export const StreamingApp: React.FC<StreamingAppProps> = ({ name, link, showName
             style={{
               width: isMobile ? '32px' : '48px',
               height: isMobile ? '32px' : '48px',
+              border: app.showBorder ? `1px solid ${theme.colors['light-dark']}` : 'none',
+              borderRadius: app.showBorder ? '50%' : 'none',
+              padding: app.showBorder ? '4px' : '0',
             }}
           />
           {showName && <Text variant="paragraph-default">{capitalize(name)}</Text>}
