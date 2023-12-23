@@ -3,7 +3,7 @@ import { Box, BoxProps, FlexLayout, Icon, LoadingSpinner, styles, Text, theme } 
 const sizesMap = {
   s: {
     height: 'input-s-height',
-    px: 2,
+    px: 3,
     space: 2,
     textVariant: 'label-button' as theme.TextVariant,
   },
