@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useSelectedTabFilter } from '~/context';
+import { getFeatureFlags } from '~/services';
 import { FlexLayout, Text, theme, useScreenType } from '~/ui';
 
 interface TabsProps {
@@ -9,6 +10,7 @@ interface TabsProps {
 }
 
 export const Tabs: React.FC<TabsProps> = ({ theme: tabsTheme = 'dark', tabs }) => {
+  const { bucketList } = getFeatureFlags();
   const { selectedTabFilter, setSelectedTabFilter } = useSelectedTabFilter();
   const { isMobile } = useScreenType();
 
@@ -23,12 +25,14 @@ export const Tabs: React.FC<TabsProps> = ({ theme: tabsTheme = 'dark', tabs }) =
     >
       {tabs.map((tab) => {
         const isActive = selectedTabFilter === tab.toLowerCase();
+        const isDisabled = tab.toLowerCase() === 'bucket list' && !bucketList;
 
         // TODO: add some animation onChange
         return (
           <Text
             bg={isActive ? 'white' : 'transparent'}
             color={isActive ? 'black' : 'dimmed'}
+            isDisabled={isDisabled}
             key={`tab-${tab}`}
             px={[4, 4, 5]}
             py={2}
