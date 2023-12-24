@@ -3,6 +3,10 @@ export function isExternalUrl(href: string) {
 }
 
 export function getUrlDomain(url: string | URL) {
+  if (url.toString().includes('tv.apple')) {
+    return 'appleTv';
+  }
+
   return url.toString().replace(/.+\/\/|www.|\..+/g, '');
 }
 
