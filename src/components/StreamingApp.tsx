@@ -45,8 +45,6 @@ export const StreamingApp: React.FC<StreamingAppProps> = ({ name, link, showName
 
   const app = streamingAppsMap[name];
 
-  console.log(name);
-
   if (app) {
     return (
       <a href={link ? addUrlProtocol(link) : app.link} rel="noreferrer" target="_blank">
