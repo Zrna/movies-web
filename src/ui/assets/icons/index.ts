@@ -12,7 +12,7 @@ export { default as chevronLeft } from './chevron-left.svg';
 export { default as chevronRight } from './chevron-right.svg';
 export { default as chevronUp } from './chevron-up.svg';
 export { default as close } from './close.svg';
-export { default as disneyPlus } from './disney-plus.svg';
+export { default as disneyPlus } from './disneyplus.svg';
 export { default as dotsVertical } from './dots-vertical.svg';
 export { default as eye } from './eye.svg';
 export { default as eyeOff } from './eye-off.svg';

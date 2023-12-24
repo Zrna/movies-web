@@ -13,7 +13,7 @@ export const StreamingApps = () => {
       <FlexLayout space={2}>
         <StreamingApp name="netflix" />
         <StreamingApp name="hbomax" />
-        <StreamingApp name="disney+" />
+        <StreamingApp name="disneyplus" />
         <StreamingApp name="appleTv" />
       </FlexLayout>
     </FlexLayout>

@@ -2,7 +2,7 @@ import capitalize from 'lodash/capitalize';
 
 import { FlexLayout, Text, theme, useScreenType } from '~/ui';
 import appleTv from '~/ui/assets/icons/apple-tv.svg';
-import disneyPlus from '~/ui/assets/icons/disney-plus.svg';
+import disneyPlus from '~/ui/assets/icons/disneyplus.svg';
 import hbomax from '~/ui/assets/icons/hbo-max.svg';
 import netflixImg from '~/ui/assets/icons/netflix.svg';
 import { addUrlProtocol } from '~/utils';
@@ -18,7 +18,7 @@ const streamingAppsMap: { [key: string]: { link: string; img: string; showBorder
     img: hbomax,
     showBorder: false,
   },
-  'disney+': {
+  disneyplus: {
     link: 'https://www.disneyplus.com',
     img: disneyPlus,
     showBorder: true,
@@ -44,6 +44,8 @@ export const StreamingApp: React.FC<StreamingAppProps> = ({ name, link, showName
   }
 
   const app = streamingAppsMap[name];
+
+  console.log(name);
 
   if (app) {
     return (
