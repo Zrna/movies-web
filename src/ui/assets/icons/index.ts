@@ -30,6 +30,7 @@ export { default as reaction2 } from './reaction-2.svg';
 export { default as reaction3 } from './reaction-3.svg';
 export { default as reaction4 } from './reaction-4.svg';
 export { default as reaction5 } from './reaction-5.svg';
+export { default as reload } from './reload.svg';
 export { default as search } from './search.svg';
 export { default as star } from './star.svg';
 export { default as starFull } from './star-full.svg';

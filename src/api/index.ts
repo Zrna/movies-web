@@ -4,5 +4,7 @@ export * from './account';
 export * from './account.d';
 export * from './auth';
 export * from './auth.d';
+export * from './recommendation';
+export * from './recommendation.d';
 export * from './reviews';
 export * from './reviews.d';
