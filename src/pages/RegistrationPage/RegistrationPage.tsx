@@ -8,13 +8,10 @@ import { useAccessToken } from '~/hooks';
 import { Button, ErrorMessage, FlexLayout, Text } from '~/ui';
 import { getErrorMessage, sleep, validator } from '~/utils';
 
-import { Captcha } from './Captcha';
-
 export const RegistrationPage = () => {
   const history = useHistory();
   const hasAccessToken = useAccessToken();
   const [error, setError] = useState('');
-  const [isCaptchaValid, setIsCaptchaValid] = useState(false);
 
   if (hasAccessToken) {
     return <Redirect to="/dashboard" />;
@@ -70,9 +67,8 @@ export const RegistrationPage = () => {
                   name="password"
                   validate={validator.isLength('Password must be at least 6 characters', { min: 6 })}
                 />
-                <Captcha onChange={(value: boolean) => setIsCaptchaValid(value)} />
                 <Button
-                  isDisabled={isSubmitDisabled || hasValidationErrors || !isCaptchaValid}
+                  isDisabled={isSubmitDisabled || hasValidationErrors}
                   isFullWidth
                   isLoading={submitting}
                   text="Create account"
