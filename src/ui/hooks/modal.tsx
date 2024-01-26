@@ -2,16 +2,15 @@ import { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useKey, useLockBodyScroll } from 'react-use';
 
-import { Button, Modal, Text } from '~/ui';
+import { Button, ButtonProps, FlexLayout, Icon, Modal, Text } from '~/ui';
 import { showErrorToast } from '~/utils';
-
-import { FlexLayout, Icon } from '../components';
 
 interface UseModalProps {
   title: string;
   content: React.ReactElement | string;
   actionButton: {
     text: string;
+    variant?: ButtonProps['variant'];
     action(): Promise<any>;
   };
   cancelButtonText?: string;
@@ -63,7 +62,7 @@ export const useModal = ({
             isLoading={isLoading}
             size="s"
             text={actionButton.text}
-            variant="primary"
+            variant={actionButton.variant || 'primary'}
             onClick={handleActionClick}
           />
           <Button isDisabled={isLoading} size="s" text={cancelButtonText} variant="secondary" onClick={closeModal} />

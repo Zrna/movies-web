@@ -43,6 +43,7 @@ export const Recommendation = () => {
       ),
     actionButton: {
       text: 'Save to Bucket List',
+      variant: 'outlined-secondary',
       action: () => Promise.resolve(),
     },
   });
