@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
 
 type AxiosFunction = <T>(url: string, config?: AxiosRequestConfig) => Promise<T>;
@@ -24,12 +24,10 @@ export function backendService() {
     async (response) => {
       return response.data as any;
     },
-    async (error: AxiosError) => {
-      const { response } = error;
-
-      if (response?.data?.error.includes('JsonWebTokenError')) {
+    async (error) => {
+      if (error.response.status === 401) {
         Cookies.remove('access-token');
-        return;
+        window.location.href = '/login';
       }
 
       return Promise.reject(error);
