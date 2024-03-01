@@ -7,31 +7,27 @@
       "jsx": true
     }
   },
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "react-app",
-    "plugin:prettier/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings"
-  ],
-  "plugins": ["simple-import-sort", "import", "unused-imports"],
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "prettier"],
+  "plugins": ["simple-import-sort", "unused-imports", "eslint-plugin-react"],
   "rules": {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
-    "import/first": "error",
-    "import/newline-after-import": "error",
-    "import/no-duplicates": "error",
+    "no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "error",
-      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
     ],
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-unused-vars": "off",
-    "import/no-anonymous-default-export": "off",
-    "import/no-unresolved": "off",
     "max-len": [
       "error",
       {
@@ -63,13 +59,5 @@
         "callbacksLast": true
       }
     ]
-  },
-  "settings": {
-    "import/resolver": {
-      "alias": {
-        "map": [["~", "./src"]],
-        "extensions": [".js", ".ts", ".tsx", ".json"]
-      }
-    }
   }
 }
