@@ -4,7 +4,7 @@ import { showToast } from '~/ui';
 
 export const getErrorMessage = (error: AxiosError | Error) => {
   if (isAxiosError(error) && error.response) {
-    if (Array.isArray(error.response)) {
+    if (Array.isArray(error.response.data.error)) {
       return error.response.data.error[0];
     } else {
       return error.response.data.error;
