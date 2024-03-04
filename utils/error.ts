@@ -3,8 +3,12 @@ import { AxiosError, isAxiosError } from 'axios';
 import { showToast } from '~/ui';
 
 export const getErrorMessage = (error: AxiosError | Error) => {
-  if (isAxiosError(error)) {
-    return Array.isArray(error.response?.data.message) ? error.response?.data.message[0] : error.response?.data.message;
+  if (isAxiosError(error) && error.response) {
+    if (Array.isArray(error.response)) {
+      return error.response.data.error[0];
+    } else {
+      return error.response.data.error;
+    }
   } else if (error.message) {
     return error.message;
   } else {

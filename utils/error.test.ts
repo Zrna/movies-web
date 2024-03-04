@@ -10,13 +10,13 @@ describe('Error', () => {
       error.response = {
         status: 500,
         data: {
-          message: ['Error Message 1', 'Error Message 2'],
+          error: ['Error Message 1', 'Error Message 2'],
         },
       };
 
       const message = getErrorMessage(error);
 
-      expect(message).toBe(error.response.data.message[0]);
+      expect(message).toBe(error.response.data.error[0]);
     });
 
     it('should return error message if message is string', () => {
@@ -25,13 +25,13 @@ describe('Error', () => {
       error.response = {
         status: 500,
         data: {
-          message: 'Error message 1',
+          error: 'Error message 1',
         },
       };
 
       const message = getErrorMessage(error);
 
-      expect(message).toBe(error.response.data.message);
+      expect(message).toBe(error.response.data.error);
     });
 
     it('should return error message if error is not axios error', () => {
