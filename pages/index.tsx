@@ -1,18 +1,7 @@
-import { useRouter } from 'next/router';
-
 import { ButtonLink } from '~/components';
-import { useAccessToken } from '~/hooks';
 import { Box, FlexLayout, Text } from '~/ui';
 
 export default function HomePage() {
-  const { push } = useRouter();
-  const hasAccessToken = useAccessToken();
-
-  if (hasAccessToken) {
-    push('/dashboard');
-    return null;
-  }
-
   return (
     <FlexLayout alignItems="center" flexDirection="column" space={5} sx={{ marginTop: '30dvh' }}>
       <Box sx={{ width: '110px' }}>

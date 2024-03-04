@@ -5,19 +5,12 @@ import { Form } from 'react-final-form';
 
 import { register, RegisterArgs } from '~/api';
 import { FormPasswordInput, FormTextInput } from '~/components';
-import { useAccessToken } from '~/hooks';
 import { Button, ErrorMessage, FlexLayout, Text } from '~/ui';
 import { getErrorMessage, sleep, validator } from '~/utils';
 
 export default function RegistrationPage() {
   const { push } = useRouter();
-  const hasAccessToken = useAccessToken();
   const [error, setError] = useState('');
-
-  if (hasAccessToken) {
-    push('/dashboard');
-    return null;
-  }
 
   const handleRegisterSubmit = async (data: RegisterArgs) => {
     setError('');

@@ -5,20 +5,13 @@ import { Form } from 'react-final-form';
 
 import { login, LoginArgs } from '~/api';
 import { FormPasswordInput, FormTextInput } from '~/components';
-import { useAccessToken } from '~/hooks';
 import { Button, ErrorMessage, FlexLayout, Only, Text } from '~/ui';
 import { getErrorMessage, sleep, validator } from '~/utils';
 
 export default function LoginPage() {
   const { push, query } = useRouter();
-  const hasAccessToken = useAccessToken();
 
   const [error, setError] = useState('');
-
-  if (hasAccessToken) {
-    push('/dashboard');
-    return null;
-  }
 
   const handleLoginSubmit = async ({ email, password }: LoginArgs) => {
     setError('');
@@ -29,8 +22,8 @@ export default function LoginPage() {
       password,
     })
       .then(() => {
-        const lastLocation = query.redirectTo;
-        push(`/${lastLocation ?? 'dashboard'}`);
+        const lastLocation = query.redirectTo as string;
+        push(lastLocation ?? '/dashboard');
         return;
       })
       .catch((err) => {
