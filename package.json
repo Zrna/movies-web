@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
-    "@testing-library/user-event": "^14.4.3",
     "@theme-ui/match-media": "^0.15.4",
     "axios": "1.4.0",
     "final-form": "^4.20.2",
@@ -47,6 +46,7 @@
     "@svgr/webpack": "6.5.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
+    "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.12",
     "@types/js-cookie": "^2.2.6",
     "@types/jsonwebtoken": "^8.5.1",
