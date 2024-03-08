@@ -1,5 +1,5 @@
 export const fonts = {
-  body: "'Poppins', sans-serif",
+  body: "'Poppins',sans-serif",
 };
 
 export const fontStyles = {
