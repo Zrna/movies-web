@@ -4,6 +4,7 @@ export * from './Checkbox';
 export * from './Divider';
 export * from './ErrorMessage';
 export * from './FlexLayout';
+export * from './GridLayout';
 export * from './Icon';
 export * from './Image';
 export * from './LoadingSpinner';
