@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Box should render 1`] = `
+<span
+  class="css-1l3a6k8-Box"
+  data-testid="box"
+  disabled=""
+>
+  <p>
+    some 
+    <strong>
+      strong
+    </strong>
+    content
+  </p>
+</span>
+`;
