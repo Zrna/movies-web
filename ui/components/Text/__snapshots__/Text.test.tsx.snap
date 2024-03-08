@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text should render 1`] = `
+<p
+  class="css-1b1m0xc-Box"
+  data-testid="text"
+>
+  Text Paragraph Big
+</p>
+`;
