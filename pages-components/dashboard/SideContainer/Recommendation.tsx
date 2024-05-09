@@ -1,8 +1,8 @@
 import startCase from 'lodash/startCase';
 
-import { Base64Img, CenteredLoadingSpinner } from '~/components';
+import { Badge, Base64Img, CenteredLoadingSpinner } from '~/components';
 import { useRecommendation } from '~/hooks';
-import { Box, Button, FlexLayout, Image, Text, theme, useModal } from '~/ui';
+import { Button, FlexLayout, Image, Text, theme, useModal } from '~/ui';
 
 export const Recommendation = () => {
   // TODO: add the recommendation on the mobile and tablet
@@ -17,19 +17,9 @@ export const Recommendation = () => {
       ) : (
         <FlexLayout flexDirection="column" space={5}>
           <FlexLayout flexDirection="row" space={2}>
+            <Badge text={recommendation?.type || ''} />
             {recommendation?.genre.map((g) => (
-              <Box
-                key={g}
-                sx={{
-                  background: 'light-dark',
-                  paddingY: 1,
-                  paddingX: 2,
-                  borderRadius: '10px',
-                  textAlign: 'center',
-                }}
-              >
-                <Text variant="paragraph-small">{g}</Text>
-              </Box>
+              <Badge text={g} />
             ))}
           </FlexLayout>
           <Base64Img src={recommendation?.img} style={{ height: '400px', objectFit: 'contain' }} />

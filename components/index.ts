@@ -1,4 +1,5 @@
 export * from './BackToLink';
+export * from './Badge';
 export * from './Base64Img';
 export * from './ButtonLink';
 export * from './CenteredLoadingSpinner';
