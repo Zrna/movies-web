@@ -7,7 +7,7 @@ export const login = async (args: LoginArgs) => {
 };
 
 export const register = async (args: RegisterArgs) => {
-  return await backend.post<'User registered'>('/register', args);
+  return await backend.post<{ accessToken: string; message: 'User registered' }>('/register', args);
 };
 
 export const logout = async () => {
