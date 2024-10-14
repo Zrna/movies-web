@@ -3,7 +3,7 @@ import { useScreenType } from '~/ui';
 
 interface HeaderImageProps {
   name: string;
-  img: string | null;
+  img: string | null | undefined;
 }
 
 export const HeaderImage: React.FC<HeaderImageProps> = ({ name, img }) => {

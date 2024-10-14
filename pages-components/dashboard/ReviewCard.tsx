@@ -5,7 +5,7 @@ import { Base64Img, ReviewRating } from '~/components';
 import { FlexLayout, Icon, Text } from '~/ui';
 
 export const ReviewCard = ({ data, isBig = false }: { data: Review; isBig?: boolean }) => {
-  const { id, img, name, rating, watchAgain } = data;
+  const { id, image, name, rating, watchAgain } = data;
 
   return (
     <NextLink href={`/review/${id}`} style={{ height: '100%' }}>
@@ -30,7 +30,7 @@ export const ReviewCard = ({ data, isBig = false }: { data: Review; isBig?: bool
         <Base64Img
           alt={`${name} poster`}
           placeHolder="/assets/images/default-poster.png"
-          src={img}
+          src={image?.img}
           style={{
             width: '100%',
             height: '100%',

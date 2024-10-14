@@ -62,7 +62,7 @@ export default function ReviewPage() {
     return <CenteredLoadingSpinner />;
   }
 
-  const { img, name, updatedAt, watchAgain, rating, url } = review;
+  const { image, name, updatedAt, watchAgain, rating, url } = review;
   const reviewUrlDomain = url && getUrlDomain(url);
 
   const isUpdateReviewDisabled = !!(
@@ -77,7 +77,7 @@ export default function ReviewPage() {
       <BackToLink text="Back to All Reviews" to="/dashboard" />
       <FlexLayout flexDirection="column" p={4} pb={8} space={[6, 8, 9]}>
         <Box sx={{ position: 'relative' }}>
-          <HeaderImage img={img} name={name} />
+          <HeaderImage img={image?.img} name={name} />
           <ActionIcons isEditMode={isEditMode} onDelete={showDeleteModal} onEdit={() => setIsEditMode(!isEditMode)} />
           <Box sx={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translate(-50%, 45%)' }}>
             {isEditMode ? (
