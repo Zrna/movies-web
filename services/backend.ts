@@ -7,6 +7,10 @@ type AxiosDataFunction = <T>(url: string, data?: any, config?: AxiosRequestConfi
 export function backendService() {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
+  if (!baseURL) {
+    throw new Error('NEXT_PUBLIC_API_URL env variable is not set');
+  }
+
   const instance = axios.create({
     baseURL,
     headers: {
