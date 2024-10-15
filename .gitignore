@@ -39,3 +39,4 @@ tsconfig.tsbuildinfo
 .vercel
 
 TODO.md
+.env
