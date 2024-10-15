@@ -1,6 +1,5 @@
+import { AccountData, UpdateAccountArgs } from '~/interfaces/account';
 import { backend } from '~/services';
-
-import { AccountData, UpdateAccountArgs } from './account.d';
 
 export const getAccountData = async () => {
   return await backend.get<AccountData>('/api/account');

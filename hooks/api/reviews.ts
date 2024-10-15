@@ -2,7 +2,8 @@ import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import { createReview, deleteReviewById, getReviewById, getReviews, Review, updateReviewById } from '~/api';
+import { createReview, deleteReviewById, getReviewById, getReviews, updateReviewById } from '~/api';
+import { GetReviews, Review } from '~/interfaces/reviews';
 import { showToast } from '~/ui';
 import { showErrorToast } from '~/utils';
 
@@ -39,17 +40,12 @@ export function useCreateReview() {
   });
 }
 
-interface CachedReviews {
-  data: Review[];
-  totalRecords: number;
-}
-
 export function useUpdateReview() {
   const queryClient = useQueryClient();
 
   return useMutation(updateReviewById, {
     onMutate: (updatedData) => {
-      const oldReviewsData: CachedReviews | undefined = queryClient.getQueryData('reviews');
+      const oldReviewsData: GetReviews | undefined = queryClient.getQueryData('reviews');
       const oldCurrentReviewData = oldReviewsData?.data.find((old) => old.id === Number(updatedData.id));
 
       const { rating, review, url, watchAgain } = updatedData.data;

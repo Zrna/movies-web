@@ -2,9 +2,9 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import { AccountData } from '~/api';
 import { useSearch } from '~/contexts';
 import { useAccount } from '~/hooks';
+import { AccountData } from '~/interfaces/account';
 import { Box, FlexLayout, Icon, Only, Search, Text, theme, useScreenType } from '~/ui';
 
 import { AccountMenu } from './AccountMenu';

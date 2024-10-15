@@ -1,6 +1,5 @@
+import { CreateReview, GetReviews, Review, UpdateReview } from '~/interfaces/reviews';
 import { backend } from '~/services';
-
-import { CreateReview, GetReviews, Review, UpdateReview } from './reviews.d';
 
 export const getReviews = async () => {
   return await backend.get<GetReviews>('/api/reviews');

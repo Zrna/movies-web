@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Form } from 'react-final-form';
 
-import { CreateReview } from '~/api';
 import { BackToLink, ButtonLink, FormCheckbox, FormTextarea, FormTextInput, Rating } from '~/components';
 import { useCreateReview } from '~/hooks';
+import { CreateReview } from '~/interfaces/reviews';
 import { Section } from '~/pages-components/create-review';
 import { Box, Button, FlexLayout, Text, useScreenType } from '~/ui';
 import { validator } from '~/utils';

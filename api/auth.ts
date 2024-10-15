@@ -1,6 +1,5 @@
+import { LoginArgs, RegisterArgs } from '~/interfaces/auth';
 import { backend } from '~/services';
-
-import { LoginArgs, RegisterArgs } from './auth.d';
 
 export const login = async (args: LoginArgs) => {
   return await backend.post('/login', args);

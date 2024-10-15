@@ -3,8 +3,9 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Form } from 'react-final-form';
 
-import { login, LoginArgs } from '~/api';
+import { login } from '~/api';
 import { FormPasswordInput, FormTextInput } from '~/components';
+import { LoginArgs } from '~/interfaces/auth';
 import { Button, ErrorMessage, FlexLayout, Only, Text } from '~/ui';
 import { getErrorMessage, sleep, validator } from '~/utils';
 

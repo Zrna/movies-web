@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 
-import { Review } from '~/api';
 import { Base64Img, ReviewRating } from '~/components';
+import { Review } from '~/interfaces/reviews';
 import { FlexLayout, Icon, Text } from '~/ui';
 
 export const ReviewCard = ({ data, isBig = false }: { data: Review; isBig?: boolean }) => {

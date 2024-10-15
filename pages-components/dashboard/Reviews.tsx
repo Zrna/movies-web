@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GetReviews } from '~/api';
+import { GetReviews } from '~/interfaces/reviews';
 import { Box, FlexLayout, Only, Text, useScreenType } from '~/ui';
 
 import { ReviewCard } from './ReviewCard';
