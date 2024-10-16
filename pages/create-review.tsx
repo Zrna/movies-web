@@ -24,65 +24,71 @@ export default function CreateReviewPage() {
           Create review
         </Text>
         <Form
-          render={({ handleSubmit, hasValidationErrors, submitting }) => (
-            <FlexLayout
-              as="form"
-              flexDirection="column"
-              space={[6, 8]}
-              sx={{ minWidth: ['300px', '100%', '984px'] }}
-              onSubmit={handleSubmit}
-            >
-              <Section number="01." title="Name & Link">
-                <FormTextInput
-                  name="name"
-                  placeholder="Movie/TV Show name"
-                  validate={validator.isEmpty("Field can't be empty")}
-                />
-                <FormTextInput name="url" placeholder="URL link to watch" validate={validator.isURL()} />
-              </Section>
-              <Section number="02." title="Your opinion">
-                <FormTextarea
-                  name="review"
-                  placeholder="Write your review..."
-                  validate={validator.isEmpty("Field can't be empty")}
-                />
-                <FlexLayout flexDirection={['column', 'row']} space={5}>
-                  <FlexLayout flexDirection="column" space={3}>
-                    <Text as="label" color="dimmed" variant="paragraph-default">
-                      Rating
-                    </Text>
-                    <Rating rating={rating} onChange={(value) => setRating(value)} />
-                  </FlexLayout>
-                  <FlexLayout flexDirection="column" space={3}>
-                    <Text as="label" color="dimmed" variant="paragraph-default">
-                      Watch again or recommend?
-                    </Text>
-                    <FormCheckbox name="watchAgain" />
-                  </FlexLayout>
-                </FlexLayout>
-              </Section>
-              <FlexLayout flexDirection={['column-reverse', 'row']} space={5}>
-                <Box sx={{ width: '100%' }}>
-                  <ButtonLink
-                    isDisabled={submitting}
-                    isFullWidth
-                    text="Cancel"
-                    to="/dashboard"
-                    type="reset"
-                    variant="outlined-secondary"
+          render={({ handleSubmit, hasValidationErrors, submitting, values }) => {
+            return (
+              <FlexLayout
+                as="form"
+                flexDirection="column"
+                space={[6, 8]}
+                sx={{ minWidth: ['300px', '100%', '984px'] }}
+                onSubmit={handleSubmit}
+              >
+                <Section number="01." title="Name & Link">
+                  <FormTextInput
+                    name="name"
+                    placeholder="Movie/TV Show name"
+                    validate={validator.isEmpty("Field can't be empty")}
                   />
-                </Box>
-                <Button
-                  isDisabled={hasValidationErrors || submitting}
-                  isFullWidth
-                  isLoading={submitting}
-                  text="Create Review"
-                  type="sumbit"
-                  variant="primary"
-                />
+                  <FormTextInput
+                    name="url"
+                    placeholder="URL link to watch"
+                    validate={values.url && validator.isLength('Must contain at least 2 characters', { min: 2 })}
+                  />
+                </Section>
+                <Section number="02." title="Your opinion">
+                  <FormTextarea
+                    name="review"
+                    placeholder="Write your review..."
+                    validate={validator.isEmpty("Field can't be empty")}
+                  />
+                  <FlexLayout flexDirection={['column', 'row']} space={5}>
+                    <FlexLayout flexDirection="column" space={3}>
+                      <Text as="label" color="dimmed" variant="paragraph-default">
+                        Rating
+                      </Text>
+                      <Rating rating={rating} onChange={(value) => setRating(value)} />
+                    </FlexLayout>
+                    <FlexLayout flexDirection="column" space={3}>
+                      <Text as="label" color="dimmed" variant="paragraph-default">
+                        Watch again or recommend?
+                      </Text>
+                      <FormCheckbox name="watchAgain" />
+                    </FlexLayout>
+                  </FlexLayout>
+                </Section>
+                <FlexLayout flexDirection={['column-reverse', 'row']} space={5}>
+                  <Box sx={{ width: '100%' }}>
+                    <ButtonLink
+                      isDisabled={submitting}
+                      isFullWidth
+                      text="Cancel"
+                      to="/dashboard"
+                      type="reset"
+                      variant="outlined-secondary"
+                    />
+                  </Box>
+                  <Button
+                    isDisabled={hasValidationErrors || submitting}
+                    isFullWidth
+                    isLoading={submitting}
+                    text="Create Review"
+                    type="sumbit"
+                    variant="primary"
+                  />
+                </FlexLayout>
               </FlexLayout>
-            </FlexLayout>
-          )}
+            );
+          }}
           onSubmit={async (data: FormData) => await createReview({ ...data, rating })}
         />
       </FlexLayout>
