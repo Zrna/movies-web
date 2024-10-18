@@ -1,20 +1,39 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { Form } from 'react-final-form';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { login } from '~/api';
-import { FormPasswordInput, FormTextInput } from '~/components';
-import { LoginArgs } from '~/interfaces/auth';
+import { FormTextInput } from '~/components/form-new';
+import { LoginProps } from '~/interfaces/auth';
 import { Button, ErrorMessage, FlexLayout, Only, Text } from '~/ui';
-import { getErrorMessage, sleep, validator } from '~/utils';
+import { getErrorMessage, sleep } from '~/utils';
+
+const LoginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6, 'Password must contain at least 6 characters'),
+});
 
 export default function LoginPage() {
   const { push, query } = useRouter();
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<LoginProps>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLoginSubmit = async ({ email, password }: LoginArgs) => {
+  const handleLoginSubmit = async ({ email, password }: LoginProps) => {
     setError('');
 
     await sleep(1000);
@@ -41,41 +60,29 @@ export default function LoginPage() {
             Sign In
           </Text>
           {error && <ErrorMessage text={error} />}
-          <Form
-            render={({ handleSubmit, hasValidationErrors, submitting }) => (
-              <FlexLayout
-                as="form"
-                flexDirection="column"
-                space={5}
-                sx={{ width: ['100%', '500px'] }}
-                onSubmit={handleSubmit}
-              >
-                <FormTextInput
-                  data-testid="login-email"
-                  label="Email"
-                  name="email"
-                  type="text"
-                  validate={validator.isEmail()}
-                />
-                <FormPasswordInput
-                  data-testid="login-password"
-                  label="Password"
-                  name="password"
-                  validate={validator.isEmpty("Field can't be empty")}
-                />
-                <Button
-                  data-testid="login-confirm"
-                  isDisabled={hasValidationErrors || submitting}
-                  isFullWidth
-                  isLoading={submitting}
-                  text="Sign in"
-                  type="sumbit"
-                  variant="primary"
-                />
-              </FlexLayout>
-            )}
-            onSubmit={handleLoginSubmit}
-          />
+          <FlexLayout as="form" flexDirection="column" space={5} sx={{ width: ['100%', '500px'] }}>
+            <FormTextInput control={control} data-testid="login-email" label="Email" name="email" />
+            <FormTextInput
+              autoComplete="on"
+              control={control}
+              data-testid="login-password"
+              iconRight={showPassword ? 'eyeOff' : 'eye'}
+              label="Password"
+              name="password"
+              type={showPassword ? 'text' : 'password'}
+              onClickRightIcon={() => setShowPassword(!showPassword)}
+            />
+            <Button
+              data-testid="login-confirm"
+              isDisabled={isSubmitting}
+              isFullWidth
+              isLoading={isSubmitting}
+              text="Sign in"
+              type="sumbit"
+              variant="primary"
+              onClick={handleSubmit(async (data) => handleLoginSubmit(data))}
+            />
+          </FlexLayout>
           <Text sx={{ alignSelf: 'center' }}>
             Don’t have an account yet? <NextLink href="/register">Create Account</NextLink>
           </Text>
