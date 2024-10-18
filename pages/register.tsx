@@ -1,23 +1,47 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { Form } from 'react-final-form';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { register } from '~/api';
-import { FormPasswordInput, FormTextInput } from '~/components';
-import { RegisterArgs } from '~/interfaces/auth';
+import { FormTextInput } from '~/components/form-new';
+import { RegisterProps } from '~/interfaces/auth';
 import { Button, ErrorMessage, FlexLayout, Text } from '~/ui';
-import { getErrorMessage, sleep, validator } from '~/utils';
+import { getErrorMessage, sleep } from '~/utils';
+
+const RegisterSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6, 'Password must contain at least 6 characters'),
+  firstName: z.string().min(2, 'First name must contain at least 2 characters'),
+  lastName: z.string().min(2, 'Last name must contain at least 2 characters'),
+});
 
 export default function RegistrationPage() {
   const { push } = useRouter();
-  const [error, setError] = useState('');
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<RegisterProps>({
+    resolver: zodResolver(RegisterSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+    },
+  });
 
-  const handleRegisterSubmit = async (data: RegisterArgs) => {
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleRegisterSubmit = async (data: RegisterProps) => {
     setError('');
 
     await sleep(1000);
-    register(data)
+    await register(data)
       .then(() => push('/dashboard'))
       .catch((err) => {
         const errorMessage = getErrorMessage(err);
@@ -32,50 +56,28 @@ export default function RegistrationPage() {
           Register
         </Text>
         {error && <ErrorMessage text={error} />}
-        <Form
-          render={({ handleSubmit, hasValidationErrors, submitting, values }) => {
-            const { email, firstName, lastName, password } = values;
-            const isSubmitDisabled = !firstName || !lastName || !email || !password || submitting;
-
-            return (
-              <FlexLayout
-                as="form"
-                flexDirection="column"
-                space={5}
-                sx={{ width: ['100%', '500px'] }}
-                onSubmit={handleSubmit}
-              >
-                <FormTextInput
-                  label="First name"
-                  name="firstName"
-                  type="text"
-                  validate={validator.isEmpty("First name can't be empty")}
-                />
-                <FormTextInput
-                  label="Last Name"
-                  name="lastName"
-                  type="text"
-                  validate={validator.isEmpty("Last name can't be empty")}
-                />
-                <FormTextInput label="Email" name="email" type="text" validate={validator.isEmail()} />
-                <FormPasswordInput
-                  label="Password"
-                  name="password"
-                  validate={validator.isLength('Password must be at least 6 characters', { min: 6 })}
-                />
-                <Button
-                  isDisabled={isSubmitDisabled || hasValidationErrors}
-                  isFullWidth
-                  isLoading={submitting}
-                  text="Create account"
-                  type="sumbit"
-                  variant="primary"
-                />
-              </FlexLayout>
-            );
-          }}
-          onSubmit={handleRegisterSubmit}
-        />
+        <FlexLayout as="form" flexDirection="column" space={5} sx={{ width: ['100%', '500px'] }}>
+          <FormTextInput control={control} label="First name" name="firstName" />
+          <FormTextInput control={control} label="Last Name" name="lastName" />
+          <FormTextInput control={control} label="Email" name="email" />
+          <FormTextInput
+            autoComplete="on"
+            control={control}
+            iconRight={showPassword ? 'eyeOff' : 'eye'}
+            label="Password"
+            name="password"
+            type={showPassword ? 'text' : 'password'}
+            onClickRightIcon={() => setShowPassword(!showPassword)}
+          />
+          <Button
+            isFullWidth
+            isLoading={isSubmitting}
+            text="Create account"
+            type="sumbit"
+            variant="primary"
+            onClick={handleSubmit(async (data) => handleRegisterSubmit(data))}
+          />
+        </FlexLayout>
         <Text>
           Already have an account? <NextLink href="/login">Sign in</NextLink>
         </Text>
