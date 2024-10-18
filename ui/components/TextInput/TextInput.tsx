@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { HTMLInputTypeAttribute, useState } from 'react';
 
 import { Box, FlexLayout, Icon, Text, theme, useScreenType } from '~/ui';
 
@@ -23,7 +23,7 @@ export interface TextInputProps {
   width?: string;
   pattern?: string;
   placeholder?: string;
-  type?: string;
+  type?: HTMLInputTypeAttribute;
   onFocus?(): void;
   onBlur?(): void;
   value: string;
