@@ -3,7 +3,7 @@ export interface LoginProps {
   password: string;
 }
 
-export interface RegisterArgs {
+export interface RegisterProps {
   email: string;
   firstName: string;
   lastName: string;
