@@ -35,9 +35,12 @@ export const TextWithIcon = forwardRef<any, TextWithIconProps>(
     return (
       <FlexLayout alignItems="center" space={space} sx={sx} onClick={onClick}>
         {iconLeft && <Icon color={iconColor ?? color} icon={iconLeft} size={iconSize} title={iconTitle} />}
-        <Text color={color} sx={{ height: iconSize === 'm' ? '20px' : 'initial' }} variant={variant}>
-          {text}
-        </Text>
+        <Text
+          color={color}
+          dangerouslySetInnerHTML={{ __html: text }}
+          sx={{ height: iconSize === 'm' ? '20px' : 'initial' }}
+          variant={variant}
+        />
         {iconRight && <Icon color={iconColor ?? color} icon={iconRight} size={iconSize} title={iconTitle} />}
       </FlexLayout>
     );
