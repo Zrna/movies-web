@@ -23,3 +23,13 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
 }
+
+/* Toast custom style start */
+.Toastify__toast-container {
+  width: fit-content !important;
+}
+
+.Toastify__toast-container span {
+  line-height: 18px;
+}
+/* Toast custom style end */

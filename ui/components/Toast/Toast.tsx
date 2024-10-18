@@ -8,12 +8,12 @@ import { theme } from '~/ui';
 export const Toast = () => {
   return (
     <ToastContainer
-      autoClose={3000}
-      hideProgressBar={false}
+      autoClose={2500}
+      hideProgressBar
       newestOnTop={false}
       pauseOnFocusLoss={false}
       pauseOnHover
-      position="bottom-center"
+      position="top-center"
       rtl={false}
       transition={Slide}
     />
@@ -50,22 +50,28 @@ export function showToast(props: ShowToastProps) {
       />
     ),
     {
-      autoClose: 3000,
+      autoClose: 2500,
       closeButton: false,
       closeOnClick: false,
       draggable: true,
       transition: Slide,
       pauseOnFocusLoss: false,
-      position: 'bottom-center',
+      position: 'top-center',
+      hideProgressBar: true,
       progressStyle: {
         background: variantsMap[variant].color,
         height: '2px',
       },
       style: {
-        backgroundColor: theme.colors.black,
+        backgroundColor: theme.colors['light-dark'],
         color: theme.colors['white-alpha-75'],
         display: 'block',
-        width: '400px',
+        width: 'auto',
+        margin: 0,
+        paddingRight: '16px',
+        minHeight: 'fit-content',
+        maxHeight: 'fit-content',
+        borderRadius: '40px',
       },
     },
   );
