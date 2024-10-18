@@ -31,7 +31,12 @@ export function backendService() {
     async (error) => {
       if (error.response.status === 401) {
         Cookies.remove('access-token');
-        window.location.href = '/login';
+
+        const currentPath = window.location.pathname;
+
+        if (currentPath !== '/login' && currentPath !== '/register') {
+          window.location.href = '/login';
+        }
       }
 
       return Promise.reject(error);
