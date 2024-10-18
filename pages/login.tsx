@@ -37,7 +37,7 @@ export default function LoginPage() {
     setError('');
 
     await sleep(1000);
-    login({
+    await login({
       email,
       password,
     })
