@@ -52,7 +52,7 @@ export function useUpdateAccount() {
       } else {
         queryClient.invalidateQueries('account');
       }
-      showToast({ text: 'Account updated.', variant: 'success' });
+      showToast({ text: 'Account updated', variant: 'success' });
     },
     onError: (err: AxiosError, updatedData, rollback: any) => {
       if (rollback) rollback();
@@ -69,7 +69,7 @@ export function useDeleteAccount() {
     onSuccess: () => {
       queryClient.clear();
       logout();
-      showToast({ text: 'Account successfully deleted.', variant: 'success' });
+      showToast({ text: 'Account deleted', variant: 'success' });
     },
     onError: (err: AxiosError) => {
       return showErrorToast(err);

@@ -32,7 +32,7 @@ export function useCreateReview() {
     onSuccess: (newReview) => {
       queryClient.invalidateQueries('reviews');
       push(`/review/${newReview.id}`);
-      showToast({ variant: 'success', text: 'Review successfully created' });
+      showToast({ variant: 'success', text: 'Review created' });
     },
     onError: (err: AxiosError) => {
       return showErrorToast(err);
@@ -77,7 +77,7 @@ export function useUpdateReview() {
       } else {
         queryClient.invalidateQueries('reviews');
       }
-      showToast({ text: 'Review successfully updated.', variant: 'success' });
+      showToast({ text: 'Review updated', variant: 'success' });
     },
     onError: (err: AxiosError, updatedData, rollback: any) => {
       if (rollback) rollback();
@@ -94,7 +94,7 @@ export function useDeleteReview() {
     onSuccess: () => {
       push('/dashboard');
       queryClient.invalidateQueries('reviews');
-      showToast({ text: 'Review successfully deleted.', variant: 'success' });
+      showToast({ text: 'Review deleted', variant: 'success' });
     },
     onError: (err: AxiosError, data, rollback: any) => {
       if (rollback) rollback();
