@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Control, Controller } from 'react-hook-form';
 
 import { Box, FlexLayout, Text, theme } from '~/ui';
 
@@ -22,66 +23,76 @@ const checkIsActive = (elementValue: number, rating: number | null, hoveredRatin
 };
 
 interface RatingProps {
+  control: Control<any>;
   isReadOnly?: boolean;
-  rating: number | null;
+  hideLabel?: boolean;
   onChange?(elementValue: number): void;
 }
 
-export const Rating: React.FC<RatingProps> = ({ isReadOnly = false, rating, onChange }) => {
-  const [newRating, setNewRating] = useState(rating);
+export const Rating: React.FC<RatingProps> = ({ control, hideLabel = false, isReadOnly = false }) => {
   const [hoveredRating, setHoveredRating] = useState<number | null>(null);
 
-  useEffect(() => setNewRating(rating), [rating]);
-
   return (
-    <FlexLayout alignItems="center" space={5}>
-      <FlexLayout space={2}>
-        {Array.from(Array(5)).map((_, i) => {
-          const elementValue = i + 1;
-          const isActive = checkIsActive(elementValue, newRating, hoveredRating);
+    <Controller
+      control={control}
+      name="rating"
+      render={({ field: { value, onChange } }) => (
+        <FlexLayout flexDirection="column" space={3}>
+          {!hideLabel && (
+            <Text as="label" color="dimmed" variant="paragraph-default">
+              Rating
+            </Text>
+          )}
+          <FlexLayout alignItems="center" space={5}>
+            <FlexLayout space={2}>
+              {Array.from(Array(5)).map((_, i) => {
+                const elementValue = i + 1;
+                const isActive = checkIsActive(elementValue, value, hoveredRating);
 
-          return (
-            <FlexLayout
-              alignItems="center"
-              justifyContent="center"
-              key={`rating-${i}`}
-              sx={{
-                width: '24px',
-                height: '24px',
-                borderRadius: '50%',
-                border: `2px solid ${isActive ? theme.colors.primary : theme.colors['light-dark']}`,
-                cursor: isReadOnly ? 'unset' : 'pointer',
-                ':hover': isReadOnly
-                  ? {}
-                  : {
-                      border: `2px solid ${isActive ? theme.colors['light-dark'] : theme.colors.primary}`,
-                      div: {
-                        backgroundColor: isActive ? 'light-dark' : 'primary',
-                      },
-                    },
-              }}
-              onClick={() => {
-                if (!isReadOnly) {
-                  setNewRating(elementValue);
-                  onChange && onChange(elementValue);
-                }
-              }}
-              onMouseEnter={() => !isReadOnly && setHoveredRating(elementValue)}
-              onMouseLeave={() => !isReadOnly && setHoveredRating(null)}
-            >
-              <Box
-                sx={{
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  backgroundColor: isActive ? 'primary' : 'light-dark',
-                }}
-              />
+                return (
+                  <FlexLayout
+                    alignItems="center"
+                    justifyContent="center"
+                    key={`rating-${i}`}
+                    sx={{
+                      width: '24px',
+                      height: '24px',
+                      borderRadius: '50%',
+                      border: `2px solid ${isActive ? theme.colors.primary : theme.colors['light-dark']}`,
+                      cursor: isReadOnly ? 'unset' : 'pointer',
+                      ':hover': isReadOnly
+                        ? {}
+                        : {
+                            border: `2px solid ${isActive ? theme.colors['light-dark'] : theme.colors.primary}`,
+                            div: {
+                              backgroundColor: isActive ? 'light-dark' : 'primary',
+                            },
+                          },
+                    }}
+                    onClick={() => {
+                      if (!isReadOnly) {
+                        onChange(elementValue);
+                      }
+                    }}
+                    onMouseEnter={() => !isReadOnly && setHoveredRating(elementValue)}
+                    onMouseLeave={() => !isReadOnly && setHoveredRating(null)}
+                  >
+                    <Box
+                      sx={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        backgroundColor: isActive ? 'primary' : 'light-dark',
+                      }}
+                    />
+                  </FlexLayout>
+                );
+              })}
             </FlexLayout>
-          );
-        })}
-      </FlexLayout>
-      <Text color="primary">{hoveredRating ?? newRating ?? 0}/5</Text>
-    </FlexLayout>
+            <Text color="primary">{hoveredRating ?? value ?? 0}/5</Text>
+          </FlexLayout>
+        </FlexLayout>
+      )}
+    />
   );
 };

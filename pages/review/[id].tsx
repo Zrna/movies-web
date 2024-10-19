@@ -1,12 +1,24 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useKey } from 'react-use';
+import { z } from 'zod';
 
-import { BackToLink, CenteredLoadingSpinner, Rating, ReviewRating, StreamingApp } from '~/components';
+import { BackToLink, CenteredLoadingSpinner, Rating, ReviewRating, StreamingApp, WatchAgain } from '~/components';
+import { FormTextInput } from '~/components/form-new';
 import { useDeleteReview, useReviewById, useUpdateReview } from '~/hooks';
+import { UpdateReview } from '~/interfaces/reviews';
 import { ActionIcons, HeaderImage, reactionsMap, RoundedBox } from '~/pages-components/review';
-import { Box, Button, Checkbox, FlexLayout, Icon, Text, Textarea, TextInput, useModal, useScreenType } from '~/ui';
-import { formatDate, getUrlDomain, splitStringToNewLine, validator } from '~/utils';
+import { Box, Button, FlexLayout, Icon, Text, useModal, useScreenType } from '~/ui';
+import { formatDate, getUrlDomain, splitStringToNewLine } from '~/utils';
+
+const UpdateReviewFormSchema = z.object({
+  review: z.string().min(1, "Field can't be empty"),
+  rating: z.number().nullable().optional(),
+  url: z.string().min(2, 'Must contain at least 2 characters').nullable().optional(),
+  watchAgain: z.boolean(),
+});
 
 export default function ReviewPage() {
   const { push, query } = useRouter();
@@ -24,12 +36,24 @@ export default function ReviewPage() {
       action: async () => deleteReview(reviewId),
     },
   });
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting, isDirty },
+    reset,
+  } = useForm<UpdateReview>({
+    resolver: zodResolver(UpdateReviewFormSchema),
+    defaultValues: {
+      review: '',
+      rating: null,
+      url: undefined,
+      watchAgain: true,
+    },
+    values: review,
+  });
 
+  const contentRef = useRef<HTMLElement | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [updatedReview, setUpdatedReview] = useState(review?.review);
-  const [updatedUrl, setUpdatedUrl] = useState(review?.url);
-  const [updatedWatchAgain, setUpdatedWatchAgain] = useState(review?.watchAgain);
-  const [updatedRating, setUpdatedRating] = useState(review?.rating);
 
   useEffect(() => {
     if (!reviewId) {
@@ -41,22 +65,9 @@ export default function ReviewPage() {
     }
   }, [reviewId, review, isLoading]);
 
-  useEffect(() => {
-    setInitialUpdatedValues();
-  }, [review]);
-
   useKey('Escape', () => {
     setIsEditMode(false);
   });
-
-  const setInitialUpdatedValues = () => {
-    if (review) {
-      setUpdatedReview(review.review);
-      setUpdatedUrl(review.url);
-      setUpdatedWatchAgain(review.watchAgain);
-      setUpdatedRating(review.rating);
-    }
-  };
 
   if (isLoading || !review) {
     return <CenteredLoadingSpinner />;
@@ -65,31 +76,37 @@ export default function ReviewPage() {
   const { image, name, updatedAt, watchAgain, rating, url } = review;
   const reviewUrlDomain = url && getUrlDomain(url);
 
-  const isUpdateReviewDisabled = !!(
-    (review.review === updatedReview || typeof validator.isEmpty("Field can't be empty")(updatedReview) === 'string') &&
-    (review.url === updatedUrl || typeof validator.isURL()(updatedUrl) === 'string') &&
-    review.watchAgain === updatedWatchAgain &&
-    review.rating === updatedRating
-  );
-
   return (
     <FlexLayout flexDirection="column" space={2}>
       <BackToLink text="Back to All Reviews" to="/dashboard" />
       <FlexLayout flexDirection="column" p={4} pb={8} space={[6, 8, 9]}>
         <Box sx={{ position: 'relative' }}>
           <HeaderImage img={image?.img} name={name} />
-          <ActionIcons isEditMode={isEditMode} onDelete={showDeleteModal} onEdit={() => setIsEditMode(!isEditMode)} />
+          <ActionIcons
+            isEditMode={isEditMode}
+            onDelete={showDeleteModal}
+            onEdit={() => {
+              setIsEditMode(!isEditMode);
+              if (!isEditMode) {
+                contentRef.current?.scrollIntoView({
+                  behavior: 'smooth',
+                });
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          />
           <Box sx={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translate(-50%, 45%)' }}>
             {isEditMode ? (
               <Box bg="white-alpha-25" px={3} py={2} sx={{ borderRadius: '50px', backdropFilter: 'blur(5px)' }}>
-                <Rating rating={updatedRating ?? null} onChange={(value) => setUpdatedRating(value)} />
+                <Rating control={control} hideLabel />
               </Box>
             ) : (
               <ReviewRating rating={rating} />
             )}
           </Box>
         </Box>
-        <FlexLayout flexDirection="column" space={7}>
+        <FlexLayout flexDirection="column" ref={contentRef} space={7}>
           <Text sx={{ alignSelf: 'center' }} variant={isMobile ? 'headline-h2' : 'headline-h1'}>
             {name}
           </Text>
@@ -98,11 +115,7 @@ export default function ReviewPage() {
               <RoundedBox
                 element={
                   isEditMode ? (
-                    <TextInput
-                      error={validator.isURL()(updatedUrl)}
-                      value={updatedUrl ?? ''}
-                      onChange={setUpdatedUrl}
-                    />
+                    <FormTextInput control={control} name="url" placeholder="URL link to watch" />
                   ) : (
                     <StreamingApp link={url} name={reviewUrlDomain} showName />
                   )
@@ -113,7 +126,7 @@ export default function ReviewPage() {
               <RoundedBox
                 element={
                   isEditMode ? (
-                    <Checkbox value={!!updatedWatchAgain} onChange={(value) => setUpdatedWatchAgain(!!value)} />
+                    <WatchAgain control={control} hideLabel />
                   ) : (
                     watchAgain && (
                       <FlexLayout bg="dark" p={[2, 3]} sx={{ borderRadius: '50%' }}>
@@ -122,7 +135,7 @@ export default function ReviewPage() {
                     )
                   )
                 }
-                info={watchAgain && updatedWatchAgain ? 'Yes, for sure!' : "I'm not sure."}
+                info={isEditMode ? '' : watchAgain ? 'Yes, for sure!' : "I'm not sure."}
                 title="Watch again or recommend?"
               />
               <RoundedBox
@@ -134,11 +147,7 @@ export default function ReviewPage() {
             <FlexLayout flexDirection="column" space={5}>
               <Text variant="headline-h4">Your review</Text>
               {isEditMode ? (
-                <Textarea
-                  error={validator.isEmpty("Field can't be empty")(updatedReview)}
-                  value={updatedReview}
-                  onChange={setUpdatedReview}
-                />
+                <FormTextInput control={control} name="review" placeholder="Write your thoughts..." />
               ) : (
                 <FlexLayout flexDirection="column" space={5}>
                   <Text>{splitStringToNewLine(review.review)}</Text>
@@ -152,22 +161,15 @@ export default function ReviewPage() {
           {isEditMode && (
             <FlexLayout flexDirection={['column', 'row']} space={[4, 5]}>
               <Button
-                isDisabled={isUpdating || isUpdateReviewDisabled}
+                isDisabled={isSubmitting || !isDirty}
                 isFullWidth={isMobile}
-                isLoading={isUpdating}
+                isLoading={isUpdating || isSubmitting}
                 text="Save changes"
-                onClick={async () => {
-                  await updateReview({
-                    id: reviewId,
-                    data: {
-                      review: updatedReview as string,
-                      rating: updatedRating,
-                      url: updatedUrl,
-                      watchAgain: !!updatedWatchAgain,
-                    },
-                  });
+                onClick={handleSubmit(async (data) => {
+                  await updateReview({ id: reviewId, data });
                   setIsEditMode(false);
-                }}
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                })}
               />
               <Button
                 isFullWidth={isMobile}
@@ -175,7 +177,7 @@ export default function ReviewPage() {
                 variant="secondary"
                 onClick={() => {
                   setIsEditMode(false);
-                  setInitialUpdatedValues();
+                  reset();
                 }}
               />
             </FlexLayout>
