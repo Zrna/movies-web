@@ -1,5 +1,2 @@
-export * from './FormCheckbox';
-export * from './FormPasswordInput';
-export * from './FormTextarea';
+export * from './FormTextArea';
 export * from './FormTextInput';
-export * from './utils';

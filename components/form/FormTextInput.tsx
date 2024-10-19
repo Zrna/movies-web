@@ -1,33 +1,31 @@
-import { Field, useField } from 'react-final-form';
+import { Control, Controller, FieldValues, RegisterOptions } from 'react-hook-form';
 
-import { TextInput } from '~/ui';
+import { TextInput, TextInputProps } from '~/ui';
 
-import { FormFieldProps, getFieldError } from './utils';
+interface FormTextInputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
+  name: string;
+  control: Control<any>;
+  rules?: Pick<RegisterOptions<FieldValues>, 'maxLength' | 'minLength' | 'validate' | 'required'>;
+}
 
-export const FormTextInput: React.FC<FormFieldProps> = ({ name, label, type = 'text', validate, ...rest }) => {
-  // `value` and `onChange` from the `rest` are ignored,
-  // because `<Field />` component has it's own `value` and `onChange`
-  const { value: _ignoredValue, onChange: _ignoredOnChange, 'data-testid': dataTestId, ...newRest } = rest;
-
-  const { meta } = useField(name, { validate });
-  const error = getFieldError(meta);
-
+export const FormTextInput: React.FC<FormTextInputProps> = ({ control, name, rules = {}, ...props }) => {
   return (
-    <Field name={name} validate={validate}>
-      {({ input: { name, value, onChange, onBlur, onFocus } }) => (
-        <TextInput
-          data-testid={dataTestId}
-          error={error}
-          label={label}
-          name={name}
-          type={type}
-          value={value}
-          onChange={(value) => onChange({ target: { value } })}
-          {...newRest}
-          onBlur={onBlur}
-          onFocus={onFocus}
-        />
-      )}
-    </Field>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => {
+        return (
+          <TextInput
+            error={error?.message}
+            name={name}
+            value={value}
+            onBlur={onBlur}
+            onChange={(value) => onChange({ target: { value } })}
+            {...props}
+          />
+        );
+      }}
+      rules={rules}
+    />
   );
 };

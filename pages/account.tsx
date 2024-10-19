@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { BackToLink } from '~/components';
-import { FormTextInput } from '~/components/form-new';
+import { BackToLink, FormTextInput } from '~/components';
 import { useAccount, useDeleteAccount, useLogout, useUpdateAccount } from '~/hooks';
 import { UpdateAccountArgs } from '~/interfaces/account';
 import { Button, FlexLayout, Text, TextInput, useModal, useScreenType } from '~/ui';

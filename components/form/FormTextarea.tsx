@@ -1,31 +1,31 @@
-import { Field, useField } from 'react-final-form';
+import { Control, Controller, FieldValues, RegisterOptions } from 'react-hook-form';
 
-import { Textarea } from '~/ui';
+import { Textarea, TextareaProps } from '~/ui';
 
-import { FormFieldProps, getFieldError } from './utils';
+interface FormTextAreaProps extends Omit<TextareaProps, 'value' | 'onChange'> {
+  name: string;
+  control: Control<any>;
+  rules?: Pick<RegisterOptions<FieldValues>, 'maxLength' | 'minLength' | 'validate' | 'required'>;
+}
 
-export const FormTextarea: React.FC<FormFieldProps> = ({ name, label, validate, ...rest }) => {
-  const { value: _ignoredValue, onChange: _ignoredOnChange, ...newRest } = rest;
-
-  const { meta } = useField(name, { validate });
-  const error = getFieldError(meta);
-
+export const FormTextArea: React.FC<FormTextAreaProps> = ({ control, name, rules = {}, ...props }) => {
   return (
-    <Field name={name} validate={validate}>
-      {({ input: { name, value, onChange, onBlur, onFocus } }) => (
-        <>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => {
+        return (
           <Textarea
-            error={error}
-            label={label}
+            error={error?.message}
             name={name}
             value={value}
-            {...newRest}
             onBlur={onBlur}
             onChange={(value) => onChange({ target: { value } })}
-            onFocus={onFocus}
+            {...props}
           />
-        </>
-      )}
-    </Field>
+        );
+      }}
+      rules={rules}
+    />
   );
 };

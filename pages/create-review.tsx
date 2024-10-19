@@ -2,8 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { BackToLink, ButtonLink, Rating, WatchAgain } from '~/components';
-import { FormTextArea, FormTextInput } from '~/components/form-new';
+import { BackToLink, ButtonLink, FormTextArea, FormTextInput, Rating, WatchAgain } from '~/components';
 import { useCreateReview } from '~/hooks';
 import { CreateReview } from '~/interfaces/reviews';
 import { Section } from '~/pages-components/create-review';

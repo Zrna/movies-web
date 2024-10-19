@@ -6,12 +6,12 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { login } from '~/api';
-import { FormTextInput } from '~/components/form-new';
+import { FormTextInput } from '~/components/form';
 import { LoginProps } from '~/interfaces/auth';
 import { Button, ErrorMessage, FlexLayout, Only, Text } from '~/ui';
 import { getErrorMessage, sleep } from '~/utils';
 
-const LoginSchema = z.object({
+const LoginFormSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6, 'Password must contain at least 6 characters'),
 });
@@ -23,7 +23,7 @@ export default function LoginPage() {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<LoginProps>({
-    resolver: zodResolver(LoginSchema),
+    resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       email: '',
       password: '',

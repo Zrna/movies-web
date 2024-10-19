@@ -6,12 +6,12 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { register } from '~/api';
-import { FormTextInput } from '~/components/form-new';
+import { FormTextInput } from '~/components/form';
 import { RegisterProps } from '~/interfaces/auth';
 import { Button, ErrorMessage, FlexLayout, Text } from '~/ui';
 import { getErrorMessage, sleep } from '~/utils';
 
-const RegisterSchema = z.object({
+const RegisterFormSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6, 'Password must contain at least 6 characters'),
   firstName: z.string().min(2, 'First name must contain at least 2 characters'),
@@ -25,7 +25,7 @@ export default function RegistrationPage() {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<RegisterProps>({
-    resolver: zodResolver(RegisterSchema),
+    resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
       email: '',
       password: '',

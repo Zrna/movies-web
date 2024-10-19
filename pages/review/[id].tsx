@@ -5,8 +5,16 @@ import { useForm } from 'react-hook-form';
 import { useKey } from 'react-use';
 import { z } from 'zod';
 
-import { BackToLink, CenteredLoadingSpinner, Rating, ReviewRating, StreamingApp, WatchAgain } from '~/components';
-import { FormTextArea, FormTextInput } from '~/components/form-new';
+import {
+  BackToLink,
+  CenteredLoadingSpinner,
+  FormTextArea,
+  FormTextInput,
+  Rating,
+  ReviewRating,
+  StreamingApp,
+  WatchAgain,
+} from '~/components';
 import { useDeleteReview, useReviewById, useUpdateReview } from '~/hooks';
 import { UpdateReview } from '~/interfaces/reviews';
 import { ActionIcons, HeaderImage, reactionsMap, RoundedBox } from '~/pages-components/review';
