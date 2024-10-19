@@ -10,3 +10,4 @@ export * from './Rating';
 export * from './ReviewRating';
 export * from './StreamingApp';
 export * from './TextWithIcon';
+export * from './WatchAgain';
