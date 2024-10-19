@@ -2,7 +2,7 @@ import { Textarea as ThemeTextarea } from 'theme-ui';
 
 import { FlexLayout, Text, theme } from '~/ui';
 
-interface TextareaProps {
+export interface TextareaProps {
   error?: string;
   helperText?: string;
   isDisabled?: boolean;

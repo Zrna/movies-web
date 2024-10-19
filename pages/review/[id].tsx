@@ -6,7 +6,7 @@ import { useKey } from 'react-use';
 import { z } from 'zod';
 
 import { BackToLink, CenteredLoadingSpinner, Rating, ReviewRating, StreamingApp, WatchAgain } from '~/components';
-import { FormTextInput } from '~/components/form-new';
+import { FormTextArea, FormTextInput } from '~/components/form-new';
 import { useDeleteReview, useReviewById, useUpdateReview } from '~/hooks';
 import { UpdateReview } from '~/interfaces/reviews';
 import { ActionIcons, HeaderImage, reactionsMap, RoundedBox } from '~/pages-components/review';
@@ -147,7 +147,7 @@ export default function ReviewPage() {
             <FlexLayout flexDirection="column" space={5}>
               <Text variant="headline-h4">Your review</Text>
               {isEditMode ? (
-                <FormTextInput control={control} name="review" placeholder="Write your thoughts..." />
+                <FormTextArea control={control} name="review" placeholder="Write your thoughts..." />
               ) : (
                 <FlexLayout flexDirection="column" space={5}>
                   <Text>{splitStringToNewLine(review.review)}</Text>

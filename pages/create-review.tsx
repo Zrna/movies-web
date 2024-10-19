@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { BackToLink, ButtonLink, Rating, WatchAgain } from '~/components';
-import { FormTextInput } from '~/components/form-new';
+import { FormTextArea, FormTextInput } from '~/components/form-new';
 import { useCreateReview } from '~/hooks';
 import { CreateReview } from '~/interfaces/reviews';
 import { Section } from '~/pages-components/create-review';
@@ -49,7 +49,7 @@ export default function CreateReviewPage() {
             <FormTextInput control={control} name="url" placeholder="URL link to watch" />
           </Section>
           <Section number="02." title="Your opinion">
-            <FormTextInput control={control} name="review" placeholder="Write your thoughts..." />
+            <FormTextArea control={control} name="review" placeholder="Write your thoughts..." />
             <FlexLayout flexDirection={['column', 'row']} space={5}>
               <Rating control={control} />
               <WatchAgain control={control} />
