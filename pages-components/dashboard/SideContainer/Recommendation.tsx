@@ -22,7 +22,7 @@ export const Recommendation = () => {
               <Badge text={g} />
             ))}
           </FlexLayout>
-          <Base64Img src={recommendation?.img} style={{ height: '400px', objectFit: 'contain' }} />
+          <Base64Img src={recommendation?.img?.img} style={{ height: '400px', objectFit: 'contain' }} />
           <Button iconLeft="reload" text="Give me something else" variant="secondary" onClick={refetch} />
         </FlexLayout>
       ),

@@ -3,5 +3,11 @@ export interface Recommendation {
   name: string;
   type: 'movie' | 'tv show';
   genre: string[];
-  img: string | null;
+  img: null | {
+    id: number;
+    name: string;
+    img: string;
+    createdAt: string;
+    updatedAt: string;
+  };
 }
