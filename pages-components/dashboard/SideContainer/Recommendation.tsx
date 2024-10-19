@@ -19,7 +19,7 @@ export const Recommendation = () => {
           <FlexLayout flexDirection="row" space={2}>
             <Badge text={recommendation?.type || ''} />
             {recommendation?.genre.map((g) => (
-              <Badge text={g} />
+              <Badge key={g} text={g} />
             ))}
           </FlexLayout>
           <Base64Img src={recommendation?.img?.img} style={{ height: '400px', objectFit: 'contain' }} />
