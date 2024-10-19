@@ -18,9 +18,9 @@ export const Text = forwardRef<any, TextProps>(({ as = 'span', variant = 'paragr
       as={as}
       ref={ref}
       sx={{
-        ...sx,
         variant: `text.${variant}`,
         color,
+        ...sx,
       }}
       {...rest}
     />
